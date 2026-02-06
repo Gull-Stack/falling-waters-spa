@@ -68,7 +68,9 @@
     .sticky-book { position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-accent); padding: 0.75rem 2rem; display: flex; justify-content: center; align-items: center; gap: 1.5rem; z-index: 999; }
     .sticky-book p { color: white; font-weight: 600; }
     .sticky-book .btn { background: white; color: var(--color-dark); padding: 0.6rem 1.5rem; }
-    @media (max-width: 768px) { .nav-links { display: none; } .sticky-book p { display: none; } }
+    @media (max-width: 768px) {
+      .nav-logo .logo-icon { height: 40px; }
+      .nav-logo .logo-text { height: 22px; } .nav-links { display: none; } .sticky-book p { display: none; } }
   </style>
 </head>
 <body>
