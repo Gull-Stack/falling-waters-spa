@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spa & Wellness Blog | Tips & Guides | Falling Waters Day Spa Draper</title>
+  <meta name="description" content="Expert spa and wellness tips from Falling Waters Day Spa in Draper, Utah. Massage benefits, skincare guides, relaxation techniques & more. Read our blog!">
+  <meta name="keywords" content="spa blog, massage tips, facial benefits, skincare guide, wellness draper utah, spa tips, relaxation techniques">
+  <link rel="canonical" href="https://fallingwatersdayspa.com/blog/">
+  
+  <meta property="og:title" content="Spa & Wellness Blog | Falling Waters Day Spa">
+  <meta property="og:description" content="Expert spa tips, wellness guides, and relaxation advice from Draper's premier day spa.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fallingwatersdayspa.com/blog/">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Falling Waters Day Spa Blog",
+    "description": "Spa tips, wellness guides, and relaxation advice from Draper's premier day spa.",
+    "url": "https://fallingwatersdayspa.com/blog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Falling Waters Day Spa & Salon",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fallingwatersdayspa.com/assets/images/logo.png"
+      }
+    }
+  }
+  </script>
+  
+  <link rel="icon" type="image/png" href="../assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root { --color-primary: #4A90A4; --color-secondary: #7FB5C5; --color-accent: #C4A77D; --color-dark: #2C3E50; --color-light: #F5F9FA; --color-cream: #FAF8F5; --font-heading: 'Cormorant Garamond', Georgia, serif; --font-body: 'Montserrat', sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: #333; line-height: 1.6; }
+    h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 0.75rem 2rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo img { height: 50px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--color-dark); text-decoration: none; font-weight: 500; font-size: 0.85rem; }
+    .nav-cta { background: var(--color-primary); color: white !important; padding: 0.6rem 1.2rem; border-radius: 25px; }
+    .btn { display: inline-block; padding: 1rem 2.5rem; text-decoration: none; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; border: 2px solid var(--color-accent); background: var(--color-accent); color: white; transition: all 0.3s; }
+    .btn:hover { background: transparent; color: var(--color-accent); }
+    .page-hero { padding: 10rem 0 4rem; text-align: center; background: var(--color-cream); }
+    .page-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-dark); margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto; }
+    .section { padding: 5rem 0; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+    .blog-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 30px rgba(0,0,0,0.08); transition: transform 0.3s; text-decoration: none; color: inherit; }
+    .blog-card:hover { transform: translateY(-5px); }
+    .blog-card-image { height: 220px; overflow: hidden; }
+    .blog-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .blog-card:hover .blog-card-image img { transform: scale(1.05); }
+    .blog-card-content { padding: 1.5rem; }
+    .blog-category { display: inline-block; background: var(--color-light); color: var(--color-primary); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .blog-card h2 { font-size: 1.4rem; color: var(--color-dark); margin-bottom: 0.75rem; line-height: 1.3; }
+    .blog-card p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+    .blog-meta { font-size: 0.8rem; color: #999; }
+    .read-more { color: var(--color-accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .cta-section { padding: 5rem 0; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: white; text-align: center; }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+    .cta-section .btn { background: white; color: var(--color-dark); border-color: white; }
+    .footer { background: var(--color-dark); color: white; padding: 3rem 0; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.8); text-decoration: none; }
+    .footer-copy { font-size: 0.85rem; opacity: 0.7; }
+    .sticky-book { position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-accent); padding: 0.75rem 2rem; display: flex; justify-content: center; align-items: center; gap: 1.5rem; z-index: 999; }
+    .sticky-book p { color: white; font-weight: 600; }
+    .sticky-book .btn { background: white; color: var(--color-dark); padding: 0.6rem 1.5rem; }
+    @media (max-width: 768px) { .nav-links { display: none; } .sticky-book p { display: none; } }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><img src="../assets/images/logo.png" alt="Falling Waters Day Spa"></a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services/massage">Massage</a></li>
+        <li><a href="/services/facials">Facials</a></li>
+        <li><a href="/services/couples-massage">Couples</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="https://go.booker.com/#/location/fallingwaters" class="nav-cta">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Spa & Wellness Blog</h1>
+      <p>Expert tips, guides, and insights from Draper's premier day spa. Discover the secrets to relaxation, self-care, and looking your best.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        <a href="/blog/best-massage-for-back-pain" class="blog-card">
+          <div class="blog-card-image">
+            <img src="../assets/images/services/massage.jpg" alt="Massage for back pain">
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-category">Massage</span>
+            <h2>Best Massage for Back Pain: A Complete Guide</h2>
+            <p>Struggling with back pain? Learn which massage techniques work best and how regular therapy can provide lasting relief.</p>
+            <span class="read-more">Read More →</span>
+          </div>
+        </a>
+        
+        <a href="/blog/what-to-expect-first-spa-visit" class="blog-card">
+          <div class="blog-card-image">
+            <img src="../assets/images/services/relaxation.jpg" alt="First spa visit">
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-category">Spa Guide</span>
+            <h2>What to Expect at Your First Spa Visit</h2>
+            <p>First time at a day spa? Here's everything you need to know to feel comfortable and get the most from your experience.</p>
+            <span class="read-more">Read More →</span>
+          </div>
+        </a>
+        
+        <a href="/blog/couples-massage-date-night-ideas" class="blog-card">
+          <div class="blog-card-image">
+            <img src="../assets/images/services/couples.jpg" alt="Couples massage">
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-category">Couples</span>
+            <h2>Couples Massage Date Night Ideas</h2>
+            <p>Planning a romantic spa date? Discover how to make your couples massage experience extra special and memorable.</p>
+            <span class="read-more">Read More →</span>
+          </div>
+        </a>
+        
+        <a href="/blog/benefits-of-regular-facials" class="blog-card">
+          <div class="blog-card-image">
+            <img src="../assets/images/services/facial.jpg" alt="Facial benefits">
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-category">Skincare</span>
+            <h2>The Benefits of Regular Facials</h2>
+            <p>Why monthly facials are worth it: from clearer skin to anti-aging benefits, discover what consistent skincare can do.</p>
+            <span class="read-more">Read More →</span>
+          </div>
+        </a>
+        
+        <a href="/blog/stress-relief-massage-techniques" class="blog-card">
+          <div class="blog-card-image">
+            <img src="../assets/images/services/girls-day.jpg" alt="Stress relief massage">
+          </div>
+          <div class="blog-card-content">
+            <span class="blog-category">Wellness</span>
+            <h2>Stress Relief Massage Techniques That Work</h2>
+            <p>Feeling overwhelmed? Learn about the most effective massage techniques for melting away stress and tension.</p>
+            <span class="read-more">Read More →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Experience These Benefits?</h2>
+      <p style="opacity:0.95;margin-bottom:2rem;">Book your appointment at Falling Waters Day Spa today.</p>
+      <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Now</a>
+      <p style="margin-top:1.5rem;">Call <a href="tel:+18015019000" style="color:white;font-weight:600;">(801) 501-9000</a></p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/services/massage">Massage</a>
+        <a href="/services/facials">Facials</a>
+        <a href="/areas/draper">Draper</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 Falling Waters Day Spa & Salon. 1101 E Draper Parkway, Draper, UT 84020</p>
+    </div>
+  </footer>
+
+  <div class="sticky-book">
+    <p>Ready to relax?</p>
+    <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Now</a>
+  </div>
+</body>
+</html>

@@ -1,7 +1,36 @@
-# Falling Waters Day Spa & Salon
+# Robots.txt for Falling Waters Day Spa
 # https://fallingwatersdayspa.com
 
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://fallingwatersdayspa.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block common non-essential paths (if they exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /api/
+
+# Allow important resources
+Allow: /assets/
+Allow: /images/
+Allow: /*.css
+Allow: /*.js
