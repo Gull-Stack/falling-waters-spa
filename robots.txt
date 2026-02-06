@@ -1,3 +1,7 @@
+# Falling Waters Day Spa & Salon
+# https://fallingwatersdayspa.com
+
 User-agent: *
 Allow: /
-Sitemap: https://premierplasticsurgery.com/sitemap.xml
+
+Sitemap: https://fallingwatersdayspa.com/sitemap.xml

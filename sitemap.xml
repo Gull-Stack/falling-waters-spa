@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://premierplasticsurgery.com/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/contact</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/gallery</loc><priority>0.7</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/services/mommy-makeover</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/services/breast-augmentation</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/services/tummy-tuck</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/services/facelift</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/services/liposuction</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://premierplasticsurgery.com/services/breast-lift</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url>
+    <loc>https://fallingwatersdayspa.com/</loc>
+    <lastmod>2026-02-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
