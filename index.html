@@ -102,28 +102,26 @@
     
     .nav-cta:hover { background: var(--color-dark); }
     
-    /* Buttons */
+    /* Buttons - Consistent Luxury Styling */
     .btn {
       display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 30px;
+      padding: 1rem 2.5rem;
+      border-radius: 0;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       transition: all 0.3s;
       cursor: pointer;
-      border: none;
-    }
-    
-    .btn-primary {
+      border: 2px solid var(--color-accent);
       background: var(--color-accent);
       color: white;
     }
     
-    .btn-primary:hover {
-      background: #b8956a;
-      transform: translateY(-2px);
+    .btn:hover {
+      background: transparent;
+      color: var(--color-accent);
     }
     
     .btn-outline {
@@ -137,13 +135,15 @@
       color: var(--color-dark);
     }
     
-    .btn-dark {
-      background: var(--color-dark);
-      color: white;
+    .btn-light {
+      background: white;
+      color: var(--color-dark);
+      border: 2px solid white;
     }
     
-    .btn-dark:hover {
-      background: #1a252f;
+    .btn-light:hover {
+      background: transparent;
+      color: white;
     }
     
     /* Hero Section */
@@ -475,8 +475,8 @@
     }
     
     .service-card .btn {
-      padding: 0.6rem 1.2rem;
-      font-size: 0.8rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.75rem;
     }
     
     /* Testimonials */
@@ -737,7 +737,7 @@
       <p class="hero-tagline">"Time stands still the moment you walk through our doors."</p>
       <p>Escape the everyday at Utah's most cherished day spa & salon. Expert therapists, luxurious treatments, and a sanctuary designed for your complete relaxation.</p>
       <div class="hero-buttons">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-primary">Book Your Escape</a>
+        <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Your Escape</a>
         <a href="#experiences" class="btn btn-outline">View Packages</a>
       </div>
       <div class="hero-stats">
@@ -857,7 +857,7 @@
           <div class="service-card-content">
             <h3>Massage Therapy</h3>
             <p>Swedish, deep tissue, hot stone, aromatherapy & prenatal. Melt away tension.</p>
-            <a href="#" class="btn btn-dark">View Services</a>
+            <a href="#" class="btn">View Services</a>
           </div>
         </div>
         <div class="service-card">
@@ -867,7 +867,7 @@
           <div class="service-card-content">
             <h3>Skin Care & Facials</h3>
             <p>HydraFacial, chemical peels, microdermabrasion & custom facials for radiant skin.</p>
-            <a href="#" class="btn btn-dark">View Services</a>
+            <a href="#" class="btn">View Services</a>
           </div>
         </div>
         <div class="service-card">
@@ -877,7 +877,7 @@
           <div class="service-card-content">
             <h3>Hair Services</h3>
             <p>Expert cuts, color, highlights, balayage & styling from talented stylists.</p>
-            <a href="#" class="btn btn-dark">View Services</a>
+            <a href="#" class="btn">View Services</a>
           </div>
         </div>
         <div class="service-card">
@@ -887,7 +887,7 @@
           <div class="service-card-content">
             <h3>Nail Care</h3>
             <p>Luxurious manicures & pedicures with gel polish options for beautiful hands & feet.</p>
-            <a href="#" class="btn btn-dark">View Services</a>
+            <a href="#" class="btn">View Services</a>
           </div>
         </div>
         <div class="service-card">
@@ -897,7 +897,7 @@
           <div class="service-card-content">
             <h3>Brows & Lashes</h3>
             <p>Lash extensions, lifts, brow shaping & tinting for that perfect frame.</p>
-            <a href="#" class="btn btn-dark">View Services</a>
+            <a href="#" class="btn">View Services</a>
           </div>
         </div>
         <div class="service-card">
@@ -907,7 +907,7 @@
           <div class="service-card-content">
             <h3>Waxing</h3>
             <p>Professional waxing services for smooth, long-lasting results.</p>
-            <a href="#" class="btn btn-dark">View Services</a>
+            <a href="#" class="btn">View Services</a>
           </div>
         </div>
       </div>
@@ -959,7 +959,7 @@
     <div class="container">
       <h2>Give the Gift of Relaxation</h2>
       <p>Treat someone special to an unforgettable spa experience. Gift cards available in any amount — perfect for birthdays, anniversaries, holidays, or just because.</p>
-      <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-primary" style="background: white; color: var(--color-dark);">Purchase Gift Card</a>
+      <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-light">Purchase Gift Card</a>
     </div>
   </section>
 
@@ -996,7 +996,7 @@
               </div>
             </div>
           </div>
-          <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-primary">Book Your Visit</a>
+          <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Your Visit</a>
         </div>
         <div class="contact-map">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.8!2d-111.863!3d40.5247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDMxJzI5LjAiTiAxMTHCsDUxJzQ2LjgiVw!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
