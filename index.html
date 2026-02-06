@@ -126,20 +126,32 @@
       overflow: hidden;
     }
     
-    .hero::before {
-      content: '';
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .hero-overlay {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('/images/hero-spa.jpg') center/cover;
-      opacity: 0.3;
+      background: linear-gradient(135deg, rgba(44, 62, 80, 0.7) 0%, rgba(74, 144, 164, 0.5) 100%);
+      z-index: 1;
     }
     
     .hero-content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       max-width: 800px;
     }
     
@@ -284,10 +296,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
     
     .service-card-image span {
       font-size: 3rem;
+    }
+    
+    .service-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover .service-card-image img {
+      transform: scale(1.05);
     }
     
     .service-card-content {
@@ -520,7 +544,11 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero" style="background: linear-gradient(135deg, #2C3E50 0%, #4A90A4 50%, #7FB5C5 100%);">
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="assets/videos/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-tagline">🌊 Draper's Premier Day Spa 🌊</p>
       <h1>Falling Waters Day Spa</h1>
@@ -572,7 +600,7 @@
         
         <div class="service-card">
           <div class="service-card-image">
-            <span>✨</span>
+            <img src="assets/images/services/face.png" alt="Skin Care Services">
           </div>
           <div class="service-card-content">
             <h3>Skin Care</h3>
