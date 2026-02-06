@@ -71,11 +71,14 @@
     }
     
     .nav-logo {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-primary);
+      display: flex;
+      align-items: center;
       text-decoration: none;
+    }
+    
+    .nav-logo img {
+      height: 50px;
+      width: auto;
     }
     
     .nav-links {
@@ -505,7 +508,7 @@
   <!-- Navigation -->
   <nav class="nav">
     <div class="nav-container">
-      <a href="/" class="nav-logo">Falling Waters</a>
+      <a href="/" class="nav-logo"><img src="assets/images/logo.png" alt="Falling Waters Day Spa & Salon"></a>
       <ul class="nav-links">
         <li><a href="/">Home</a></li>
         <li><a href="/services/">Services</a></li>
