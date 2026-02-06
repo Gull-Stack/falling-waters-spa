@@ -192,8 +192,9 @@
       align-items: center;
     }
     
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 28px; width: auto; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; gap: 0.5rem; }
+    .nav-logo .logo-icon { height: 36px; width: auto; }
+    .nav-logo .logo-text { height: 20px; width: auto; }
     
     .nav-links {
       display: flex;
@@ -1139,7 +1140,8 @@
   <nav class="nav">
     <div class="nav-container">
       <a href="/" class="nav-logo">
-        <img src="assets/images/logo-text.png" alt="Falling Waters Day Spa & Salon">
+        <img src="assets/images/logo.png" alt="Falling Waters" class="logo-icon">
+        <img src="assets/images/logo-text.png" alt="Falling Waters Day Spa & Salon" class="logo-text">
       </a>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
