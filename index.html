@@ -1149,6 +1149,107 @@
       .contact-grid { grid-template-columns: 1fr; }
       .experience-grid { grid-template-columns: 1fr; }
     }
+
+    /* ═══════════════════════════════════════════
+       SCROLL ANIMATIONS
+    ═══════════════════════════════════════════ */
+    
+    /* Fade in from bottom */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Fade in from left */
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* Fade in from right */
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* Scale up */
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .reveal-scale.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    /* Staggered children animation */
+    .stagger-children > * {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .stagger-children.active > *:nth-child(1) { transition-delay: 0ms; }
+    .stagger-children.active > *:nth-child(2) { transition-delay: 100ms; }
+    .stagger-children.active > *:nth-child(3) { transition-delay: 200ms; }
+    .stagger-children.active > *:nth-child(4) { transition-delay: 300ms; }
+    .stagger-children.active > *:nth-child(5) { transition-delay: 400ms; }
+    .stagger-children.active > *:nth-child(6) { transition-delay: 500ms; }
+    .stagger-children.active > *:nth-child(7) { transition-delay: 600ms; }
+    .stagger-children.active > *:nth-child(8) { transition-delay: 700ms; }
+    
+    .stagger-children.active > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Parallax effect for hero */
+    .parallax-hero {
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+    }
+    
+    @media (max-width: 768px) {
+      .parallax-hero {
+        background-attachment: scroll;
+      }
+    }
+    
+    /* Smooth section transitions */
+    section {
+      position: relative;
+    }
+    
+    /* Floating animation for accents */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
   </style>
 </head>
 <body>
@@ -1657,6 +1758,97 @@
     <p>Ready to relax? Book your appointment today!</p>
     <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Now</a>
   </div>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    // IntersectionObserver for scroll-triggered animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add reveal classes to sections
+      const sections = document.querySelectorAll('section');
+      sections.forEach((section, index) => {
+        // Alternate animation directions for visual interest
+        if (index % 3 === 0) {
+          section.classList.add('reveal');
+        } else if (index % 3 === 1) {
+          section.classList.add('reveal-scale');
+        } else {
+          section.classList.add('reveal');
+        }
+      });
+      
+      // Add stagger animation to grids
+      const grids = document.querySelectorAll('.services-grid, .experience-grid, .testimonial-grid, .team-grid, .instagram-grid');
+      grids.forEach(grid => {
+        grid.classList.add('stagger-children');
+      });
+      
+      // Create observer
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, observerOptions);
+      
+      // Observe all reveal elements
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Parallax effect on scroll (subtle)
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        window.addEventListener('scroll', () => {
+          const scrolled = window.pageYOffset;
+          const rate = scrolled * 0.3;
+          hero.style.backgroundPosition = `center ${rate}px`;
+        });
+      }
+      
+      // Smooth counter animation for stats
+      const animateCounter = (element, target, duration = 2000) => {
+        let start = 0;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= target) {
+            element.textContent = target + (element.dataset.suffix || '');
+            clearInterval(timer);
+          } else {
+            element.textContent = Math.floor(start) + (element.dataset.suffix || '');
+          }
+        }, 16);
+      };
+      
+      // Observe stat numbers for counter animation
+      const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+            const text = entry.target.textContent;
+            const match = text.match(/(\d+)/);
+            if (match) {
+              const number = parseInt(match[1]);
+              const suffix = text.replace(/\d+/, '');
+              entry.target.dataset.suffix = suffix;
+              animateCounter(entry.target, number);
+            }
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      document.querySelectorAll('.stat-number').forEach(stat => {
+        statObserver.observe(stat);
+      });
+    });
+  </script>
 
 </body>
 </html>
