@@ -370,7 +370,7 @@ function initCurrentYear() {
 function initFormValidation() {
   const form = document.querySelector('.contact-form');
   if (!form) return;
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let valid = true;
     form.querySelectorAll('[required]').forEach(f => {
@@ -381,7 +381,28 @@ function initFormValidation() {
     });
     if (valid) {
       const btn = form.querySelector('[type="submit"]');
-      if (btn) { btn.textContent = 'Message Sent!'; btn.disabled = true; }
+      const originalText = btn ? btn.textContent : '';
+      if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+      try {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          if (btn) { btn.textContent = 'Message Sent!'; }
+          form.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        if (btn) { btn.textContent = originalText; btn.disabled = false; }
+        alert('There was an error sending your message. Please call us at (801) 501-9000.');
+      }
     }
   });
 }
