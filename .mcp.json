@@ -5,6 +5,16 @@
       "args": [
         "agentkits-memory-server"
       ]
+    },
+    "notion": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
+      "env": {
+        "NOTION_API_KEY": "${NOTION_API_KEY}"
+      }
     }
   }
 }
