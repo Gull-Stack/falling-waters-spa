@@ -4,5 +4,12 @@
     "type": "command",
     "command": "node .claude/statusline.js",
     "padding": 0
+  },
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "api.notion.com"
+      ]
+    }
   }
 }
