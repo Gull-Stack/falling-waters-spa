@@ -1898,25 +1898,50 @@
       .mdp-modal { padding: 0.5rem; }
       .mdp-modal-card { max-height: 94vh; border-radius: 10px; }
       .mdp-modal-close { top: 0.5rem; right: 0.5rem; width: 34px; height: 34px; font-size: 1.35rem; }
-      .mdp { padding: 2.75rem 0.85rem 2.5rem; }
-      .mdp-packages { margin-bottom: 1.75rem; gap: 0.75rem; }
+      .mdp { padding: 1.75rem 0.85rem 1.75rem; }
+      .mdp-eyebrow { font-size: 0.65rem; letter-spacing: 0.28em; margin-bottom: 0.5rem; }
+      .mdp-sub { margin-bottom: 1rem; }
+      .mdp-packages { margin-bottom: 1rem; gap: 0.45rem; }
       .mdp-pkg {
-        grid-template-columns: 1fr;
-        gap: 0.35rem;
-        padding: 0.95rem 1rem;
-        text-align: center;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        column-gap: 0.65rem;
+        row-gap: 0.1rem;
+        padding: 0.55rem 0.85rem;
+        text-align: left;
+        align-items: center;
       }
-      .mdp-pkg-num { min-width: 0; }
-      .mdp-pkg-price { font-size: 1.1rem; }
-      .mdp-floral { width: 110px; opacity: 0.45; }
-      .mdp-floral-tl, .mdp-floral-tr { top: -10px; }
-      .mdp-floral-tl { left: -10px; }
-      .mdp-floral-tr { right: -10px; }
-      .mdp-floral-bl, .mdp-floral-br { bottom: -10px; }
-      .mdp-floral-bl { left: -10px; }
-      .mdp-floral-br { right: -10px; }
-      .mdp-cta { padding: 0.95rem 1.5rem; font-size: 0.78rem; letter-spacing: 0.12em; }
-      .mdp-cta-hint { font-size: 0.85rem; }
+      .mdp-pkg-num {
+        min-width: 0;
+        font-size: 1rem;
+        grid-column: 1;
+        grid-row: 1;
+        line-height: 1.1;
+      }
+      .mdp-pkg-body {
+        font-size: 0.82rem;
+        line-height: 1.3;
+        grid-column: 1;
+        grid-row: 2;
+        color: #5a5a5a;
+      }
+      .mdp-pkg-price {
+        font-size: 1.05rem;
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        text-align: right;
+        align-self: center;
+      }
+      .mdp-pkg-value { font-size: 0.7rem; }
+      .mdp-floral { width: 100px; opacity: 0.4; }
+      .mdp-floral-tl, .mdp-floral-tr { top: -8px; }
+      .mdp-floral-tl { left: -8px; }
+      .mdp-floral-tr { right: -8px; }
+      .mdp-floral-bl, .mdp-floral-br { bottom: -8px; }
+      .mdp-floral-bl { left: -8px; }
+      .mdp-floral-br { right: -8px; }
+      .mdp-cta { padding: 0.85rem 1.4rem; font-size: 0.75rem; letter-spacing: 0.12em; }
+      .mdp-cta-hint { font-size: 0.8rem; margin-top: 0.5rem; }
     }
     @media (max-height: 700px) {
       .mdp { padding-top: 2.25rem; padding-bottom: 2.25rem; }
