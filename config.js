@@ -42,7 +42,7 @@ const CONFIG = {
     
     // Social & Web
     website: "https://www.fallingwatersdayspa.com",
-    bookingUrl: "/book",
+    bookingUrl: "https://go.booker.com/#/location/fallingwaters",
     facebook: "https://www.facebook.com/fallingwatersdayspasalon/",
     instagram: "",
     
@@ -90,7 +90,7 @@ const CONFIG = {
     cta: {
       primary: {
         text: "Book Your Experience",
-        link: "/book"
+        link: "https://go.booker.com/#/location/fallingwaters"
       },
       secondary: {
         text: "View Our Services",
