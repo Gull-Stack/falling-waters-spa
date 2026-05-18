@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <!--
-  Falling Waters Day Spa & Salon — in-site booking page (/book)
-  Self-contained: own styling, no build step. Submits an appointment
-  request to /api/booking, which emails the spa + auto-replies the guest.
-  When the Cinch booking API is live, swap the fetch in submitBooking().
+  Falling Waters Day Spa & Salon — booking experience DEMO (/book)
+  A self-contained preview of what booking on the spa's own site could
+  look like, vs. the current go.booker.com handoff. Not linked from the
+  live site; noindex. submitBooking() shows a sample confirmation only —
+  no real appointment is created. Wire it to a booking API to make live.
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book an Appointment · Falling Waters Day Spa &amp; Salon</title>
-  <meta name="description" content="Book your massage, facial, hair, nail or signature spa package at Falling Waters Day Spa & Salon in Draper, UT — right here, in under a minute. No phone call, no account." />
-  <link rel="canonical" href="https://www.fallingwatersdayspa.com/book" />
+  <title>Booking Experience Preview · Falling Waters Day Spa &amp; Salon</title>
+  <meta name="description" content="A preview of the new Falling Waters Day Spa booking experience." />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="/assets/images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -448,10 +449,6 @@
                 <input id="f-email" type="email" autocomplete="email" placeholder="you@email.com" oninput="validateDetails()" />
               </div>
             </div>
-            <!-- honeypot: real guests never fill this -->
-            <div class="hp" aria-hidden="true">
-              <label>Fax number<input type="text" id="f-fax" tabindex="-1" autocomplete="off" /></label>
-            </div>
             <label class="tac-box">
               <input type="checkbox" id="f-tac" onchange="toggleTac()" />
               <span>
@@ -467,16 +464,16 @@
               <div class="seal">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
               </div>
-              <h2 id="confirm-title">Request received</h2>
-              <p class="lead" id="confirm-lead">Thank you — we've got your appointment request. We'll text you shortly to confirm your time. We can't wait to help you unwind.</p>
+              <h2 id="confirm-title">You're all set</h2>
+              <p class="lead" id="confirm-lead">That's the whole flow — one page, no redirect, no account, your member discount applied automatically. Here's what a confirmation would look like:</p>
               <div class="receipt" id="receipt"></div>
               <div class="confirm-actions">
-                <button class="btn btn-primary" onclick="resetFlow()">Request another visit</button>
+                <button class="btn btn-primary" onclick="resetFlow()">Try it again</button>
                 <a class="btn btn-ghost" href="/" style="display:inline-block;text-align:center;">Back to home</a>
               </div>
               <p class="confirm-call">
-                Need a same-day appointment or have a question?
-                Call or text us at <a href="tel:+18015019000">(801) 501-9000</a>.
+                Preview only — no appointment was reserved. This is a demo of the
+                new Falling Waters booking experience.
               </p>
             </div>
           </section>
@@ -604,7 +601,6 @@
     date: null, time: null,
     details: { first:'', last:'', phone:'', email:'' }, tac: false
   };
-  var PAGE_LOADED = Date.now();
 
   // ---- Step 1: categories & services ----
   function renderCategories() {
@@ -849,7 +845,7 @@
     if (state.step >= 5) { next.style.display = 'none'; return; }
     next.style.display = '';
     next.disabled = !stepValid(state.step);
-    next.textContent = state.step === 4 ? 'Request appointment' : 'Continue';
+    next.textContent = state.step === 4 ? 'Book appointment' : 'Continue';
   }
   function showPanel(step) {
     var panels = document.querySelectorAll('.panel');
@@ -908,46 +904,13 @@
   }
 
   function submitBooking() {
-    var next = document.getElementById('btn-next');
-    next.disabled = true;
-    next.textContent = 'Sending…';
-
-    var p = priceParts();
-    var payload = {
-      firstName: state.details.first,
-      lastName:  state.details.last,
-      email:     state.details.email,
-      phone:     state.details.phone,
-      service:   state.service.name + ' · ' + state.service.dur,
-      provider:  state.provider,
-      when:      whenLabel(),
-      total:     money(p.total),
-      tacMember: state.tac,
-      fax_number: document.getElementById('f-fax').value,
-      _timestamp: PAGE_LOADED
-    };
-
-    function finish(ok) {
-      renderReceipt();
-      if (!ok) {
-        document.getElementById('confirm-title').textContent = 'Almost there';
-        document.getElementById('confirm-lead').textContent =
-          "We saved your request below, but couldn't send it automatically. " +
-          "Please call or text (801) 501-9000 to lock in this time — it only takes a moment.";
-      }
-      state.step = 5;
-      showPanel(5);
-      refreshControls();
-      scrollToWidget();
-    }
-
-    fetch('/api/booking', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(function(r){ finish(r.ok); })
-      .catch(function(){ finish(false); });
+    // DEMO: renders a sample confirmation only — no appointment is created
+    // and nothing is sent. Wire this to a booking API to make it live.
+    renderReceipt();
+    state.step = 5;
+    showPanel(5);
+    refreshControls();
+    scrollToWidget();
   }
 
   function resetFlow() {
@@ -956,11 +919,8 @@
       date:null, time:null,
       details:{ first:'', last:'', phone:'', email:'' }, tac:false
     };
-    ['f-first','f-last','f-phone','f-email','f-fax'].forEach(function(id){ document.getElementById(id).value=''; });
+    ['f-first','f-last','f-phone','f-email'].forEach(function(id){ document.getElementById(id).value=''; });
     document.getElementById('f-tac').checked = false;
-    document.getElementById('confirm-title').textContent = 'Request received';
-    document.getElementById('confirm-lead').textContent =
-      "Thank you — we've got your appointment request. We'll text you shortly to confirm your time. We can't wait to help you unwind.";
     showCategories();
     showPanel(1);
     updateSummary();
