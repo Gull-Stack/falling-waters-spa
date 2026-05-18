@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<!--
+  Falling Waters Day Spa & Salon — in-site booking page (/book)
+  Self-contained: own styling, no build step. Submits an appointment
+  request to /api/booking, which emails the spa + auto-replies the guest.
+  When the Cinch booking API is live, swap the fetch in submitBooking().
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an Appointment · Falling Waters Day Spa &amp; Salon</title>
+  <meta name="description" content="Book your massage, facial, hair, nail or signature spa package at Falling Waters Day Spa & Salon in Draper, UT — right here, in under a minute. No phone call, no account." />
+  <link rel="canonical" href="https://www.fallingwatersdayspa.com/book" />
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #4A90A4;
+      --color-secondary: #7FB5C5;
+      --color-accent: #C4A77D;
+      --color-dark: #2C3E50;
+      --color-light: #F5F9FA;
+      --color-cream: #FAF8F5;
+      --color-text: #333333;
+      --color-sage: #A8B89A;
+      --color-peach: #F5C5A8;
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Montserrat', 'Segoe UI', sans-serif;
+      --font-script: 'Dancing Script', cursive;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.6;
+      background: var(--color-cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--color-dark); font-weight: 600; line-height: 1.15; }
+
+    /* ---- Nav (matches the site) ---- */
+    .nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      padding: 0.6rem 2rem;
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; }
+    .logo-icon { height: 60px; width: auto; }
+    .logo-text { height: 34px; width: auto; }
+    .nav-links { display: flex; gap: 1.7rem; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--color-dark); text-decoration: none; font-weight: 500;
+      font-size: 0.85rem; letter-spacing: 0.05em; transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--color-primary); }
+    .nav-cta {
+      background: var(--color-primary); color: #fff !important;
+      padding: 0.6rem 1.3rem; border-radius: 25px; font-size: 0.8rem !important;
+    }
+    .nav-cta:hover { background: var(--color-dark); }
+
+    /* ---- Hero ---- */
+    .hero {
+      position: relative; color: #fff; text-align: center;
+      padding: 4.5rem 1.5rem 5rem;
+      display: flex; flex-direction: column; align-items: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: url('/assets/images/services/relaxation.jpg');
+      background-size: cover; background-position: center;
+      transform: scale(1.05);
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(44,62,80,0.86), rgba(74,144,164,0.78));
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero .eyebrow {
+      font-family: var(--font-script); font-size: 1.6rem;
+      color: var(--color-peach); margin-bottom: 0.25rem;
+    }
+    .hero h1 { color: #fff; font-size: clamp(2.4rem, 5.5vw, 3.9rem); font-weight: 700; }
+    .hero p {
+      margin-top: 0.9rem; max-width: 540px; font-size: 1.05rem;
+      opacity: 0.92; font-weight: 300;
+    }
+    .hero-badges {
+      margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: 0.6rem;
+      justify-content: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(6px);
+      padding: 0.45rem 0.95rem; border-radius: 30px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+
+    /* ---- Booking shell ---- */
+    .booking-wrap {
+      max-width: 1120px; margin: -3.5rem auto 4rem; padding: 0 1.25rem;
+      position: relative; z-index: 5;
+    }
+    .booking-card {
+      background: #fff; border-radius: 18px;
+      box-shadow: 0 30px 70px -30px rgba(44,62,80,0.45);
+      overflow: hidden;
+    }
+
+    .steps {
+      display: flex; border-bottom: 1px solid #ece7e0;
+      background: var(--color-light);
+    }
+    .step {
+      flex: 1; padding: 1rem 0.5rem; text-align: center;
+      font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: #9aa3ab; font-weight: 600; position: relative;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .step .dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #d9d9d9; color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.74rem; flex-shrink: 0;
+    }
+    .step.active { color: var(--color-primary); }
+    .step.active .dot { background: var(--color-primary); }
+    .step.done { color: var(--color-dark); }
+    .step.done .dot { background: var(--color-accent); }
+    .step-label { display: inline; }
+
+    .booking-body { display: grid; grid-template-columns: 1fr 312px; }
+    .panel-area { padding: 2.4rem 2.4rem 2.6rem; min-height: 460px; }
+    .panel-head { margin-bottom: 1.5rem; }
+    .panel-head .kicker {
+      font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--color-primary); font-weight: 600;
+    }
+    .panel-head h2 { font-size: 1.95rem; margin-top: 0.25rem; }
+    .panel-head p { color: #6b7178; font-size: 0.92rem; }
+
+    .panel { display: none; animation: fade 0.35s ease; }
+    .panel.show { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+    .cat {
+      border: 1px solid #e7e2da; border-radius: 12px; overflow: hidden;
+      cursor: pointer; background: #fff; text-align: left;
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+      font-family: inherit;
+    }
+    .cat:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -18px rgba(44,62,80,0.4); border-color: var(--color-secondary); }
+    .cat-img { height: 92px; background-size: cover; background-position: center; }
+    .cat-body { padding: 0.7rem 0.85rem 0.85rem; }
+    .cat-body .name { font-family: var(--font-heading); font-size: 1.15rem; color: var(--color-dark); font-weight: 600; }
+    .cat-body .from { font-size: 0.78rem; color: var(--color-primary); font-weight: 600; }
+
+    .opt {
+      width: 100%; text-align: left; font-family: inherit; cursor: pointer;
+      border: 1px solid #e7e2da; border-radius: 11px; background: #fff;
+      padding: 0.95rem 1.1rem; margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.16s, background 0.16s, box-shadow 0.16s;
+    }
+    .opt:hover { border-color: var(--color-secondary); box-shadow: 0 10px 22px -16px rgba(44,62,80,0.45); }
+    .opt.selected { border-color: var(--color-primary); background: #f1f7f9; }
+    .opt-main { flex: 1; }
+    .opt-main .t { font-weight: 600; color: var(--color-dark); font-size: 0.98rem; }
+    .opt-main .s { font-size: 0.83rem; color: #7b8087; margin-top: 0.1rem; }
+    .opt-price { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 600; color: var(--color-dark); white-space: nowrap; }
+    .opt-check {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid #d4d8dc; display: flex; align-items: center; justify-content: center;
+    }
+    .opt.selected .opt-check { border-color: var(--color-primary); background: var(--color-primary); }
+    .opt.selected .opt-check svg { display: block; }
+    .opt-check svg { display: none; width: 12px; height: 12px; }
+    .opt-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      background: var(--color-sage); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading); font-size: 1.15rem; font-weight: 600;
+    }
+
+    .back-link {
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      color: var(--color-primary); font-size: 0.82rem; font-weight: 600;
+      padding: 0; margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 0.35rem;
+    }
+    .back-link:hover { color: var(--color-dark); }
+
+    .date-strip { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem; }
+    .date-btn {
+      flex: 0 0 auto; width: 68px; padding: 0.6rem 0; border-radius: 10px;
+      border: 1px solid #e7e2da; background: #fff; cursor: pointer; font-family: inherit;
+      text-align: center; transition: all 0.16s;
+    }
+    .date-btn:hover:not(:disabled) { border-color: var(--color-secondary); }
+    .date-btn.selected { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+    .date-btn:disabled { opacity: 0.32; cursor: not-allowed; }
+    .date-btn .dow { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .date-btn .dnum { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; line-height: 1.1; }
+    .date-btn .mon { font-size: 0.64rem; text-transform: uppercase; opacity: 0.7; }
+
+    .time-head { margin: 1.5rem 0 0.7rem; font-size: 0.82rem; font-weight: 600; color: #6b7178; }
+    .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    .time-btn {
+      padding: 0.6rem 0.3rem; border-radius: 9px; border: 1px solid #e7e2da;
+      background: #fff; cursor: pointer; font-family: inherit; font-size: 0.84rem;
+      font-weight: 500; color: var(--color-dark); transition: all 0.14s;
+    }
+    .time-btn:hover:not(:disabled) { border-color: var(--color-secondary); }
+    .time-btn.selected { background: var(--color-primary); border-color: var(--color-primary); color: #fff; }
+    .time-btn:disabled { color: #c4c4c4; text-decoration: line-through; cursor: not-allowed; background: #faf9f7; }
+    .empty-note { color: #9aa0a6; font-size: 0.88rem; font-style: italic; }
+
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--color-dark); margin-bottom: 0.3rem; }
+    .field input {
+      width: 100%; padding: 0.7rem 0.85rem; border: 1px solid #ddd8d0;
+      border-radius: 9px; font-family: inherit; font-size: 0.95rem; color: var(--color-text);
+    }
+    .field input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(74,144,164,0.12); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .tac-box {
+      margin-top: 0.4rem; border: 1px dashed var(--color-accent); border-radius: 11px;
+      padding: 0.9rem 1rem; background: #fbf6ec; display: flex; gap: 0.7rem; align-items: flex-start;
+    }
+    .tac-box input { width: 18px; height: 18px; margin-top: 0.15rem; accent-color: var(--color-primary); flex-shrink: 0; }
+    .tac-box .tac-t { font-weight: 600; color: var(--color-dark); font-size: 0.9rem; }
+    .tac-box .tac-s { font-size: 0.8rem; color: #7b7468; }
+
+    .summary {
+      background: var(--color-dark); color: #fff; padding: 2rem 1.7rem;
+      display: flex; flex-direction: column;
+    }
+    .summary h3 { color: #fff; font-size: 1.4rem; }
+    .summary .sub { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-bottom: 1.3rem; }
+    .sum-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.62rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.86rem; }
+    .sum-row .k { color: rgba(255,255,255,0.55); }
+    .sum-row .v { text-align: right; font-weight: 500; }
+    .sum-row .v.empty { color: rgba(255,255,255,0.3); font-weight: 400; font-style: italic; }
+    .sum-total { margin-top: auto; padding-top: 1.2rem; }
+    .sum-total .discount { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--color-peach); margin-bottom: 0.3rem; }
+    .sum-total .grand { display: flex; justify-content: space-between; align-items: baseline; }
+    .sum-total .grand .lbl { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+    .sum-total .grand .amt { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 600; }
+    .sum-note { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 0.5rem; }
+
+    .action-bar {
+      grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 2.4rem; border-top: 1px solid #ece7e0; background: #fff;
+    }
+    .btn {
+      font-family: var(--font-body); font-weight: 600; font-size: 0.8rem;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      padding: 0.95rem 2.2rem; border-radius: 30px; border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--color-primary); color: #fff; }
+    .btn-primary:hover { background: var(--color-dark); }
+    .btn-primary:disabled { background: #cdd6da; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: #8b9097; border-color: transparent; }
+    .btn-ghost:hover { color: var(--color-dark); }
+
+    .confirm { text-align: center; padding: 1rem 0.5rem 0.5rem; }
+    .confirm .seal {
+      width: 78px; height: 78px; border-radius: 50%; margin: 0 auto 1.1rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .confirm .seal svg { width: 38px; height: 38px; }
+    .confirm h2 { font-size: 2.1rem; }
+    .confirm .lead { color: #6b7178; max-width: 440px; margin: 0.4rem auto 1.6rem; }
+    .receipt {
+      text-align: left; max-width: 460px; margin: 0 auto 1.6rem;
+      border: 1px solid #e7e2da; border-radius: 13px; overflow: hidden;
+    }
+    .receipt .rhead { background: var(--color-light); padding: 0.8rem 1.2rem; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8b9097; font-weight: 600; }
+    .receipt .rrow { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 1.2rem; border-bottom: 1px solid #f0ece5; font-size: 0.9rem; }
+    .receipt .rrow:last-child { border-bottom: none; }
+    .receipt .rrow .k { color: #8b9097; }
+    .receipt .rrow .v { font-weight: 600; color: var(--color-dark); text-align: right; }
+    .receipt .rrow.total .v { font-family: var(--font-heading); font-size: 1.3rem; }
+    .confirm-actions { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+    .confirm-call { max-width: 460px; margin: 1.5rem auto 0; font-size: 0.85rem; color: #9aa0a6; }
+    .confirm-call a { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+
+    /* footer */
+    .site-footer {
+      background: var(--color-dark); color: #fff; padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+    .site-footer .fscript { font-family: var(--font-script); color: var(--color-peach); font-size: 1.3rem; }
+    .site-footer .fname { font-family: var(--font-heading); font-size: 1.5rem; }
+    .site-footer .finfo { font-size: 0.85rem; color: rgba(255,255,255,0.62); margin-top: 0.7rem; line-height: 1.9; }
+    .site-footer .finfo a { color: rgba(255,255,255,0.62); text-decoration: none; }
+    .site-footer .fcopy { font-size: 0.72rem; color: rgba(255,255,255,0.32); margin-top: 1.4rem; }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav { padding: 0.5rem 1rem; }
+      .booking-body { grid-template-columns: 1fr; }
+      .summary { order: -1; }
+      .sum-total { margin-top: 1rem; }
+      .panel-area { padding: 1.6rem 1.3rem 1.8rem; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .time-grid { grid-template-columns: repeat(3, 1fr); }
+      .action-bar { padding: 1rem 1.3rem; }
+      .step-label { display: none; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <img src="/assets/images/logo.png" alt="Falling Waters" class="logo-icon" />
+        <img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa &amp; Salon" class="logo-text" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="/services/massage">Massage</a></li>
+        <li><a href="/services/facials">Facials</a></li>
+        <li><a href="/services/hair-care">Hair</a></li>
+        <li><a href="/services/nails">Nails</a></li>
+        <li><a href="/areas/draper">Location</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <li><a href="/book" class="nav-cta">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="eyebrow">Reserve your time</div>
+    <h1>Book your escape</h1>
+    <p>Pick a treatment, choose your time, and request your appointment — right here, in under a minute. No phone call, no second website.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        No account required
+      </span>
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        Quick text confirmation
+      </span>
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        TAC members save 10%
+      </span>
+    </div>
+  </header>
+
+  <!-- Booking widget -->
+  <main class="booking-wrap" id="book">
+    <div class="booking-card">
+
+      <div class="steps" id="steps">
+        <div class="step" data-step="1"><span class="dot">1</span><span class="step-label">Service</span></div>
+        <div class="step" data-step="2"><span class="dot">2</span><span class="step-label">Provider</span></div>
+        <div class="step" data-step="3"><span class="dot">3</span><span class="step-label">Date &amp; Time</span></div>
+        <div class="step" data-step="4"><span class="dot">4</span><span class="step-label">Your Details</span></div>
+      </div>
+
+      <div class="booking-body">
+        <div class="panel-area">
+
+          <!-- STEP 1 -->
+          <section class="panel show" data-panel="1">
+            <div class="panel-head">
+              <div class="kicker">Step 1 of 4</div>
+              <h2 id="s1-title">What would you like?</h2>
+              <p id="s1-sub">Choose a category to begin.</p>
+            </div>
+            <div id="cat-view"><div class="cat-grid" id="cat-grid"></div></div>
+            <div id="service-view" style="display:none;">
+              <button class="back-link" onclick="showCategories()">&larr; All categories</button>
+              <div id="service-list"></div>
+            </div>
+          </section>
+
+          <!-- STEP 2 -->
+          <section class="panel" data-panel="2">
+            <div class="panel-head">
+              <div class="kicker">Step 2 of 4</div>
+              <h2>Choose your provider</h2>
+              <p>Request a favorite by name, or let us match you with the first available.</p>
+            </div>
+            <div id="provider-list"></div>
+          </section>
+
+          <!-- STEP 3 -->
+          <section class="panel" data-panel="3">
+            <div class="panel-head">
+              <div class="kicker">Step 3 of 4</div>
+              <h2>Pick a date &amp; time</h2>
+              <p>Choose when you'd like to come in — we'll confirm the exact time by text.</p>
+            </div>
+            <div class="date-strip" id="date-strip"></div>
+            <div class="time-head" id="time-head">Select a date above</div>
+            <div class="time-grid" id="time-grid"></div>
+          </section>
+
+          <!-- STEP 4 -->
+          <section class="panel" data-panel="4">
+            <div class="panel-head">
+              <div class="kicker">Step 4 of 4</div>
+              <h2>Almost there</h2>
+              <p>Just your contact details — no password, no account to create.</p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-first">First name</label>
+                <input id="f-first" type="text" autocomplete="given-name" oninput="validateDetails()" />
+              </div>
+              <div class="field">
+                <label for="f-last">Last name</label>
+                <input id="f-last" type="text" autocomplete="family-name" oninput="validateDetails()" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-phone">Mobile phone</label>
+                <input id="f-phone" type="tel" autocomplete="tel" placeholder="(801) 555-0148" oninput="validateDetails()" />
+              </div>
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input id="f-email" type="email" autocomplete="email" placeholder="you@email.com" oninput="validateDetails()" />
+              </div>
+            </div>
+            <!-- honeypot: real guests never fill this -->
+            <div class="hp" aria-hidden="true">
+              <label>Fax number<input type="text" id="f-fax" tabindex="-1" autocomplete="off" /></label>
+            </div>
+            <label class="tac-box">
+              <input type="checkbox" id="f-tac" onchange="toggleTac()" />
+              <span>
+                <span class="tac-t">I'm a Treehouse Athletic Club member</span><br />
+                <span class="tac-s">Applies your 10% member discount automatically — no code, no need to mention it.</span>
+              </span>
+            </label>
+          </section>
+
+          <!-- CONFIRMATION -->
+          <section class="panel" data-panel="5">
+            <div class="confirm">
+              <div class="seal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h2 id="confirm-title">Request received</h2>
+              <p class="lead" id="confirm-lead">Thank you — we've got your appointment request. We'll text you shortly to confirm your time. We can't wait to help you unwind.</p>
+              <div class="receipt" id="receipt"></div>
+              <div class="confirm-actions">
+                <button class="btn btn-primary" onclick="resetFlow()">Request another visit</button>
+                <a class="btn btn-ghost" href="/" style="display:inline-block;text-align:center;">Back to home</a>
+              </div>
+              <p class="confirm-call">
+                Need a same-day appointment or have a question?
+                Call or text us at <a href="tel:+18015019000">(801) 501-9000</a>.
+              </p>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- live summary -->
+        <aside class="summary">
+          <h3>Your visit</h3>
+          <div class="sub">Falling Waters Day Spa &amp; Salon</div>
+          <div class="sum-row"><span class="k">Service</span><span class="v empty" id="sum-service">Not selected</span></div>
+          <div class="sum-row"><span class="k">Provider</span><span class="v empty" id="sum-provider">Not selected</span></div>
+          <div class="sum-row"><span class="k">When</span><span class="v empty" id="sum-when">Not selected</span></div>
+          <div class="sum-total">
+            <div class="discount" id="sum-discount" style="display:none;">
+              <span>TAC member discount</span><span id="sum-discount-amt">−$0</span>
+            </div>
+            <div class="grand">
+              <span class="lbl">Est. total</span>
+              <span class="amt" id="sum-total">$0</span>
+            </div>
+            <div class="sum-note">Paid at the spa. Prices are starting rates — final pricing confirmed at your visit.</div>
+          </div>
+        </aside>
+
+        <!-- action bar -->
+        <div class="action-bar">
+          <button class="btn btn-ghost" id="btn-back" onclick="goBack()" style="visibility:hidden;">&larr; Back</button>
+          <button class="btn btn-primary" id="btn-next" onclick="goNext()" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="fscript">Falling Waters</div>
+    <div class="fname">Day Spa &amp; Salon</div>
+    <div class="finfo">
+      1101 E Draper Parkway, Draper, UT 84020 · Inside Treehouse Athletic Club<br />
+      <a href="tel:+18015019000">(801) 501-9000</a> · Mon–Fri 9am–6pm · Sat 9am–4pm · Closed Sunday
+    </div>
+    <div class="fcopy">© 2026 Falling Waters Day Spa &amp; Salon · Est. 1998 · Where Draper Unwinds</div>
+  </footer>
+
+  <script>
+  // ===========================================================================
+  // Data — Falling Waters' service menu & starting prices
+  // ===========================================================================
+  var IMG = '/assets/images/services/';
+
+  var CATEGORIES = [
+    { id:'massage',  name:'Massage Therapy',    from:105, img:IMG+'massage.jpg' },
+    { id:'facials',  name:'Skin Care & Facials',from:65,  img:IMG+'facial.jpg' },
+    { id:'hair',     name:'Hair Services',      from:35,  img:IMG+'hair.jpg' },
+    { id:'nails',    name:'Nail Care',          from:40,  img:IMG+'nails.jpg' },
+    { id:'brows',    name:'Brows & Lashes',     from:23,  img:IMG+'brows.jpg' },
+    { id:'waxing',   name:'Waxing',             from:20,  img:IMG+'waxing.jpg' },
+    { id:'packages', name:'Signature Packages', from:210, img:IMG+'couples.jpg' }
+  ];
+
+  var SERVICES = {
+    massage: [
+      { name:'Swedish Massage',     dur:'50 min', price:105 },
+      { name:'Swedish Massage',     dur:'80 min', price:150 },
+      { name:'Deep Tissue Massage', dur:'50 min', price:115 },
+      { name:'Deep Tissue Massage', dur:'80 min', price:160 },
+      { name:'Hot Stone Massage',   dur:'80 min', price:165 },
+      { name:'Prenatal Massage',    dur:'50 min', price:110 }
+    ],
+    facials: [
+      { name:'Custom Facial',          dur:'60 min', price:65 },
+      { name:'HydraFacial',            dur:'60 min', price:165 },
+      { name:'Chemical Peel',          dur:'45 min', price:120 },
+      { name:'Microdermabrasion',      dur:'50 min', price:110 },
+      { name:'Teen Clear-Skin Facial', dur:'45 min', price:75 }
+    ],
+    hair: [
+      { name:"Women's Cut & Style",  dur:'45 min', price:55 },
+      { name:"Men's Cut",            dur:'30 min', price:35 },
+      { name:'All-Over Color',       dur:'90 min', price:95 },
+      { name:'Partial Highlights',   dur:'2 hrs',  price:130 },
+      { name:'Balayage',             dur:'2.5 hrs',price:175 },
+      { name:'Blowout & Style',      dur:'45 min', price:48 }
+    ],
+    nails: [
+      { name:'Classic Manicure',    dur:'40 min', price:40 },
+      { name:'Gel Manicure',        dur:'50 min', price:52 },
+      { name:'Luxury Spa Pedicure', dur:'60 min', price:65 },
+      { name:'Gel Pedicure',        dur:'60 min', price:70 }
+    ],
+    brows: [
+      { name:'Brow Shaping & Tint', dur:'30 min', price:23 },
+      { name:'Lash Lift',           dur:'45 min', price:75 },
+      { name:'Classic Lash Set',    dur:'90 min', price:120 },
+      { name:'Lash Fill',           dur:'60 min', price:65 }
+    ],
+    waxing: [
+      { name:'Brow Wax',         dur:'15 min', price:20 },
+      { name:'Lip or Chin Wax',  dur:'15 min', price:18 },
+      { name:'Full Leg Wax',     dur:'45 min', price:70 },
+      { name:'Underarm Wax',     dur:'20 min', price:28 }
+    ],
+    packages: [
+      { name:'The Ultimate Spa Day',             dur:'≈ 3 hrs', price:249, desc:'50-min Swedish massage, 60-min custom facial & a luxury spa pedicure.' },
+      { name:'Bloom & Bliss Couples Experience', dur:'80 min',  price:349, desc:'Side-by-side Swedish massage for two — plus a flower bouquet to take home.' },
+      { name:'The Birthday Glow Experience',     dur:'≈ 2 hrs', price:210, desc:'Custom facial, relaxing massage, birthday treats & a floral arrangement.' }
+    ]
+  };
+
+  // Named staff are from the spa's own site/reviews; everything else
+  // routes through "first available".
+  var PROVIDERS = {
+    massage:  [{ n:'Licensed Massage Therapist', r:'27 years of experience' }],
+    facials:  [{ n:'Licensed Aesthetician', r:'12 years of experience' }],
+    hair:     [{ n:'Holland', r:'Hair Stylist · 13 years' }, { n:'Alicia', r:'Hair & Color' }],
+    nails:    [{ n:'Nail Technician', r:'Falling Waters team' }],
+    brows:    [{ n:'Jaiden', r:'Brow & Lash Artist' }],
+    waxing:   [{ n:'Licensed Aesthetician', r:'12 years of experience' }],
+    packages: []
+  };
+
+  var state = {
+    step: 1, category: null, service: null, provider: null,
+    date: null, time: null,
+    details: { first:'', last:'', phone:'', email:'' }, tac: false
+  };
+  var PAGE_LOADED = Date.now();
+
+  // ---- Step 1: categories & services ----
+  function renderCategories() {
+    var g = document.getElementById('cat-grid');
+    g.innerHTML = '';
+    CATEGORIES.forEach(function(c) {
+      var b = document.createElement('button');
+      b.className = 'cat';
+      b.onclick = function() { selectCategory(c.id); };
+      b.innerHTML =
+        '<div class="cat-img" style="background-image:url(\'' + c.img + '\')"></div>' +
+        '<div class="cat-body"><div class="name">' + c.name + '</div>' +
+        '<div class="from">' + (c.id==='packages' ? 'Packages from $'+c.from : 'From $'+c.from) + '</div></div>';
+      g.appendChild(b);
+    });
+  }
+
+  function showCategories() {
+    document.getElementById('cat-view').style.display = '';
+    document.getElementById('service-view').style.display = 'none';
+    document.getElementById('s1-title').textContent = 'What would you like?';
+    document.getElementById('s1-sub').textContent = 'Choose a category to begin.';
+  }
+
+  function selectCategory(catId) {
+    state.category = catId;
+    state.service = null;
+    state.provider = null;
+    var cat = CATEGORIES.filter(function(c){ return c.id===catId; })[0];
+    document.getElementById('cat-view').style.display = 'none';
+    document.getElementById('service-view').style.display = '';
+    document.getElementById('s1-title').textContent = cat.name;
+    document.getElementById('s1-sub').textContent = catId==='packages'
+      ? 'Our signature experiences — request one right here, no phone call needed.'
+      : 'Select a service. Prices are starting rates.';
+    var list = document.getElementById('service-list');
+    list.innerHTML = '';
+    SERVICES[catId].forEach(function(svc) {
+      var b = document.createElement('button');
+      b.className = 'opt';
+      b.onclick = function() { selectService(svc, b); };
+      b.innerHTML =
+        '<div class="opt-main"><div class="t">' + svc.name + '</div>' +
+        '<div class="s">' + (svc.desc ? svc.desc : svc.dur) + (svc.desc ? ' · '+svc.dur : '') + '</div></div>' +
+        '<div class="opt-price">$' + svc.price + '</div>' +
+        '<div class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></div>';
+      list.appendChild(b);
+    });
+    updateSummary();
+    refreshControls();
+  }
+
+  function selectService(svc, el) {
+    state.service = svc;
+    var sibs = el.parentNode.querySelectorAll('.opt');
+    for (var i=0;i<sibs.length;i++) sibs[i].classList.remove('selected');
+    el.classList.add('selected');
+    updateSummary();
+    refreshControls();
+  }
+
+  // ---- Step 2: provider ----
+  function renderProviders() {
+    var list = document.getElementById('provider-list');
+    list.innerHTML = '';
+    var opts = [{ n:'No preference', r:'We\'ll match you with the first available' }];
+    (PROVIDERS[state.category] || []).forEach(function(p){ opts.push(p); });
+    opts.forEach(function(p) {
+      var b = document.createElement('button');
+      b.className = 'opt' + (state.provider === p.n ? ' selected' : '');
+      b.onclick = function() { selectProvider(p.n, b); };
+      var initials = p.n === 'No preference' ? '★' : p.n.charAt(0);
+      b.innerHTML =
+        '<div class="opt-avatar">' + initials + '</div>' +
+        '<div class="opt-main"><div class="t">' + p.n + '</div><div class="s">' + p.r + '</div></div>' +
+        '<div class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></div>';
+      list.appendChild(b);
+    });
+  }
+
+  function selectProvider(name, el) {
+    state.provider = name;
+    var sibs = el.parentNode.querySelectorAll('.opt');
+    for (var i=0;i<sibs.length;i++) sibs[i].classList.remove('selected');
+    el.classList.add('selected');
+    updateSummary();
+    refreshControls();
+  }
+
+  // ---- Step 3: date & time ----
+  function renderDates() {
+    var strip = document.getElementById('date-strip');
+    strip.innerHTML = '';
+    var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var today = new Date(); today.setHours(0,0,0,0);
+    for (var i=1; i<=14; i++) {
+      var d = new Date(today.getTime() + i*86400000);
+      var closed = d.getDay() === 0; // closed Sunday
+      var b = document.createElement('button');
+      b.className = 'date-btn';
+      b.disabled = closed;
+      var iso = d.toISOString().slice(0,10);
+      b.setAttribute('data-iso', iso);
+      if (state.date && state.date.toISOString().slice(0,10) === iso) b.classList.add('selected');
+      b.innerHTML =
+        '<div class="dow">' + DOW[d.getDay()] + '</div>' +
+        '<div class="dnum">' + d.getDate() + '</div>' +
+        '<div class="mon">' + MON[d.getMonth()] + '</div>';
+      (function(dd, btn) { btn.onclick = function() { selectDate(dd, btn); }; })(d, b);
+      strip.appendChild(b);
+    }
+  }
+
+  function selectDate(d, el) {
+    state.date = d;
+    state.time = null;
+    var sibs = el.parentNode.querySelectorAll('.date-btn');
+    for (var i=0;i<sibs.length;i++) sibs[i].classList.remove('selected');
+    el.classList.add('selected');
+    renderTimes();
+    updateSummary();
+    refreshControls();
+  }
+
+  // deterministic pseudo-availability so the grid looks real and stable
+  function isTaken(d, h, m) {
+    var seed = (d.getDate()*41 + d.getMonth()*7 + h*13 + m) % 10;
+    return seed < 3;
+  }
+
+  function renderTimes() {
+    var grid = document.getElementById('time-grid');
+    var head = document.getElementById('time-head');
+    grid.innerHTML = '';
+    if (!state.date) { head.textContent = 'Select a date above'; return; }
+    var dow = state.date.getDay();
+    var endHour = dow === 6 ? 15 : 17; // Sat last start 3pm, else 5pm
+    head.textContent = 'Preferred time';
+    var any = false;
+    for (var h=9; h<=endHour; h++) {
+      for (var mi=0; mi<2; mi++) {
+        var m = mi*30;
+        var taken = isTaken(state.date, h, m);
+        if (!taken) any = true;
+        var hr12 = (h % 12) || 12;
+        var ampm = h < 12 ? 'AM' : 'PM';
+        var label = hr12 + ':' + (m===0?'00':'30') + ' ' + ampm;
+        var b = document.createElement('button');
+        b.className = 'time-btn';
+        b.textContent = label;
+        b.disabled = taken;
+        if (state.time && state.time.h===h && state.time.m===m) b.classList.add('selected');
+        (function(hh, mm, lbl, btn) { btn.onclick = function() { selectTime(hh, mm, lbl, btn); }; })(h, m, label, b);
+        grid.appendChild(b);
+      }
+    }
+    if (!any) grid.innerHTML = '<div class="empty-note">Fully booked this day — try another date.</div>';
+  }
+
+  function selectTime(h, m, label, el) {
+    state.time = { h:h, m:m, label:label };
+    var sibs = el.parentNode.querySelectorAll('.time-btn');
+    for (var i=0;i<sibs.length;i++) sibs[i].classList.remove('selected');
+    el.classList.add('selected');
+    updateSummary();
+    refreshControls();
+  }
+
+  // ---- Step 4: details ----
+  function validateDetails() {
+    state.details.first = document.getElementById('f-first').value.trim();
+    state.details.last  = document.getElementById('f-last').value.trim();
+    state.details.phone = document.getElementById('f-phone').value.trim();
+    state.details.email = document.getElementById('f-email').value.trim();
+    refreshControls();
+  }
+  function toggleTac() {
+    state.tac = document.getElementById('f-tac').checked;
+    updateSummary();
+  }
+  function detailsValid() {
+    var d = state.details;
+    return d.first.length > 0 && d.last.length > 0 &&
+           d.phone.replace(/\D/g,'').length >= 10 &&
+           /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email);
+  }
+
+  // ---- Summary + pricing ----
+  function priceParts() {
+    var base = state.service ? state.service.price : 0;
+    var discount = state.tac ? Math.round(base * 0.10 * 100)/100 : 0;
+    return { base:base, discount:discount, total: base - discount };
+  }
+  function money(n) { return '$' + (Math.round(n*100)/100).toFixed(2).replace(/\.00$/,''); }
+  function whenLabel() {
+    if (!state.date) return null;
+    var DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var s = DOW[state.date.getDay()] + ', ' + MON[state.date.getMonth()] + ' ' + state.date.getDate();
+    if (state.time) s += ' · ' + state.time.label;
+    return s;
+  }
+  function setSum(id, text, isEmpty) {
+    var el = document.getElementById(id);
+    el.textContent = text;
+    el.classList.toggle('empty', !!isEmpty);
+  }
+  function updateSummary() {
+    if (state.service) setSum('sum-service', state.service.name + ' · ' + state.service.dur, false);
+    else setSum('sum-service', 'Not selected', true);
+    if (state.provider) setSum('sum-provider', state.provider, false);
+    else setSum('sum-provider', 'Not selected', true);
+    var w = whenLabel();
+    if (w) setSum('sum-when', w, false); else setSum('sum-when', 'Not selected', true);
+    var p = priceParts();
+    var disc = document.getElementById('sum-discount');
+    if (p.discount > 0) {
+      disc.style.display = 'flex';
+      document.getElementById('sum-discount-amt').textContent = '−' + money(p.discount);
+    } else { disc.style.display = 'none'; }
+    document.getElementById('sum-total').textContent = money(p.total);
+  }
+
+  // ---- Navigation ----
+  function stepValid(step) {
+    if (step === 1) return !!state.service;
+    if (step === 2) return !!state.provider;
+    if (step === 3) return !!(state.date && state.time);
+    if (step === 4) return detailsValid();
+    return true;
+  }
+  function refreshControls() {
+    var chips = document.querySelectorAll('#steps .step');
+    for (var i=0;i<chips.length;i++) {
+      var n = parseInt(chips[i].getAttribute('data-step'), 10);
+      chips[i].classList.toggle('active', n === state.step);
+      chips[i].classList.toggle('done', n < state.step);
+    }
+    document.getElementById('btn-back').style.visibility = state.step > 1 && state.step < 5 ? 'visible' : 'hidden';
+    var next = document.getElementById('btn-next');
+    if (state.step >= 5) { next.style.display = 'none'; return; }
+    next.style.display = '';
+    next.disabled = !stepValid(state.step);
+    next.textContent = state.step === 4 ? 'Request appointment' : 'Continue';
+  }
+  function showPanel(step) {
+    var panels = document.querySelectorAll('.panel');
+    for (var i=0;i<panels.length;i++)
+      panels[i].classList.toggle('show', parseInt(panels[i].getAttribute('data-panel'),10) === step);
+  }
+  function goNext() {
+    if (!stepValid(state.step)) return;
+    if (state.step === 4) { submitBooking(); return; }
+    state.step++;
+    if (state.step === 2) renderProviders();
+    if (state.step === 3) { renderDates(); renderTimes(); }
+    showPanel(state.step);
+    refreshControls();
+    scrollToWidget();
+  }
+  function goBack() {
+    if (state.step <= 1) return;
+    state.step--;
+    showPanel(state.step);
+    refreshControls();
+    scrollToWidget();
+  }
+  function scrollToWidget() {
+    var w = document.getElementById('book');
+    var y = w.getBoundingClientRect().top + window.pageYOffset - 70;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  // ---- Confirmation ----
+  function formatPhone(raw) {
+    var d = raw.replace(/\D/g,'').slice(-10);
+    if (d.length !== 10) return raw;
+    return '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+  }
+
+  function renderReceipt() {
+    var p = priceParts();
+    var rows = [
+      ['Service', state.service.name + ' · ' + state.service.dur],
+      ['Provider', state.provider],
+      ['Requested', whenLabel()],
+      ['Guest', state.details.first + ' ' + state.details.last],
+      ['We\'ll text', formatPhone(state.details.phone)]
+    ];
+    var html = '<div class="rhead">Falling Waters Day Spa &amp; Salon</div>';
+    rows.forEach(function(r){
+      html += '<div class="rrow"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
+    });
+    if (p.discount > 0) {
+      html += '<div class="rrow"><span class="k">Subtotal</span><span class="v">' + money(p.base) + '</span></div>';
+      html += '<div class="rrow"><span class="k">TAC member discount</span><span class="v">−' + money(p.discount) + '</span></div>';
+    }
+    html += '<div class="rrow total"><span class="k">Est. total</span><span class="v">' + money(p.total) + '</span></div>';
+    document.getElementById('receipt').innerHTML = html;
+  }
+
+  function submitBooking() {
+    var next = document.getElementById('btn-next');
+    next.disabled = true;
+    next.textContent = 'Sending…';
+
+    var p = priceParts();
+    var payload = {
+      firstName: state.details.first,
+      lastName:  state.details.last,
+      email:     state.details.email,
+      phone:     state.details.phone,
+      service:   state.service.name + ' · ' + state.service.dur,
+      provider:  state.provider,
+      when:      whenLabel(),
+      total:     money(p.total),
+      tacMember: state.tac,
+      fax_number: document.getElementById('f-fax').value,
+      _timestamp: PAGE_LOADED
+    };
+
+    function finish(ok) {
+      renderReceipt();
+      if (!ok) {
+        document.getElementById('confirm-title').textContent = 'Almost there';
+        document.getElementById('confirm-lead').textContent =
+          "We saved your request below, but couldn't send it automatically. " +
+          "Please call or text (801) 501-9000 to lock in this time — it only takes a moment.";
+      }
+      state.step = 5;
+      showPanel(5);
+      refreshControls();
+      scrollToWidget();
+    }
+
+    fetch('/api/booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function(r){ finish(r.ok); })
+      .catch(function(){ finish(false); });
+  }
+
+  function resetFlow() {
+    state = {
+      step:1, category:null, service:null, provider:null,
+      date:null, time:null,
+      details:{ first:'', last:'', phone:'', email:'' }, tac:false
+    };
+    ['f-first','f-last','f-phone','f-email','f-fax'].forEach(function(id){ document.getElementById(id).value=''; });
+    document.getElementById('f-tac').checked = false;
+    document.getElementById('confirm-title').textContent = 'Request received';
+    document.getElementById('confirm-lead').textContent =
+      "Thank you — we've got your appointment request. We'll text you shortly to confirm your time. We can't wait to help you unwind.";
+    showCategories();
+    showPanel(1);
+    updateSummary();
+    refreshControls();
+    scrollToWidget();
+  }
+
+  // ---- Init ----
+  renderCategories();
+  updateSummary();
+  refreshControls();
+  </script>
+
+  <script src="/js/banner.js"></script>
+</body>
+</html>
