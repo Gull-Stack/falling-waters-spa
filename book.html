@@ -532,75 +532,165 @@
   // ===========================================================================
   var IMG = '/assets/images/services/';
 
+  // Full service menu — sourced from the spa's live Booker service menu.
   var CATEGORIES = [
-    { id:'massage',  name:'Massage Therapy',    from:105, img:IMG+'massage.jpg' },
-    { id:'facials',  name:'Skin Care & Facials',from:65,  img:IMG+'facial.jpg' },
-    { id:'hair',     name:'Hair Services',      from:35,  img:IMG+'hair.jpg' },
-    { id:'nails',    name:'Nail Care',          from:40,  img:IMG+'nails.jpg' },
-    { id:'brows',    name:'Brows & Lashes',     from:23,  img:IMG+'brows.jpg' },
-    { id:'waxing',   name:'Waxing',             from:20,  img:IMG+'waxing.jpg' },
-    { id:'packages', name:'Signature Packages', from:210, img:IMG+'couples.jpg' }
+    { id:'massage',   name:'Massage',               from:66,  img:IMG+'massage.jpg' },
+    { id:'facials',   name:'Facials & Skin Care',   from:60,  img:IMG+'facial.jpg' },
+    { id:'hair',      name:'Hair',                  from:15,  img:IMG+'hair.jpg' },
+    { id:'haircolor', name:'Hair Color',            from:50,  img:IMG+'hair.jpg' },
+    { id:'nails',     name:'Nails',                 from:15,  img:IMG+'nails.jpg' },
+    { id:'brows',     name:'Brows & Lashes',        from:23,  img:IMG+'brows.jpg' },
+    { id:'waxing',    name:'Waxing',                from:14,  img:IMG+'waxing.jpg' },
+    { id:'packages',  name:'Signature Experiences', from:210, img:IMG+'couples.jpg' }
   ];
 
   var SERVICES = {
     massage: [
-      { name:'Swedish Massage',     dur:'50 min', price:105 },
-      { name:'Swedish Massage',     dur:'80 min', price:150 },
-      { name:'Deep Tissue Massage', dur:'50 min', price:115 },
-      { name:'Deep Tissue Massage', dur:'80 min', price:160 },
-      { name:'Hot Stone Massage',   dur:'80 min', price:165 },
-      { name:'Prenatal Massage',    dur:'50 min', price:110 }
+      { name:'Tension Tamer Massage', dur:'30 min', price:66 },
+      { name:'Prenatal Massage',      dur:'50 min', price:99 },
+      { name:'Swedish Massage',       dur:'50 min', price:105 },
+      { name:'Deep Tissue Massage',   dur:'50 min', price:120 },
+      { name:'Prenatal Massage',      dur:'1 hr 20 min', price:138 },
+      { name:'Swedish Massage',       dur:'1 hr 20 min', price:145 },
+      { name:'Hot Stone Massage',     dur:'1 hr 20 min', price:155 },
+      { name:'Deep Tissue Massage',   dur:'1 hr 20 min', price:160 },
+      { name:'Swedish Massage',       dur:'1 hr 50 min', price:210 },
+      { name:'Deep Tissue Massage',   dur:'1 hr 50 min', price:237 }
     ],
     facials: [
-      { name:'Custom Facial',          dur:'60 min', price:65 },
-      { name:'HydraFacial',            dur:'60 min', price:165 },
-      { name:'Chemical Peel',          dur:'45 min', price:120 },
-      { name:'Microdermabrasion',      dur:'50 min', price:110 },
-      { name:'Teen Clear-Skin Facial', dur:'45 min', price:75 }
+      { name:'Mini Facial',                       dur:'30 min', price:60 },
+      { name:'Express Microderm (no facial)',     dur:'30 min', price:65 },
+      { name:'Basic Facial',                      dur:'1 hr', price:77 },
+      { name:'Acne Express HydraFacial',          dur:'35 min', price:82.50 },
+      { name:'Custom Facial',                     dur:'1 hr', price:99 },
+      { name:'Back Treatment',                    dur:'1 hr', price:99 },
+      { name:'Pumpkin Enzyme Peel',               dur:'1 hr', price:105 },
+      { name:'Microdermabrasion',                 dur:'1 hr', price:120 },
+      { name:'Mild Grade Chemical Peel',          dur:'1 hr', price:135 },
+      { name:'Medium Grade Chemical Peel',        dur:'1 hr', price:135 },
+      { name:'Neck & Décolleté HydraFacial',      dur:'20 min', price:142 },
+      { name:'Custom Facial',                     dur:'1 hr 30 min', price:155 },
+      { name:'Aggressive Chemical Peel',          dur:'1 hr', price:175 },
+      { name:'Signature HydraFacial',             dur:'45 min', price:195 },
+      { name:'Clarifying Deluxe HydraFacial',     dur:'1 hr', price:248 },
+      { name:'Age Refinement Deluxe HydraFacial', dur:'1 hr', price:275 },
+      { name:'Radiance Deluxe HydraFacial',       dur:'1 hr', price:275 },
+      { name:'Signature HydraFacial + Lip & Eye Perk', dur:'1 hr', price:303 },
+      { name:'Back Clarifying HydraFacial',       dur:'1 hr', price:325 },
+      { name:'Restorative Deluxe HydraFacial',    dur:'1 hr', price:325 },
+      { name:'Platinum HydraFacial',              dur:'1 hr 15 min', price:410 }
     ],
     hair: [
-      { name:"Women's Cut & Style",  dur:'45 min', price:55 },
-      { name:"Men's Cut",            dur:'30 min', price:35 },
-      { name:'All-Over Color',       dur:'90 min', price:95 },
-      { name:'Partial Highlights',   dur:'2 hrs',  price:130 },
-      { name:'Balayage',             dur:'2.5 hrs',price:175 },
-      { name:'Blowout & Style',      dur:'45 min', price:48 }
+      { name:'Beard Trim',                  dur:'15 min', price:15 },
+      { name:'Bang Trim',                   dur:'15 min', price:22 },
+      { name:"Boy's Haircut",               dur:'30 min', price:25 },
+      { name:"Girl's Cut (ages 0–9)",       dur:'1 hr', price:25 },
+      { name:'Curling',                     dur:'30 min', price:30 },
+      { name:"Girl's Cut (ages 10–17)",     dur:'1 hr', price:35 },
+      { name:"Men's Haircut",               dur:'30 min', price:35 },
+      { name:'Blow Out',                    dur:'1 hr', price:48 },
+      { name:'Deep Condition & Style',      dur:'1 hr', price:55 },
+      { name:'Scalp Treatment & Style',     dur:'1 hr', price:55 },
+      { name:"Ladies' Haircut",             dur:'1 hr', price:59 },
+      { name:'Event Hairstyle & Up-do',     dur:'1 hr', price:66 },
+      { name:'Hair Extension Maintenance',  dur:'45 min', price:75 },
+      { name:"Men's Perm",                  dur:'1 hr 30 min', price:83 },
+      { name:'Ladies Permanent Wave',       dur:'3 hr', price:120 },
+      { name:'Ladies Permanent Wave & Cut', dur:'3 hr 30 min', price:165 },
+      { name:'Beaded Weft Extensions (service only)', dur:'3 hr', price:200 },
+      { name:'Hair Extensions',             dur:'3 hr', price:495 }
+    ],
+    haircolor: [
+      { name:'Express Color',            dur:'30 min', price:50 },
+      { name:"Men's Color",              dur:'30 min', price:55 },
+      { name:'Style & Glaze',            dur:'1 hr', price:66 },
+      { name:"Men's Color & Cut",        dur:'1 hr', price:72 },
+      { name:'Corrective Color',         dur:'2 hr', price:120 },
+      { name:'Root Retouch',             dur:'1 hr 30 min', price:120 },
+      { name:'All-Over Color',           dur:'2 hr', price:125 },
+      { name:'Partial Weave',            dur:'2 hr 30 min', price:132 },
+      { name:'Root Retouch & Haircut',   dur:'2 hr 30 min', price:149 },
+      { name:'Full Weave',               dur:'3 hr', price:165 },
+      { name:'Ombré',                    dur:'2 hr 30 min', price:176 },
+      { name:'Partial Weave & Cut',      dur:'2 hr 30 min', price:182 },
+      { name:'All-Over Color & Cut',     dur:'2 hr 30 min', price:184 },
+      { name:'Balayage',                 dur:'3 hr', price:190 },
+      { name:'Platinum All-Over Blonde', dur:'4 hr', price:199 },
+      { name:'Full Weave & Cut',         dur:'3 hr', price:209 },
+      { name:'Balayage & Cut',           dur:'2 hr 30 min', price:239 }
     ],
     nails: [
-      { name:'Classic Manicure',    dur:'40 min', price:40 },
-      { name:'Gel Manicure',        dur:'50 min', price:52 },
-      { name:'Luxury Spa Pedicure', dur:'60 min', price:65 },
-      { name:'Gel Pedicure',        dur:'60 min', price:70 }
+      { name:'Polish Change',                          dur:'15 min', price:15 },
+      { name:'Gel Polish Removal',                     dur:'15 min', price:15 },
+      { name:'Xpress Pedicure',                        dur:'30 min', price:35 },
+      { name:'Traditional Manicure',                   dur:'30 min', price:40 },
+      { name:'Gel Manicure',                           dur:'45 min', price:48 },
+      { name:'Gel Toes (no pedicure)',                 dur:'30 min', price:53 },
+      { name:'Spa Pedicure',                           dur:'1 hr', price:55 },
+      { name:'Natural Nails by Sienna — Fill',         dur:'1 hr', price:55 },
+      { name:'Natural Nails by Sienna',                dur:'1 hr', price:60 },
+      { name:'Natural Nails by Sienna — Fill + Art',   dur:'1 hr 30 min', price:65 },
+      { name:'Gel Toes with Spa Pedicure',             dur:'1 hr 15 min', price:70 },
+      { name:'Natural Nails by Sienna + Nail Art',     dur:'1 hr 30 min', price:70 }
     ],
     brows: [
-      { name:'Brow Shaping & Tint', dur:'30 min', price:23 },
-      { name:'Lash Lift',           dur:'45 min', price:75 },
-      { name:'Classic Lash Set',    dur:'90 min', price:120 },
-      { name:'Lash Fill',           dur:'60 min', price:65 }
+      { name:'Eyebrow Tint',             dur:'15 min', price:23 },
+      { name:'Eyebrow Wax',              dur:'15 min', price:23 },
+      { name:'Eyelash Tint',             dur:'30 min', price:23 },
+      { name:'Eyebrow Tweezing',         dur:'15 min', price:28 },
+      { name:'Eyelash Extension Removal',dur:'30 min', price:40 },
+      { name:'Eyebrow Wax & Tint',       dur:'30 min', price:45 },
+      { name:'Mini Eyelash Fill',        dur:'30 min', price:45 },
+      { name:'Classic Eyelash Fill',     dur:'45 min', price:75 },
+      { name:'Hybrid Eyelash Fill',      dur:'1 hr', price:85 },
+      { name:'Eyelash Lift & Tint',      dur:'1 hr', price:90 },
+      { name:'Volume Eyelash Fill',      dur:'1 hr 15 min', price:95 },
+      { name:'Classic Eyelash Full Set', dur:'1 hr 30 min', price:170 },
+      { name:'Hybrid Eyelash Full Set',  dur:'2 hr', price:180 },
+      { name:'Volume Eyelash Full Set',  dur:'2 hr', price:200 }
     ],
     waxing: [
-      { name:'Brow Wax',         dur:'15 min', price:20 },
-      { name:'Lip or Chin Wax',  dur:'15 min', price:18 },
-      { name:'Full Leg Wax',     dur:'45 min', price:70 },
-      { name:'Underarm Wax',     dur:'20 min', price:28 }
+      { name:'Cheeks',             dur:'10 min', price:14 },
+      { name:'Chin',               dur:'10 min', price:15 },
+      { name:'Upper Lip',          dur:'10 min', price:15 },
+      { name:'Stomach',            dur:'15 min', price:16.50 },
+      { name:'Nose',               dur:'15 min', price:20 },
+      { name:'Neck Line',          dur:'15 min', price:22 },
+      { name:'Underarms',          dur:'15 min', price:27.50 },
+      { name:'Half Arms',          dur:'30 min', price:35 },
+      { name:'Bikini Line',        dur:'30 min', price:43 },
+      { name:'Shoulders',          dur:'30 min', price:44 },
+      { name:'Full Arms',          dur:'30 min', price:50 },
+      { name:'Lower Leg',          dur:'30 min', price:50 },
+      { name:'Full Face',          dur:'30 min', price:60 },
+      { name:'Full Bikini',        dur:'1 hr', price:60 },
+      { name:'Back',               dur:'45 min', price:70 },
+      { name:'Chest',              dur:'45 min', price:70 },
+      { name:'Brazilian',          dur:'50 min', price:72 },
+      { name:'Full Legs',          dur:'1 hr', price:90 },
+      { name:'Full Legs & Bikini', dur:'1 hr 30 min', price:104 }
     ],
     packages: [
-      { name:'The Ultimate Spa Day',             dur:'≈ 3 hrs', price:249, desc:'50-min Swedish massage, 60-min custom facial & a luxury spa pedicure.' },
-      { name:'Bloom & Bliss Couples Experience', dur:'80 min',  price:349, desc:'Side-by-side Swedish massage for two — plus a flower bouquet to take home.' },
-      { name:'The Birthday Glow Experience',     dur:'≈ 2 hrs', price:210, desc:'Custom facial, relaxing massage, birthday treats & a floral arrangement.' }
+      { name:'The Birthday Glow Experience',         dur:'1 hr 30 min', price:210, desc:'A 90-minute custom facial, a relaxing massage, birthday treats & a floral arrangement to take home.' },
+      { name:'Couples Swedish Massage',              dur:'50 min', price:215, desc:'Side-by-side 50-minute Swedish massages, plus a smoothie from Liv Pure Açaí.' },
+      { name:'Couples Deep Tissue Massage',          dur:'50 min', price:250, desc:'Side-by-side 50-minute deep tissue massages in the same room.' },
+      { name:'Couples Swedish Massage',              dur:'1 hr 20 min', price:298, desc:'Side-by-side 80-minute Swedish massages, plus a smoothie from Liv Pure Açaí.' },
+      { name:'Couples Deep Tissue Massage',          dur:'1 hr 20 min', price:335, desc:'Side-by-side 80-minute deep tissue massages in the same room.' },
+      { name:'The Bloom & Bliss Couples Experience', dur:'1 hr 20 min', price:349, desc:'80 minutes of side-by-side Swedish relaxation — plus a flower bouquet to take home.' }
     ]
   };
 
-  // Named staff are from the spa's own site/reviews; everything else
-  // routes through "first available".
+  // Named staff are from the spa's own service menu + guest reviews;
+  // everything else routes through "first available".
   var PROVIDERS = {
-    massage:  [{ n:'Licensed Massage Therapist', r:'27 years of experience' }],
-    facials:  [{ n:'Licensed Aesthetician', r:'12 years of experience' }],
-    hair:     [{ n:'Holland', r:'Hair Stylist · 13 years' }, { n:'Alicia', r:'Hair & Color' }],
-    nails:    [{ n:'Nail Technician', r:'Falling Waters team' }],
-    brows:    [{ n:'Jaiden', r:'Brow & Lash Artist' }],
-    waxing:   [{ n:'Licensed Aesthetician', r:'12 years of experience' }],
-    packages: []
+    massage:   [{ n:'Licensed Massage Therapist', r:'Our certified massage team' }],
+    facials:   [{ n:'Licensed Aesthetician', r:'Skin-care specialist' }],
+    hair:      [{ n:'Holland', r:'Hair Stylist' }, { n:'Alicia', r:'Stylist & Color' }, { n:'Jaiden', r:'Hair Stylist' }],
+    haircolor: [{ n:'Alicia', r:'Color Specialist' }, { n:'Holland', r:'Color & Highlights' }],
+    nails:     [{ n:'Sienna', r:'Nail Artist' }],
+    brows:     [{ n:'Jaiden', r:'Brow & Lash Artist' }],
+    waxing:    [{ n:'Licensed Aesthetician', r:'Waxing specialist' }],
+    packages:  []
   };
 
   var state = {
