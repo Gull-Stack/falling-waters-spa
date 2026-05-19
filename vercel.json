@@ -1,6 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/services/mothers-day-spa",
+      "destination": "/services/fathers-day-spa",
+      "statusCode": 302
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
