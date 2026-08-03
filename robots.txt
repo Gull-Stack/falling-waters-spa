@@ -1,16 +1,19 @@
 # Robots.txt for Falling Waters Day Spa
-# https://fallingwatersdayspa.com
+# https://www.fallingwatersdayspa.com
 
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://fallingwatersdayspa.com/sitemap.xml
+# AEO / LLM-readable brand files (must remain crawlable)
+Allow: /brand-facts.json
+Allow: /llms.txt
+
+# Sitemap
+Sitemap: https://www.fallingwatersdayspa.com/sitemap.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1
 
-# Allow all major search engines
 User-agent: Googlebot
 Allow: /
 
@@ -23,13 +26,11 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# Block common non-essential paths (if they exist)
+# Block admin/private/API only — do NOT blanket-block *.json (blocks brand-facts)
 Disallow: /admin/
 Disallow: /private/
-Disallow: /*.json$
 Disallow: /api/
 
-# Allow important resources
 Allow: /assets/
 Allow: /images/
 Allow: /*.css

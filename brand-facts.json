@@ -1,0 +1,143 @@
+{
+  "name": "Falling Waters Day Spa & Salon",
+  "type": "DaySpa",
+  "tagline": "Where Draper Unwinds",
+  "founded": "1998",
+  "description": "Full-service day spa and salon in Draper, Utah since 1998. Open to the public inside Treehouse Athletic Club. Massage, HydraFacial and facials, hair, nails, brows & lashes, and waxing.",
+  "location": {
+    "streetAddress": "1101 E Draper Parkway",
+    "addressLocality": "Draper",
+    "addressRegion": "UT",
+    "postalCode": "84020",
+    "addressCountry": "US",
+    "landmark": "Inside Treehouse Athletic Club"
+  },
+  "geo": {
+    "latitude": 40.5247,
+    "longitude": -111.8630
+  },
+  "telephone": "+1-801-501-9000",
+  "email": "Spa@tacfitness.com",
+  "url": "https://www.fallingwatersdayspa.com/",
+  "bookingUrl": "https://go.booker.com/#/location/fallingwaters",
+  "hours": {
+    "monday": "09:00-18:00",
+    "tuesday": "09:00-18:00",
+    "wednesday": "09:00-18:00",
+    "thursday": "09:00-18:00",
+    "friday": "09:00-18:00",
+    "saturday": "09:00-16:00",
+    "sunday": "Closed"
+  },
+  "priceRange": "$$",
+  "services": [
+    "Massage Therapy (Swedish, deep tissue, hot stone, prenatal)",
+    "Facials & Skin Care (HydraFacial, chemical peels, microdermabrasion, custom facials)",
+    "Hair Services (cuts, color, highlights, balayage, styling)",
+    "Nail Care (manicures, pedicures, gel polish)",
+    "Brows & Lashes (extensions, lifts, shaping, tinting)",
+    "Waxing",
+    "Couples Massage",
+    "Spa Packages & Gift Cards"
+  ],
+  "serviceArea": [
+    "Draper",
+    "Sandy",
+    "South Jordan",
+    "Riverton",
+    "Cottonwood Heights",
+    "Holladay",
+    "Greater Salt Lake Valley"
+  ],
+  "differentiators": [
+    "Established 1998 — 27+ years serving Draper",
+    "Full-service spa and salon under one roof",
+    "Located inside Treehouse Athletic Club; open to the public",
+    "Treehouse Athletic Club (TAC) members receive 10% off all services",
+    "Licensed massage therapists and aestheticians",
+    "Couples suite for side-by-side massage"
+  ],
+  "socialProof": {
+    "ratingValue": 4.4,
+    "reviewCount": 136,
+    "ratingSource": "Google (as published on site; verify live GBP for latest)",
+    "guestsServed": "10K+"
+  },
+  "memberOffer": {
+    "program": "Treehouse Athletic Club members",
+    "discount": "10% off all spa & salon services",
+    "howToRedeem": "Mention membership at booking"
+  },
+  "packages": [
+    {
+      "name": "The Ultimate Spa Day",
+      "startingPrice": 207,
+      "includes": "50-min Swedish massage, 60-min custom facial, luxury spa pedicure",
+      "note": "Must book multiple services in person; call (801) 501-9000"
+    },
+    {
+      "name": "The Bloom & Bliss Couples Experience",
+      "startingPrice": 349,
+      "includes": "80 minutes side-by-side Swedish massage plus flower bouquet",
+      "note": "Must book multiple services in person; call (801) 501-9000"
+    },
+    {
+      "name": "The Birthday Glow Experience",
+      "startingPrice": 210,
+      "includes": "60-min custom facial, 50-min Swedish massage, floral arrangement",
+      "note": "Must book multiple services in person; call (801) 501-9000"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do I need to book in advance?",
+      "answer": "We recommend booking 24-48 hours ahead, especially for weekends. Walk-ins welcome based on availability."
+    },
+    {
+      "question": "What should I wear?",
+      "answer": "Comfortable clothing is best. We provide robes and slippers for spa services. Wear easy-to-remove clothing for waxing."
+    },
+    {
+      "question": "How early should I arrive?",
+      "answer": "Please arrive 10-15 minutes early to check in and relax before your treatment begins."
+    },
+    {
+      "question": "What's your cancellation policy?",
+      "answer": "We require 24-hour notice for cancellations. Late cancellations may incur a fee."
+    },
+    {
+      "question": "Do you offer couples treatments?",
+      "answer": "Yes. Our couples suite allows side-by-side massages — ideal for date nights or special occasions."
+    },
+    {
+      "question": "Is parking available?",
+      "answer": "Yes. Free parking at Treehouse Athletic Club. We are located inside the club."
+    },
+    {
+      "question": "Are you open to non-members of Treehouse Athletic Club?",
+      "answer": "Yes. Falling Waters is open to the public. TAC members receive 10% off services."
+    },
+    {
+      "question": "Where are you located?",
+      "answer": "1101 E Draper Parkway, Draper, UT 84020, inside Treehouse Athletic Club."
+    }
+  ],
+  "social": {
+    "instagram": "https://www.instagram.com/fallingwaters_dayspa/",
+    "facebook": "https://www.facebook.com/fallingwatersdayspasalon/"
+  },
+  "sameAs": [
+    "https://www.facebook.com/fallingwatersdayspasalon/",
+    "https://www.instagram.com/fallingwaters_dayspa/"
+  ],
+  "primaryKeywords": [
+    "day spa Draper Utah",
+    "massage Draper",
+    "HydraFacial Draper",
+    "hair salon Draper",
+    "couples massage Draper",
+    "spa near Sandy Utah",
+    "spa near South Jordan"
+  ],
+  "last_updated": "2026-08-03"
+}
