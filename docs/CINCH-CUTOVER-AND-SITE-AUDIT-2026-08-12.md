@@ -289,6 +289,28 @@ years." There is no `Person` schema, no practitioner bios, no per-therapist
 pages. For a local service business where people book a *person*, this is the
 cheapest remaining organic gain — and it feeds A1's provider picker directly.
 
+### C7 · MEDIUM · Three Vercel projects deploy this repo
+
+Surfaced incidentally by the PR #7 preview builds — one push produced three
+separate deployments, across three teams:
+
+| Team | Project id |
+|---|---|
+| `gull-stack` | `prj_HoHsW2KV7Ed8kzEyOozUZfe0ioth` |
+| `gullstackteam` | `prj_CnTbvi3DNNIosNydL04X6Ew9IzG2` |
+| `gullstack-projects` | `prj_UOicL0E1ZcplDAugzhNEmMrTn5ct` |
+
+All three built successfully, so nothing is broken today. **Which one holds
+`fallingwatersdayspa.com` was not determined** — response headers confirm
+Vercel serves the domain but not the project behind it. Worth 60 seconds in
+the dashboard.
+
+This is the same hazard class `cinch-app/scripts/instances.json` warns about
+for the Cinch fleet: duplicate deployments that all report green while only
+one is real. The failure mode is a change that looks shipped because two
+projects deployed it, on a domain pinned to the third. Retire the two that
+aren't serving production, or write down which is canonical and why.
+
 ### C6 · LOW · `meta keywords`
 
 Twelve keywords in a tag no engine has used since 2009. Harmless, but it is
