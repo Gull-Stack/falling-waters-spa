@@ -123,7 +123,8 @@ def faq(q, a):
         <div class="faq-a"><p>{a}</p></div>
       </details>'''
 
-HTML = f'''<title>Falling Waters Redesign</title>
+HTML = f'''<meta name="robots" content="noindex,nofollow">
+<title>Falling Waters Redesign</title>
 <style>
 {fonts}
 
