@@ -8,7 +8,8 @@ Four questions were asked. This is the answer to each, with the evidence.
 4. How ready are we to turn Cinch on for the day spa? — **Track A. Not ready.
    The engine is done; the public front door does not exist.**
 
-Mobbin could not be reached — see Track D.
+Mobbin could not be reached — but the benchmark it was meant to source is
+delivered from public sites instead. See Track D and **Track E**.
 
 ---
 
@@ -177,8 +178,19 @@ B7.
 Reference: `utahpickleball.com` — Connor Pardoe's facility, PPA Tour's second
 HQ (`docs/UTAH-PICKLEBALL-CENTER.md`). Next.js + Tailwind 4 on Vercel.
 
-*(Assumed this is the "PPA tour site" — it is the PPA-linked site Bryce built
-per the repo. Say the word if you meant `ppatour.com` itself.)*
+**Both PPA-related sites were checked so the reference question is settled.**
+`ppatour.com` is the tour's own property — a different species: a live-data
+sports portal (world rankings with a men/women toggle, event countdowns,
+champion results, broadcast grid, tiered sponsor directory, sticky ticket
+bar). It is not a Bryce build and not a useful model for a day spa; almost
+nothing on it transfers. `utahpickleball.com` is the facility site, matches
+the repo's description of Bryce's build, and is the right comparable — a
+local venue selling memberships and bookings, which is exactly Falling
+Waters' job. Track B is written against it.
+
+The one idea worth lifting from `ppatour.com`: its **sticky footer CTA bar**
+that persists the primary action ("tickets") on every scroll position. For a
+spa that would be a persistent "Book" bar on mobile — see B10.
 
 | # | Technique | There | Falling Waters |
 |---|---|---|---|
@@ -190,7 +202,8 @@ per the repo. Say the word if you meant `ppatour.com` itself.)*
 | B6 | **Sticky header, backdrop blur**, 72px | yes | no |
 | B7 | **Tiered pricing cards** with per-tier "reserve at this rate" | $149–$249/mo | none — memberships live only in Cinch (A11) |
 | B8 | **Interactive product demo** — the member app, on the marketing page | yes | none |
-| B9 | **Urgency mechanic** — countdown to opening | yes | n/a, but seasonal//capacity equivalents exist |
+| B9 | **Urgency mechanic** — countdown to opening | yes | n/a, but seasonal/capacity equivalents exist |
+| B10 | **Sticky footer CTA bar** persisting the primary action (from `ppatour.com`) | yes | no — "Book" scrolls away |
 
 **B2 is the one to steal.** A mono eyebrow face over a quiet serif is what
 makes that page read as designed rather than assembled, and it is a few lines
@@ -283,21 +296,87 @@ the kind of thing an auditor spots and then distrusts everything else.
 
 ---
 
+## Track E — Top-tier spa benchmark
+
+Mobbin was the proposed source, not the deliverable. The deliverable is a
+comparison against top spa sites, so it was built from sites whose source can
+actually be read — which is better evidence than a screenshot anyway.
+
+Seven comparables, inspected live on 2026-08-12:
+
+| Site | Platform | Booking | Structured data | srcset | webp |
+|---|---|---|---|---|---|
+| PRESS Modern Massage (Brooklyn) | Squarespace | **Boulevard, embedded** | MassageTherapist, Place, hours | 14 | 26 |
+| Othership | Webflow + Shopify | on-site | HealthClub, AggregateRating, Geo | 4 | 7 |
+| Remedy Place | Next.js | **Zenoti, 96 refs — deep** | Organization only | 0 | 0 |
+| Glen Ivy | WordPress | on-site | WebPage, Breadcrumb | 5 | 13 |
+| Heyday Skincare | Shopify + Wix | Square | BreadcrumbList only | 0 | 0 |
+| Burke Williams | — | on-site | none detected | 3 | 0 |
+| AIRE Ancient Baths | — | on-site | Organization | 0 | 0 |
+| **Falling Waters** | Vanilla HTML | **Booker, offsite** | **DaySpa, 13× FAQPage, 28× Service, AggregateRating, OfferCatalog** | **0** | **0** |
+
+### E1 · Our structured data is the best in the set — defend it, don't redo it
+
+Not one of these sites carries FAQ markup at our depth. Most have less
+structured data than a single Falling Waters service page. Heyday — a
+national, well-funded facial chain — ships `BreadcrumbList` and nothing else.
+
+For AEO specifically this is a live advantage: when an assistant answers
+"what should I expect at my first spa visit in Draper," our 75 Question/Answer
+pairs are machine-readable and our competitors' are not. **C0 stands: leave
+the schema alone.** The work is elsewhere.
+
+### E2 · We are the only site in the set with no modern image pipeline
+
+Every comparable that invested anywhere invested here first. PRESS ships 26
+WebP and 14 `srcset`; Othership self-hosts woff2 and ships both. We ship
+zero of each, on 82MB of assets. This is now confirmed as table stakes rather
+than polish — it is the same fix as B4, B5 and C2, and it is the single
+clearest deficit against the field.
+
+### E3 · The tier that converts embeds booking; we hand off
+
+The pattern is unambiguous. Remedy Place carries **96 Zenoti references** —
+booking is woven through the page, not linked from it. PRESS runs Boulevard
+inline. Nobody in this set bounces a guest to a bare hash-routed external
+domain the way `go.booker.com/#/location/fallingwaters` does.
+
+This is the strongest external validation of the Cinch cutover: **A1–A3 are
+not a platform preference, they are how the top of this market operates.**
+Boulevard and Zenoti are the products Cinch is competing with here, and the
+appointment engine already matches them on capability — it is the front door
+that is missing.
+
+### E4 · What the premium tier does that isn't a platform choice
+
+Common to PRESS, Othership and Remedy Place, all cheap for us:
+
+- **Price and duration on the menu, inline** — no "call for pricing." We
+  mostly do this; packages are the exception, and they are our costliest
+  services (C4).
+- **A named practitioner attached to the booking** — reinforces C5.
+- **Membership as a first-class page**, not a footnote — reinforces B7.
+- **One persistent booking affordance** on mobile — reinforces B10.
+
+Nothing in this track needs a redesign. Every item lands on something already
+in Tracks B and C, which is a good sign the earlier read was right.
+
+---
+
 ## Track D — Mobbin: blocked
 
 `mobbin.com` returns **403** without a session. I cannot log in — I have no
 credentials, and the fetch tool cannot hold an authenticated session even if I
 did. I did not attempt a workaround.
 
-Three ways forward, in the order I'd suggest:
+**Track E delivers the benchmark anyway**, from public sites whose source can
+be read directly. Mobbin would still add one thing E cannot: captured
+*interaction* flows — the step-by-step of how a booking or onboarding actually
+moves. If that is what you want, export the spa/wellness collections as
+screenshots or PDF and drop them in, and I will analyze from there.
 
-1. **You export the collections** — screenshot or PDF the spa/beauty/wellness
-   flows you want benchmarked and drop them in. I analyze from there.
-2. **I benchmark against public top-tier spa sites instead** — real sites,
-   real page source, and I can inspect their actual technique rather than a
-   screenshot. Weaker on interaction patterns, stronger on implementation.
-3. You paste credentials — I'd rather you didn't, and it likely breaks their
-   ToS.
+I am not asking for credentials — I can't hold an authenticated session with
+them regardless, and it likely breaks Mobbin's terms.
 
 Worth knowing: `cinch-app/docs/mobbin-study/` already holds a committed Mobbin
 **Pro** study from 2026-08-07 — a design standard and a screen/flow taxonomy.
@@ -335,11 +414,15 @@ Nothing here is started. Sequenced by what unblocks what:
 - B2 typography — mono eyebrow in, Dancing Script out
 - B7 put the Massage Club on the website
 - B1 announcement bar
+- B10 sticky mobile "Book" bar
 - C3 rewrite README and BUILD_SPEC
 - C5 practitioner bios and `Person` schema
 
 **Decide before starting**
-- D how to handle Mobbin
+- D whether you want Mobbin's interaction flows on top of Track E
 - Whether the site stays vanilla HTML or moves to the Next.js stack the
   Pardoe site uses. B4/B5/B6 are close to free on that stack and hand-built
-  here. Not a recommendation either way — a real fork in the road.
+  here. Track E raises the stakes on this one: every comparable that invested
+  in images did it through a framework's pipeline rather than by hand. Still
+  not a recommendation — but it is the decision that makes C2 cheap or
+  expensive.
