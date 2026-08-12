@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Falling Waters Day Spa & Salon | Draper, UT | Est. 1998</title>
   <meta name="description" content="Draper day spa & salon since 1998. Massage, HydraFacial, hair & nails. TAC members save 10%. Book today — (801) 501-9000.">
-  <meta name="keywords" content="day spa draper utah, massage draper, facial draper, hydrafacial utah, hair salon draper, lash extensions draper, nails draper, spa near me, treehouse athletic club, best spa draper, couples massage draper, deep tissue massage draper">
   <meta name="author" content="Falling Waters Day Spa & Salon">
   <meta name="geo.region" content="US-UT">
   <meta name="geo.placename" content="Draper">
@@ -251,11 +250,15 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="apple-touch-icon" href="/assets/images/logo.png">
   
-  <!-- Fonts -->
+  <!-- Fonts — Dancing Script dropped (1 use, whole family downloaded).
+       Loaded non-render-blocking; the eyebrow face is a system mono, so it
+       costs nothing on the wire. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
   <style>
     :root {
       --color-primary: #4A90A4;
@@ -267,6 +270,98 @@
       --color-text: #333333;
       --font-heading: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'Montserrat', 'Segoe UI', sans-serif;
+      --font-eyebrow: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    }
+
+    /* ---- B2: eyebrow label. Uppercase mono, wide tracking, small.
+       The device that makes the Pardoe site read as designed. ---- */
+    .eyebrow {
+      font-family: var(--font-eyebrow);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      color: var(--color-primary);
+      display: block;
+    }
+
+    /* ---- B1: announcement bar ---- */
+    .announce {
+      background: var(--color-dark);
+      color: #fff;
+      text-align: center;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      position: relative;
+      z-index: 1100;
+    }
+    .announce .eyebrow {
+      display: inline;
+      color: var(--color-accent);
+      margin-right: 0.6rem;
+      font-size: 0.62rem;
+    }
+    .announce a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: var(--color-accent);
+      margin-left: 0.4rem;
+      white-space: nowrap;
+    }
+    .announce a:hover { color: var(--color-accent); }
+
+    /* ---- B7: membership tiers ---- */
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 2rem;
+      text-align: left;
+    }
+    .tier {
+      background: #fff;
+      border: 1px solid #e4e9ea;
+      border-radius: 6px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .tier.is-featured { border-color: var(--color-primary); border-width: 2px; }
+    .tier-name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+    .tier-price {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .tier-price span { font-size: 0.85rem; font-weight: 500; color: #6b7b80; }
+    .tier ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+    .tier li {
+      font-size: 0.9rem;
+      color: #4a5a5e;
+      padding-left: 1.4rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .tier li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+    .tier .btn { margin-top: auto; text-align: center; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -288,12 +383,14 @@
       padding: 0 2rem;
     }
     
-    /* Navigation */
+    /* Navigation.
+       Was `position: fixed; top: 0`, which put it UNDERNEATH the in-flow
+       announcement bar — on a 390px phone the bar covered the nav completely
+       and the site rendered with no visible logo at all. `sticky` lets the bar
+       and the nav stack honestly: the bar scrolls away, the nav stays. */
     .nav {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
       z-index: 1000;
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(10px);
@@ -564,9 +661,31 @@
       background: white;
     }
     
+    /* Body-copy links had NO rule on this page, so they rendered as default
+       browser blue — visible in the "Also serving guests from…" line. */
+    .container p a:not(.btn),
+    .faq-item a:not(.btn) {
+      color: var(--color-primary);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(74,144,164,0.35);
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .container p a:not(.btn):hover,
+    .faq-item a:not(.btn):hover {
+      color: var(--color-dark);
+      text-decoration-color: var(--color-accent);
+    }
+
     .section-header {
       text-align: center;
       margin-bottom: 4rem;
+    }
+
+    .section-header .eyebrow {
+      margin-bottom: 0.9rem;
+      color: var(--color-primary);
     }
     
     .section-header h2 {
@@ -1251,6 +1370,17 @@
       color: white;
       border-color: var(--color-dark);
     }
+
+    .sticky-book .btn-call {
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.75);
+    }
+    .sticky-book .btn-call:hover {
+      background: white;
+      color: var(--color-dark);
+      border-color: white;
+    }
     
     /* Responsive */
     @media (max-width: 768px) {
@@ -1374,12 +1504,13 @@
 </head>
 <body>
 
+
   <!-- Navigation -->
   <nav class="nav">
     <div class="nav-container">
       <a href="/" class="nav-logo">
-        <img src="/assets/images/logo.png" alt="Falling Waters" class="logo-icon">
-        <img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa & Salon" class="logo-text">
+        <picture><source type="image/webp" srcset="/assets/images/logo.webp"><img src="/assets/images/logo.png" alt="Falling Waters" class="logo-icon" width="1280" height="1280" loading="eager" fetchpriority="high"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/logo-text.webp"><img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa & Salon" class="logo-text" width="1280" height="233" loading="eager" fetchpriority="high"></picture>
       </a>
       <ul class="nav-links">
         <li><a href="/services/massage">Massage</a></li>
@@ -1504,13 +1635,14 @@
   <section class="experiences" id="experiences">
     <div class="container">
       <div class="section-header">
-        <img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa + Salon" class="section-logo">
+        <picture><source type="image/webp" srcset="/assets/images/logo-text.webp"><img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa + Salon" class="section-logo" width="1280" height="233" loading="lazy" decoding="async"></picture>
+        <span class="eyebrow">Packages</span>
         <h2>Signature Spa Packages in Draper</h2>
         <p>More than treatments — these are moments you'll cherish. Perfect for celebrations, self-care days, or simply because you deserve it.</p>
       </div>
       <div class="experience-grid">
         <div class="experience-card">
-          <img src="/assets/images/services/girls-day.jpg" alt="The Ultimate Spa Day package at Falling Waters Day Spa Draper">
+          <picture><source type="image/webp" srcset="/assets/images/services/girls-day.webp"><img src="/assets/images/services/girls-day.jpg" alt="The Ultimate Spa Day package at Falling Waters Day Spa Draper" width="1408" height="768" loading="lazy" decoding="async"></picture>
           <div class="experience-overlay"></div>
           <div class="experience-content">
             <h3>The Ultimate Spa Day</h3>
@@ -1520,7 +1652,7 @@
           </div>
         </div>
         <div class="experience-card">
-          <img src="/assets/images/services/couples.jpg" alt="Couples massage experience at Falling Waters Day Spa">
+          <picture><source type="image/webp" srcset="/assets/images/services/couples.webp"><img src="/assets/images/services/couples.jpg" alt="Couples massage experience at Falling Waters Day Spa" width="800" height="533" loading="lazy" decoding="async"></picture>
           <div class="experience-overlay"></div>
           <div class="experience-content">
             <h3>The Bloom &amp; Bliss Couples Experience</h3>
@@ -1530,7 +1662,7 @@
           </div>
         </div>
         <div class="experience-card">
-          <img src="/assets/images/services/relaxation.jpg" alt="The Birthday Glow spa experience in Draper Utah">
+          <picture><source type="image/webp" srcset="/assets/images/services/relaxation.webp"><img src="/assets/images/services/relaxation.jpg" alt="The Birthday Glow spa experience in Draper Utah" width="720" height="960" loading="lazy" decoding="async"></picture>
           <div class="experience-overlay"></div>
           <div class="experience-content">
             <h3>The Birthday Glow Experience</h3>
@@ -1547,13 +1679,14 @@
   <section class="services" id="services">
     <div class="container">
       <div class="section-header">
+        <span class="eyebrow">The menu</span>
         <h2>Spa &amp; Salon Services in Draper</h2>
         <p>Massage, facials, hair, nails, lashes &amp; waxing — certified professionals under one roof</p>
       </div>
       <div class="services-grid">
         <div class="service-card">
           <div class="service-card-image">
-            <img src="/assets/images/services/massage.jpg" alt="Massage therapy in Draper Utah at Falling Waters">
+            <picture><source type="image/webp" srcset="/assets/images/services/massage.webp"><img src="/assets/images/services/massage.jpg" alt="Massage therapy in Draper Utah at Falling Waters" width="800" height="533" loading="lazy" decoding="async"></picture>
           </div>
           <div class="service-card-content">
             <h3>Massage Therapy</h3>
@@ -1564,7 +1697,7 @@
         </div>
         <div class="service-card">
           <div class="service-card-image">
-            <img src="/assets/images/services/facial.jpg" alt="HydraFacial and facials in Draper at Falling Waters">
+            <picture><source type="image/webp" srcset="/assets/images/services/facial.webp"><img src="/assets/images/services/facial.jpg" alt="HydraFacial and facials in Draper at Falling Waters" width="800" height="533" loading="lazy" decoding="async"></picture>
           </div>
           <div class="service-card-content">
             <h3>Skin Care & Facials</h3>
@@ -1575,7 +1708,7 @@
         </div>
         <div class="service-card">
           <div class="service-card-image">
-            <img src="/assets/images/services/hair.jpg" alt="Hair salon cuts and color in Draper Utah">
+            <picture><source type="image/webp" srcset="/assets/images/services/hair.webp"><img src="/assets/images/services/hair.jpg" alt="Hair salon cuts and color in Draper Utah" width="800" height="534" loading="lazy" decoding="async"></picture>
           </div>
           <div class="service-card-content">
             <h3>Hair Services</h3>
@@ -1586,7 +1719,7 @@
         </div>
         <div class="service-card">
           <div class="service-card-image">
-            <img src="/assets/images/services/nails.jpg" alt="Manicure and pedicure nail care in Draper">
+            <picture><source type="image/webp" srcset="/assets/images/services/nails.webp"><img src="/assets/images/services/nails.jpg" alt="Manicure and pedicure nail care in Draper" width="800" height="1200" loading="lazy" decoding="async"></picture>
           </div>
           <div class="service-card-content">
             <h3>Nail Care</h3>
@@ -1597,7 +1730,7 @@
         </div>
         <div class="service-card">
           <div class="service-card-image">
-            <img src="/assets/images/services/brows.jpg" alt="Lash extensions and brow services in Draper">
+            <picture><source type="image/webp" srcset="/assets/images/services/brows.webp"><img src="/assets/images/services/brows.jpg" alt="Lash extensions and brow services in Draper" width="1280" height="720" loading="lazy" decoding="async"></picture>
           </div>
           <div class="service-card-content">
             <h3>Brows & Lashes</h3>
@@ -1608,7 +1741,7 @@
         </div>
         <div class="service-card">
           <div class="service-card-image">
-            <img src="/assets/images/services/waxing.jpg" alt="Professional waxing services in Draper Utah">
+            <picture><source type="image/webp" srcset="/assets/images/services/waxing.webp"><img src="/assets/images/services/waxing.jpg" alt="Professional waxing services in Draper Utah" width="1280" height="720" loading="lazy" decoding="async"></picture>
           </div>
           <div class="service-card-content">
             <h3>Waxing</h3>
@@ -1633,22 +1766,23 @@
   <section class="team">
     <div class="container">
       <div class="section-header">
+        <span class="eyebrow">Your therapists</span>
         <h2>Meet Our Team</h2>
         <p>Experienced professionals dedicated to your relaxation and beauty</p>
       </div>
       <div class="team-grid">
         <div class="team-member">
-          <img src="/assets/images/team/massage-therapist.jpg" alt="Licensed massage therapist at Falling Waters Day Spa Draper">
+          <picture><source type="image/webp" srcset="/assets/images/team/massage-therapist.webp"><img src="/assets/images/team/massage-therapist.jpg" alt="Licensed massage therapist at Falling Waters Day Spa Draper" width="600" height="600" loading="lazy" decoding="async"></picture>
           <h4>Licensed Massage Therapists</h4>
           <p>Swedish, deep tissue &amp; more — decades of hands-on care</p>
         </div>
         <div class="team-member">
-          <img src="/assets/images/team/aesthetician.jpg" alt="Licensed aesthetician at Falling Waters Day Spa">
+          <picture><source type="image/webp" srcset="/assets/images/team/aesthetician.webp"><img src="/assets/images/team/aesthetician.jpg" alt="Licensed aesthetician at Falling Waters Day Spa" width="600" height="600" loading="lazy" decoding="async"></picture>
           <h4>Licensed Aestheticians</h4>
           <p>HydraFacial, peels &amp; custom facials</p>
         </div>
         <div class="team-member">
-          <img src="/assets/images/team/hair-stylist.jpg" alt="Hair stylist at Falling Waters Day Spa and Salon">
+          <picture><source type="image/webp" srcset="/assets/images/team/hair-stylist.webp"><img src="/assets/images/team/hair-stylist.jpg" alt="Hair stylist at Falling Waters Day Spa and Salon" width="600" height="600" loading="lazy" decoding="async"></picture>
           <h4>Hair Stylists</h4>
           <p>Cuts, color &amp; styling — including favorites like Alicia &amp; Holland</p>
         </div>
@@ -1664,6 +1798,7 @@
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-header">
+        <span class="eyebrow">Reviews</span>
         <h2>What Our Guests Say</h2>
         <p>Don't just take our word for it — hear from the people who make us Draper's favorite spa</p>
       </div>
@@ -1727,16 +1862,44 @@
     </div>
   </section>
 
-  <!-- Membership -->
+  <!-- Membership — B7.
+       ⚠ DRAFT PRICING: the tiers and prices below are taken from the Cinch
+       seed (src/db/seed-fallingwaters.ts), which is a PROPOSAL, not a product
+       the spa sells today. Confirm real names, prices and terms with the
+       owner before this ships. Everything else on this page is verified. -->
   <section class="membership">
     <div class="container">
-      <h2>Become a Regular</h2>
-      <p>Join our community of wellness enthusiasts. Frequent visitors enjoy exclusive perks and priority booking.</p>
-      <div class="membership-perks">
-        <div class="perk"><strong>Priority</strong> Booking</div>
-        <div class="perk"><strong>Exclusive</strong> Promotions</div>
+      <span class="eyebrow">Memberships</span>
+      <h2>Make it a habit, not a treat</h2>
+      <p>Regular guests get better results and better rates. Two ways to keep coming back.</p>
+
+      <div class="tiers">
+        <div class="tier is-featured">
+          <span class="eyebrow">Most popular</span>
+          <div class="tier-name">Massage Club</div>
+          <div class="tier-price">$89<span> / month</span></div>
+          <ul>
+            <li>One 50-minute Swedish or deep-tissue massage every month</li>
+            <li>10% off every additional service</li>
+            <li>Unused sessions roll over for 90 days</li>
+            <li>Priority booking on weekends</li>
+          </ul>
+          <a href="tel:+18015019000" class="btn" data-cta="tier-massage-club">Call to join — (801) 501-9000</a>
+        </div>
+
+        <div class="tier">
+          <span class="eyebrow">Already a member</span>
+          <div class="tier-name">Treehouse Athletic Club</div>
+          <div class="tier-price">10%<span> off, always</span></div>
+          <ul>
+            <li>10% off all spa &amp; salon services</li>
+            <li>No enrollment — just mention your membership</li>
+            <li>Stacks with seasonal offers</li>
+            <li>Free parking at the club</li>
+          </ul>
+          <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-light" data-cta="tier-tac">Book your visit</a>
+        </div>
       </div>
-      <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-light">Start Your Wellness Journey</a>
     </div>
   </section>
 
@@ -1760,6 +1923,7 @@
   <section class="faq" id="faq">
     <div class="container">
       <div class="section-header">
+        <span class="eyebrow">Good to know</span>
         <h2>Frequently Asked Questions</h2>
         <p>Everything you need to know before your visit</p>
       </div>
@@ -1801,12 +1965,12 @@
       <h2>Follow Our Journey</h2>
       <a href="https://instagram.com/fallingwaters_dayspa" target="_blank" class="instagram-handle">@fallingwaters_dayspa</a>
       <div class="instagram-grid">
-        <img src="/assets/images/services/massage.jpg" alt="Massage room at Falling Waters Day Spa Draper">
-        <img src="/assets/images/services/facial.jpg" alt="Facial treatment at Falling Waters">
-        <img src="/assets/images/services/hair.jpg" alt="Hair salon styling at Falling Waters">
-        <img src="/assets/images/services/nails.jpg" alt="Nail care manicure at Falling Waters">
-        <img src="/assets/images/services/brows.jpg" alt="Brow and lash services at Falling Waters">
-        <img src="/assets/images/services/relaxation.jpg" alt="Relaxation space at Falling Waters Day Spa">
+        <picture><source type="image/webp" srcset="/assets/images/services/massage.webp"><img src="/assets/images/services/massage.jpg" alt="Massage room at Falling Waters Day Spa Draper" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/services/facial.webp"><img src="/assets/images/services/facial.jpg" alt="Facial treatment at Falling Waters" width="800" height="533" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/services/hair.webp"><img src="/assets/images/services/hair.jpg" alt="Hair salon styling at Falling Waters" width="800" height="534" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/services/nails.webp"><img src="/assets/images/services/nails.jpg" alt="Nail care manicure at Falling Waters" width="800" height="1200" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/services/brows.webp"><img src="/assets/images/services/brows.jpg" alt="Brow and lash services at Falling Waters" width="1280" height="720" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="/assets/images/services/relaxation.webp"><img src="/assets/images/services/relaxation.jpg" alt="Relaxation space at Falling Waters Day Spa" width="720" height="960" loading="lazy" decoding="async"></picture>
       </div>
       <div style="margin-top: 1.5rem;">
         <a href="https://instagram.com/fallingwaters_dayspa" target="_blank" class="btn">Follow Us</a>
@@ -1882,9 +2046,12 @@
   </footer>
 
   <!-- Sticky Book Bar -->
+  <!-- A persistent bar already existed. The only change: a Call action, since
+       packages ($207–$349) can only be booked by phone today. -->
   <div class="sticky-book">
     <p>Ready to relax? Book your appointment today!</p>
-    <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Now</a>
+    <a href="https://go.booker.com/#/location/fallingwaters" class="btn" data-cta="sticky-book">Book Now</a>
+    <a href="tel:+18015019000" class="btn btn-call" data-cta="sticky-call">Call</a>
   </div>
 
   <!-- Scroll Animation Script -->
@@ -1979,5 +2146,7 @@
   </script>
 
 <script src="/js/banner.js"></script>
+
+
 </body>
 </html>
