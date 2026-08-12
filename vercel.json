@@ -1,6 +1,16 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/about", "destination": "/", "permanent": true },
+    { "source": "/contact", "destination": "/#contact", "permanent": true },
+    { "source": "/gallery", "destination": "/#instagram", "permanent": true },
+    {
+      "source": "/services/mommy-makeover",
+      "destination": "/services/body-treatments",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
