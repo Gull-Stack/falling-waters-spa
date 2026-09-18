@@ -60,9 +60,33 @@ echo "  main carries the timezone fix"
 code=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $TOKEN" "$API/v9/projects/$PROJECT?teamId=$TEAM_ID")
 [ "$code" = "404" ] || die "project $PROJECT already exists (HTTP $code) — nothing created"
 echo "  $PROJECT is free"
+# Resend key: read and validated BEFORE anything is created, so a bad
+# clipboard can never leave a half-built project behind.
+RESEND_KEY=""
+if [ "${RESEND_FROM_CLIPBOARD:-}" = "1" ]; then
+  # Straight off the macOS clipboard: never in a transcript, history or output.
+  RESEND_KEY=$(pbpaste | tr -d '[:space:]')
+  case "$RESEND_KEY" in
+    re_*) echo "  Resend key read from the clipboard" ;;
+    *) die "clipboard does not hold a Resend key (they start re_) — nothing created" ;;
+  esac
+elif [ -t 0 ]; then
+  read -r -s -p "  RESEND_API_KEY (Enter to skip): " RESEND_KEY; echo
+  RESEND_KEY=$(printf '%s' "$RESEND_KEY" | tr -d '[:space:]')
+else
+  echo "  no Resend key (RESEND_FROM_CLIPBOARD=1 to add one) — email stays off"
+fi
+RESEND_KEY=$(printf '%s' "$RESEND_KEY" | tr -cd 'A-Za-z0-9_-')
 echo "  owner login will be: $OWNER_EMAIL  (override: OWNER_EMAIL=... bash $0)"
-read -r -p "  Create $PROJECT on team $TEAM_SLUG now? [y/N] " yn
-[ "$yn" = "y" ] || die "cancelled — nothing created"
+# Non-interactive runs (Claude Code's `!` has no keyboard) pass CONFIRM=yes.
+if [ "${CONFIRM:-}" = "yes" ]; then
+  echo "  CONFIRM=yes — proceeding"
+elif [ -t 0 ]; then
+  read -r -p "  Create $PROJECT on team $TEAM_SLUG now? [y/N] " yn
+  [ "$yn" = "y" ] || die "cancelled — nothing created"
+else
+  die "no keyboard to confirm — re-run with CONFIRM=yes (nothing created)"
+fi
 
 say "1. Vercel project"
 REPO_ID=$(gh api "repos/$REPO" -q .id)
@@ -94,12 +118,9 @@ put_env FALLINGWATERS_OWNER_PASSWORD "$OWNER_PW" sensitive
 security add-generic-password -U -a "$OWNER_EMAIL" -s "cinch-falling-waters-owner" -w "$OWNER_PW"
 echo "  owner password saved to Keychain: service cinch-falling-waters-owner"
 
-say "3. Email (Resend) — paste a key; it is not echoed"
-echo "  Resend dashboard → API Keys → Create (Sending access). Enter to skip for now."
-read -r -s -p "  RESEND_API_KEY: " RESEND_KEY; echo
-RESEND_KEY=$(printf '%s' "$RESEND_KEY" | tr -d '[:space:]' | tr -cd 'A-Za-z0-9_-')
+say "3. Email (Resend)"
 if [ -n "$RESEND_KEY" ]; then put_env RESEND_API_KEY "$RESEND_KEY" sensitive
-else echo "  skipped — guests get no confirmation email until this is set"; fi
+else echo "  skipped — guests get no confirmation email until it is set (scripts/add-resend-key.sh)"; fi
 
 say "4. Database — Neon via the Vercel Marketplace installation"
 WORK=$(mktemp -d)
