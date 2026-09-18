@@ -34,6 +34,10 @@ OWNER_EMAIL="${OWNER_EMAIL:-bryce@gullstack.com}"
 
 say() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 die() { printf '\n\033[31mSTOP: %s\033[0m\n' "$*" >&2; exit 1; }
+# Every JSON body is built by Python from environment variables, inside SINGLE
+# quotes. macOS ships bash 3.2, which mangles quotes nested in "$(…)" — that
+# turned {'key':…} into four broken arguments on the first real run.
+json_env() { K="$1" V="$2" TY="$3" python3 -c 'import json,os;print(json.dumps({"key":os.environ["K"],"value":os.environ["V"],"type":os.environ["TY"],"target":["production"]}))'; }
 
 AUTH_FILE="$HOME/Library/Application Support/com.vercel.cli/auth.json"
 [ -f "$AUTH_FILE" ] || die "Vercel CLI is not logged in (run: vercel login)"
@@ -58,8 +62,15 @@ case "$SEED_SRC" in
 esac
 echo "  main carries the timezone fix"
 code=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $TOKEN" "$API/v9/projects/$PROJECT?teamId=$TEAM_ID")
-[ "$code" = "404" ] || die "project $PROJECT already exists (HTTP $code) — nothing created"
-echo "  $PROJECT is free"
+EXISTS=0
+if [ "$code" = "404" ]; then
+  echo "  $PROJECT is free"
+elif [ "$code" = "200" ] && [ "${RESUME:-}" = "1" ]; then
+  EXISTS=1
+  echo "  $PROJECT exists — RESUME=1, continuing from the secrets step"
+else
+  die "project $PROJECT already exists (HTTP $code) — re-run with RESUME=1 to continue it"
+fi
 # Resend key: read and validated BEFORE anything is created, so a bad
 # clipboard can never leave a half-built project behind.
 RESEND_KEY=""
@@ -90,10 +101,13 @@ fi
 
 say "1. Vercel project"
 REPO_ID=$(gh api "repos/$REPO" -q .id)
+if [ "$EXISTS" = "0" ]; then
+PROJECT_BODY=$(P="$PROJECT" R="$REPO" python3 -c 'import json,os;print(json.dumps({"name":os.environ["P"],"framework":"nextjs","gitRepository":{"type":"github","repo":os.environ["R"]},"commandForIgnoringBuildStep":"bash scripts/vercel-ignore.sh","serverlessFunctionRegion":"iad1"}))')
 curl -fsS -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
   "$API/v11/projects?teamId=$TEAM_ID" \
-  -d "{\"name\":\"$PROJECT\",\"framework\":\"nextjs\",\"gitRepository\":{\"type\":\"github\",\"repo\":\"$REPO\"},\"commandForIgnoringBuildStep\":\"bash scripts/vercel-ignore.sh\",\"serverlessFunctionRegion\":\"iad1\"}" \
-  | python3 -c "import json,sys;p=json.load(sys.stdin);print('  created',p['name'],p['id'])"
+  -d "$PROJECT_BODY" \
+  | python3 -c 'import json,sys;p=json.load(sys.stdin);print("  created",p["name"],p["id"])'
+fi
 curl -fsS -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
   "$API/v9/projects/$PROJECT?teamId=$TEAM_ID" -d '{"nodeVersion":"24.x"}' >/dev/null && echo "  node 24.x (matches the fleet)"
 
@@ -102,9 +116,11 @@ rnd() { python3 -c "import secrets;print(secrets.token_urlsafe(32))"; }
 AUTH_SECRET=$(rnd)
 OWNER_PW="FW-$(python3 -c "import secrets;print(secrets.token_urlsafe(12))")"
 put_env() { # key value type
+  local BODY
+  BODY=$(json_env "$1" "$2" "$3")
   curl -fsS -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
     "$API/v10/projects/$PROJECT/env?teamId=$TEAM_ID&upsert=true" \
-    -d "$(python3 -c "import json,sys;print(json.dumps({'key':sys.argv[1],'value':sys.argv[2],'type':sys.argv[3],'target':['production']}))" "$1" "$2" "$3")" >/dev/null
+    -d "$BODY" >/dev/null
   echo "  $1 ($3)"
 }
 put_env CINCH_INSTANCE "$SLUG" encrypted
@@ -131,9 +147,9 @@ curl -fsS -H "Authorization: Bearer $TOKEN" "$API/v9/projects/$PROJECT/env?teamI
   | python3 -c "import json,sys;k={e['key'] for e in json.load(sys.stdin)['envs']};print('  DATABASE_URL present' if 'DATABASE_URL' in k else '  !! DATABASE_URL MISSING — do not deploy');sys.exit(0 if 'DATABASE_URL' in k else 1)"
 
 say "5. First production deploy (from main)"
+DEPLOY_BODY=$(P="$PROJECT" RID="$REPO_ID" python3 -c 'import json,os;print(json.dumps({"name":os.environ["P"],"project":os.environ["P"],"target":"production","gitSource":{"type":"github","repoId":int(os.environ["RID"]),"ref":"main"}}))')
 DEP=$(curl -fsS -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
-  "$API/v13/deployments?teamId=$TEAM_ID" \
-  -d "{\"name\":\"$PROJECT\",\"project\":\"$PROJECT\",\"target\":\"production\",\"gitSource\":{\"type\":\"github\",\"repoId\":$REPO_ID,\"ref\":\"main\"}}")
+  "$API/v13/deployments?teamId=$TEAM_ID" -d "$DEPLOY_BODY")
 DEP_URL=$(printf '%s' "$DEP" | python3 -c "import json,sys;print(json.load(sys.stdin)['url'])")
 echo "  building https://$DEP_URL"
 for i in $(seq 1 90); do
