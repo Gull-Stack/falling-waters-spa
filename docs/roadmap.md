@@ -1,79 +1,53 @@
 # Falling Waters — roadmap
 
-## Goal (set 18 Sep 2026 by Bryce)
+## Goal (Bryce, 18 Sep 2026)
 
-Put Falling Waters Day Spa live on Cinch **as soon as possible**. Cinch
-replaces Booker (go.booker.com/#/location/fallingwaters) as the spa's
-booking system, front-desk calendar, and card processor.
+Falling Waters Day Spa live on Cinch **as soon as possible**, replacing Booker
+(go.booker.com/#/location/fallingwaters) as the spa's online booking and front-desk
+book. Erika (GM) told Bryce at the gym on 18 Sep that she "really wants" it online.
 
-## Where it stands, 18 Sep 2026
+## Where it stands (end of 18 Sep 2026)
 
-- **This site is live** at www.fallingwatersdayspa.com. Every "Book" button
-  still goes to Booker.
-- **`/book` preview exists** (commits 087eabf–8d9abd1, 18 May). It carries the
-  full service menu from the spa's Booker export. It is a demo. It books
-  nothing.
-- **Bryce emailed Erika and Erin (@tacfitness.com) on 19 May** with the
-  preview and a list of what we need. Gmail shows no reply.
-- **Cinch has a Falling Waters tenant**, but only as a demo row on the
-  SHARED Cinch database (`app.usecinch.com/t/falling-waters`). Seed:
-  `src/db/seed-fallingwaters.ts` in Gull-Stack/cinch-app. It has 10
-  services, 5 staff and 4 appointments, partly invented fill-ins.
-- **Cinch rule (Josh, 6 Aug):** every client gets its own instance: own
-  Vercel project, own Neon DB, `CINCH_INSTANCE=falling-waters`. See
-  cinch-app `docs/INSTANCE-PER-CLIENT-2026-07.md`. Falling Waters is one of
-  three clients still to pull off the shared DB.
-- The spa engine is complete (cinch-app `docs/SPA-ENGINE-AND-HOTSPRINGS-2026-09-04.md`):
-  guest booking with no login, deposits, card hold, reminders, waitlist,
-  intake forms, per-therapist calendar feeds. Nothing is missing in code.
-  The missing parts are real data, an instance, and the spa's decisions.
+| Piece | State |
+|---|---|
+| Real menu in Cinch (117 services, 8 categories, 5 couples) | MERGED — cinch-app #2341 (`fa297f9`) |
+| Guest booking end to end, couples, desk alerts, spa sender, Utah timezone | PR **#2345** open, unmerged, CI running |
+| Own instance `cinch-falling-waters` + Neon DB | NOT created — `scripts/provision-cinch-instance.sh` ready for Bryce to run |
+| Domain `fallingwaters.usecinch.com` → new project | Needs **Josh's written go** (docs/PRODUCTION-LIVE-DB-SAFETY.md) |
+| Staff, hours, services per provider | Waiting on Erika |
+| Email to Erika (5 asks) | Gmail draft, **unsent** |
+| Stripe (card payments, online gift cards) | Later — needs the owner's KYC |
+| SMS | OFF at launch — no consent box on the guest form, no 10DLC |
 
-## The plan
+## How launch goes, in order
 
-### Phase 0 — The deal (Bryce)
-Confirm the spa said yes, who signs, and the price. Pricing is Bryce's call.
+1. **Merge #2345** (review it; it touches public booking for every appointments tenant).
+2. **Bryce runs** `bash scripts/provision-cinch-instance.sh` from this repo. It refuses
+   to run until #2345 is on main. It creates the project, the Neon DB through the
+   Marketplace installation, fresh sensitive secrets, a Resend key (pasted), and the
+   first production deploy, then checks `/api/version` says `instance: falling-waters`.
+3. **Claude** reads the build log (`[falling-waters] seeded — live instance, 117 real
+   services`), walks `cinch-falling-waters.vercel.app/t/falling-waters/book`.
+4. **Erika's answers** → Claude loads providers, weekly hours, services each performs,
+   cancellation policy, `booking_policy.opsNotifyEmails` (desk alerts) and
+   `tenants.email_reply_to` (guest replies).
+5. **Josh's go** → attach `fallingwaters.usecinch.com` to `cinch-falling-waters`; add the
+   instance to cinch-app `scripts/instances.json` with `expect: ["email"]`; confirm the
+   host and alias both report `instance: falling-waters`.
+6. **One real test booking** from a phone; confirm the email lands in an inbox.
+7. **Switch the "Book" buttons** on this site from Booker to
+   `https://fallingwaters.usecinch.com/t/falling-waters/book`. A push to `main` here
+   deploys production — that push is the go-live moment.
+8. **Booker export** (clients, gift-card balances, future appointments) → import, then
+   cancel Booker before its renewal.
+9. **Retire the shared-DB demo** (Josh's go + backup): drop `seedFallingWaters` from the
+   shared seed tail, then delete the shared `falling-waters` rows.
 
-### Phase 1 — Own instance (Claude, about 1 day)
-1. cinch-app PR: make `seed-fallingwaters.ts` a production seed. Load the
-   real Booker menu from this repo's `book.html`. Remove invented staff,
-   reviews and demo appointments. No migration, so no `ruled` label.
-2. Provision: `scripts/provision-instance.mjs --slug falling-waters`
-   (Vercel project `cinch-fallingwaters` + its own Neon DB, fresh
-   AUTH_SECRET / CRON_SECRET).
-3. **Fresh instance, not a cutover.** The shared-DB rows are demo data, so
-   `instance-migrate.mjs` has nothing worth copying. After the new instance
-   is verified, delete the `falling-waters` rows from the shared DB and
-   drop its call from the shared seed tail (cutover step 7).
-4. Re-point `fallingwaters.usecinch.com` to the new project. Add the entry
-   to `scripts/instances.json` with `expect: ["email"]`.
+## Later
 
-### Phase 2 — Real data (spa supplies, Claude loads)
-- Staff: names, what each performs, weekly hours.
-- Policies: deposit or pay-at-spa, cancellation / no-show fee, text or
-  email confirmations, booking notification email + phone.
-- Booker export: clients, gift-card balances, future appointments. The spa
-  requests it from Booker (Mindbody). Claude drafts the request.
-- Booker renewal date, so the switch lands before it and nobody pays twice.
-
-### Phase 3 — Money and messages
-- Stripe: spa owner opens `/admin/wallet` → Connect → Stripe KYC (their EIN
-  and bank). Claude mints the per-instance webhook
-  (`scripts/wallet/setup-webhook.mjs`).
-- Email: SendGrid key on the new project (sensitive vars cannot be copied
-  between projects; a human pastes it). Sender on fallingwatersdayspa.com
-  needs DNS access for DKIM.
-- SMS reminders: optional at launch.
-
-### Phase 4 — Go live
-1. Staff walk-through of the front desk on the new instance.
-2. Parallel run: Cinch takes new online bookings; Booker keeps the
-   appointments already on it until they run out.
-3. Point every "Book" button on this site to Cinch. **A push to `main` here
-   deploys production** (.github/workflows/deploy.yml), so that push is the
-   go-live moment.
-4. Cancel Booker before its renewal.
-
-## Next
-
-Bryce: Phase 0 and the owner contact. Claude: Phase 1 now; it does not wait
-on the spa.
+- Stripe Connect (owner KYC at /admin/settings/account → Direct payouts) → online gift
+  cards; per-instance webhook; fee is Bryce's decision.
+- SMS: consent checkbox + Terms page, 10DLC under the spa's own EIN, then SignalWire env.
+- Public-flow deposits and intake (prenatal) — not built for guest bookings today.
+- Desk bookings should capture guest email/phone; no-show fee is not charged.
+- Admin rail shows Kitchen / Stays for a spa (Josh's 17 Aug "every group renders" ruling).

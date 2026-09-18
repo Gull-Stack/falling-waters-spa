@@ -21,8 +21,22 @@ Durable facts. Newest first inside each section.
 - Cinch demo tenant: app.usecinch.com/t/falling-waters (shared DB).
 - Booker today: go.booker.com/#/location/fallingwaters.
 
+## Decisions
+- 18 Sep 2026: own instance, FRESH (not an instance-migrate cutover). The shared-DB
+  falling-waters rows are demo data with invented staff and prices.
+- 18 Sep 2026: bootstrap owner login is bryce@gullstack.com; Erika gets her own login
+  via Team access. Owner password lives in Bryce's Keychain (cinch-falling-waters-owner).
+- 18 Sep 2026: guests pay at the spa at launch; no online deposits, no SMS.
+
 ## Gotchas
 - The contact form's September "leads" are virtual-assistant spam
   (vasdirect.com, vas4hire.com, virtualeaseservice.com). None are guests.
 - Cloudflare dropped fallingwatersdayspa.com on 20 May 2026 for incomplete
   nameserver setup. DNS host for the domain: unconfirmed.
+- Josh's production rules (cinch-app docs/PRODUCTION-LIVE-DB-SAFETY.md) need his
+  explicit go to move fallingwaters.usecinch.com or delete shared-DB rows.
+- fallingwatersdayspa.com DNS is at Wix with Google Workspace MX and NO SPF/DKIM/DMARC.
+  Never move the nameservers (Workspace mail dies). Launch sends from the platform
+  address with the spa's name; a spa-domain sender needs Resend DKIM records in Wix.
+- A guest who replies to a confirmation reaches a no-reply address until
+  `tenants.email_reply_to` is set to the spa's desk email.
