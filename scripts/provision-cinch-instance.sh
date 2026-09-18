@@ -48,9 +48,14 @@ TEAM_ID=$(curl -fsS -H "Authorization: Bearer $TOKEN" "$API/v2/teams?limit=100" 
 echo "  team $TEAM_SLUG = $TEAM_ID"
 
 say "0. Pre-flight"
-gh api "repos/$REPO/contents/src/db/seed-fallingwaters.ts?ref=main" -q .content | base64 -d \
-  | grep -q 'timezone: "America/Denver"' \
-  || die "main does not set Falling Waters' timezone yet — merge PR #2345 first."
+# Read the file first, THEN test it: `grep -q` exits on the first match and,
+# under pipefail, the SIGPIPE it hands base64 fails the whole pipeline.
+SEED_SRC=$(gh api "repos/$REPO/contents/src/db/seed-fallingwaters.ts?ref=main" -q .content | base64 -d) \
+  || die "could not read seed-fallingwaters.ts from main (is gh logged in?)"
+case "$SEED_SRC" in
+  *'timezone: "America/Denver"'*) ;;
+  *) die "main does not set Falling Waters' timezone yet — merge PR #2345 first." ;;
+esac
 echo "  main carries the timezone fix"
 code=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $TOKEN" "$API/v9/projects/$PROJECT?teamId=$TEAM_ID")
 [ "$code" = "404" ] || die "project $PROJECT already exists (HTTP $code) — nothing created"
