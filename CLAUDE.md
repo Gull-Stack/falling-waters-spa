@@ -5,6 +5,14 @@ production. Plans live in `docs/roadmap.md`; durable facts in `docs/notes.md`.
 
 ## Session Log
 
+### 2026-09-18 (pt. 3) — Own instance live
+- cinch-app #2345 merged (`5edb196`). Bryce ran `scripts/provision-cinch-instance.sh`
+  (four fixes on the way: pipefail grep, no-keyboard prompt, bash 3.2 quoting, resume).
+- `cinch-falling-waters` is up with its own Neon DB; /api/version = falling-waters;
+  seed = 117 real services, owner bryce@gullstack.com (password in Bryce's Keychain).
+- Still off: email (Resend key not set), domain (needs Josh's go — draft to Josh in
+  Bryce's Gmail), staff (waiting on Erika; her email is an unsent draft).
+
 ### 2026-09-18 (pt. 2) — Guest booking made launch-ready; instance script
 - Researched Veyo / Desert Reef / Cottonwood launch failures and traced the spa's full
   guest + owner journey in cinch-app. Fixed what would fail on day one: cinch-app PR

@@ -11,8 +11,9 @@ book. Erika (GM) told Bryce at the gym on 18 Sep that she "really wants" it onli
 | Piece | State |
 |---|---|
 | Real menu in Cinch (117 services, 8 categories, 5 couples) | MERGED — cinch-app #2341 (`fa297f9`) |
-| Guest booking end to end, couples, desk alerts, spa sender, Utah timezone | PR **#2345** open, unmerged, CI running |
-| Own instance `cinch-falling-waters` + Neon DB | NOT created — `scripts/provision-cinch-instance.sh` ready for Bryce to run |
+| Guest booking end to end, couples, desk alerts, spa sender, Utah timezone | MERGED — cinch-app #2345 (`5edb196`) |
+| Own instance `cinch-falling-waters` + Neon DB `cinch-falling-waters-db` | LIVE 18 Sep at cinch-falling-waters.vercel.app — build log: "live instance, 117 real services, no demo data" |
+| Email (Resend key on the instance) | NOT set — `scripts/add-resend-key.sh`, then redeploy |
 | Domain `fallingwaters.usecinch.com` → new project | Needs **Josh's written go** (docs/PRODUCTION-LIVE-DB-SAFETY.md) |
 | Staff, hours, services per provider | Waiting on Erika |
 | Email to Erika (5 asks) | Gmail draft, **unsent** |
