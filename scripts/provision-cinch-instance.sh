@@ -37,6 +37,8 @@ die() { printf '\n\033[31mSTOP: %s\033[0m\n' "$*" >&2; exit 1; }
 
 AUTH_FILE="$HOME/Library/Application Support/com.vercel.cli/auth.json"
 [ -f "$AUTH_FILE" ] || die "Vercel CLI is not logged in (run: vercel login)"
+# The saved token expires (auth.json carries expiresAt); any CLI call refreshes it.
+vercel whoami >/dev/null 2>&1 || die "vercel whoami failed — run: vercel login"
 TOKEN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['token'])" "$AUTH_FILE")
 API="https://api.vercel.com"
 # GET /v2/teams/<slug> answers 403 for this token; the team LIST does not.
