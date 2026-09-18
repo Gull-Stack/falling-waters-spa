@@ -39,7 +39,11 @@ AUTH_FILE="$HOME/Library/Application Support/com.vercel.cli/auth.json"
 [ -f "$AUTH_FILE" ] || die "Vercel CLI is not logged in (run: vercel login)"
 TOKEN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['token'])" "$AUTH_FILE")
 API="https://api.vercel.com"
-TEAM_ID=$(curl -fsS -H "Authorization: Bearer $TOKEN" "$API/v2/teams/$TEAM_SLUG" | python3 -c "import json,sys;print(json.load(sys.stdin)['id'])")
+# GET /v2/teams/<slug> answers 403 for this token; the team LIST does not.
+TEAM_ID=$(curl -fsS -H "Authorization: Bearer $TOKEN" "$API/v2/teams?limit=100" \
+  | python3 -c "import json,sys;print(next(t['id'] for t in json.load(sys.stdin)['teams'] if t['slug']==sys.argv[1]))" "$TEAM_SLUG") \
+  || die "could not find team $TEAM_SLUG for this Vercel login"
+echo "  team $TEAM_SLUG = $TEAM_ID"
 
 say "0. Pre-flight"
 gh api "repos/$REPO/contents/src/db/seed-fallingwaters.ts?ref=main" -q .content | base64 -d \
