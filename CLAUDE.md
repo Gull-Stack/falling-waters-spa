@@ -11,6 +11,9 @@ production. Plans live in `docs/roadmap.md`; durable facts in `docs/notes.md`.
   tenant on the shared DB; the 19 May email to Erika and Erin got no reply.
 - Wrote the four-phase plan in `docs/roadmap.md`. Fresh Cinch instance, not a
   cutover, because the shared rows are demo data.
-- Blocked on Bryce: deal confirmed, owner contact, price.
-- Next for Claude: cinch-app PR for a production seed with the real menu,
-  then provision `cinch-fallingwaters`.
+- Same day: Erika (GM) told Bryce she really wants the spa online.
+- Shipped Gull-Stack/cinch-app PR #2341 (unmerged): live instance seeds the real
+  117-service menu and an env-only owner password; demo data stays on the shared demo.
+- Gmail draft to Erika (cc Josh) asks for staff/hours, deposit, cancellation policy,
+  alert contacts, owner, Booker renewal. UNSENT, waiting on Bryce.
+- Next: merge #2341, provision `cinch-fallingwaters`, load staff when Erika replies.

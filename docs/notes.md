@@ -5,9 +5,11 @@ Durable facts. Newest first inside each section.
 ## Who
 - Falling Waters Day Spa & Salon, 1101 E Draper Parkway, Draper UT. Est.
   1998. Inside the Treehouse Athletic Club building.
-- Contacts on file: erika@tacfitness.com, erin@tacfitness.com (tacfitness =
-  Treehouse). Lead-form mail goes to Spa@tacfitness.com. Owner and signer:
-  unknown as of 18 Sep 2026.
+- **Erika (erika@tacfitness.com) is the spa's GM.** 18 Sep 2026: Bryce ran into
+  her at the gym; she "really wants us to get the spa online." Intent, not a
+  signed deal: no price agreed, no acceptance row yet.
+- Other contact: erin@tacfitness.com (tacfitness = Treehouse). Lead-form mail
+  goes to Spa@tacfitness.com. Business owner (the Stripe signer): unknown.
 - Notion: GullStack Flight Deck → Treehouse Athletic Club + Cinch → Utah Golf
   Pipeline → "Falling Waters Day Spa" (stage: Proposal, segment "Warm —
   inside Treehouse").
