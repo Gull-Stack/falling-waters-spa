@@ -9,7 +9,9 @@ production. Plans live in `docs/roadmap.md`; durable facts in `docs/notes.md`.
 - Resend key added (from Bryce's clipboard via scripts/add-resend-key.sh, clipboard
   cleared after), production redeployed; /api/version email:true.
 - Proven: a sign-in email from the instance landed in bryce@gullstack.com's INBOX.
-- Still waiting: Erika's team (her email is an unsent draft), Josh's domain go (draft).
+- Sent Josh the full status + 3 asks (domain go, shared cleanup go, Wix login for
+  sending from the spa's domain) with Erika's email for his review. Erika's email
+  waits on Josh's OK. Plan for the spa-domain sender is in docs/roadmap.md.
 
 ### 2026-09-18 (pt. 3) — Own instance live
 - cinch-app #2345 merged (`5edb196`). Bryce ran `scripts/provision-cinch-instance.sh`

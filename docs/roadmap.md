@@ -44,6 +44,18 @@ book. Erika (GM) told Bryce at the gym on 18 Sep that she "really wants" it onli
 9. **Retire the shared-DB demo** (Josh's go + backup): drop `seedFallingWaters` from the
    shared seed tail, then delete the shared `falling-waters` rows.
 
+## Sending from the spa's own domain (Bryce, 19 Sep: "we will want to send from their domain")
+
+1. Add fallingwatersdayspa.com as a domain in Resend (same account as the instance key).
+2. Add Resend's records in **Wix DNS** (the domain's nameservers are ns1/ns2.wix.com):
+   `resend._domainkey` TXT (DKIM), and MX + SPF TXT on the `send` subdomain. These do
+   not touch the root MX, so Google Workspace mail keeps working. Add a DMARC TXT
+   (`_dmarc`, start at `p=none`) — the domain has none today, and no SPF either.
+3. Verify in Resend, then set `EMAIL_FROM` on cinch-falling-waters, e.g.
+   `Falling Waters Day Spa & Salon <bookings@…>`, redeploy, and confirm
+   `/api/version` shows `emailSender: true` and a test lands in an inbox with dkim=pass.
+4. Open: who holds the Wix login (asked Josh 19 Sep; could be Treehouse).
+
 ## Later
 
 - Stripe Connect (owner KYC at /admin/settings/account → Direct payouts) → online gift
