@@ -5,6 +5,12 @@ production. Plans live in `docs/roadmap.md`; durable facts in `docs/notes.md`.
 
 ## Session Log
 
+### 2026-09-19 — Email live on the instance
+- Resend key added (from Bryce's clipboard via scripts/add-resend-key.sh, clipboard
+  cleared after), production redeployed; /api/version email:true.
+- Proven: a sign-in email from the instance landed in bryce@gullstack.com's INBOX.
+- Still waiting: Erika's team (her email is an unsent draft), Josh's domain go (draft).
+
 ### 2026-09-18 (pt. 3) — Own instance live
 - cinch-app #2345 merged (`5edb196`). Bryce ran `scripts/provision-cinch-instance.sh`
   (four fixes on the way: pipefail grep, no-keyboard prompt, bash 3.2 quoting, resume).
