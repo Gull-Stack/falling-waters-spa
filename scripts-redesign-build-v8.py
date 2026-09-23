@@ -1,0 +1,858 @@
+"""Falling Waters — v2 redesign.
+
+v1 was graded B-minus: cold, monotone after the hero, and the photography
+clashed. Three changes drive this pass.
+
+1. WARM palette. Measured the photos: 7 of 9 sit in a 9-34deg amber/clay band.
+   v1's neutrals were cold greys (#f4f6f5 / #34423f) fighting every image.
+   Ground is now linen; the accent is brass, drawn from the photos themselves.
+2. RHYTHM. v1 went light-and-grey for eleven straight sections. This one
+   alternates linen / deep green-black the whole way down, so colour never dies.
+3. ONE IMAGE TREATMENT. A warm multiply tint plus a slight desaturation pulls
+   the pink hair shot and the green facial shot back toward the amber majority,
+   so nine pieces of mismatched stock read as one set.
+
+Content, prices, review text, FAQ answers, hours and JSON-LD are verbatim from
+index.html. Nothing here is invented.
+"""
+import base64, mimetypes, pathlib, re
+
+ROOT = pathlib.Path("/home/user/falling-waters-spa")
+src = (ROOT / "index.html").read_text()
+fonts = pathlib.Path("/tmp/fonts2.css").read_text()
+
+_cache = {}
+def uri(rel):
+    if rel in _cache: return _cache[rel]
+    p = ROOT / rel.lstrip("/")
+    if not p.exists(): raise SystemExit("missing asset: " + rel)
+    mt = mimetypes.guess_type(p.name)[0] or "application/octet-stream"
+    _cache[rel] = "data:%s;base64,%s" % (mt, base64.b64encode(p.read_bytes()).decode())
+    return _cache[rel]
+
+IMG = {k: uri(v) for k, v in {
+    "hero": "/assets/images/services/couples.webp",
+    "massage": "/assets/images/services/massage.webp",
+    "facial": "/assets/images/services/facial.webp",
+    "hair": "/assets/images/services/hair.webp",
+    "nails": "/assets/images/services/nails.webp",
+    "brows": "/assets/images/services/brows.webp",
+    "waxing": "/assets/images/services/waxing.webp",
+    "couples": "/assets/images/services/couples.webp",
+    "roses": "/assets/images/services/relaxation.webp",
+    "team1": "/assets/images/team/massage-therapist.webp",
+    "team2": "/assets/images/team/aesthetician.webp",
+    "team3": "/assets/images/team/hair-stylist.webp",
+    "logo": "/assets/images/logo.webp",
+    "logotext": "/assets/images/logo-text.webp",
+}.items()}
+
+schema = re.findall(r'<script type="application/ld\+json">.*?</script>', src, re.S)
+
+# grain — one tiny SVG, no image request
+GRAIN = ("data:image/svg+xml;base64," + base64.b64encode(
+    b'<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140">'
+    b'<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"/>'
+    b'<feColorMatrix type="saturate" values="0"/></filter>'
+    b'<rect width="140" height="140" filter="url(#n)" opacity="0.42"/></svg>').decode())
+
+SERVICES = [
+    ("Massage Therapy", "Swedish, deep tissue, hot stone &amp; prenatal massage. Melt away tension.", "105", "/services/massage", "massage"),
+    ("Skin Care &amp; Facials", "HydraFacial, chemical peels, microdermabrasion &amp; custom facials for radiant skin.", "65", "/services/facials", "facial"),
+    ("Hair Services", "Expert cuts, color, highlights, balayage &amp; styling from talented stylists.", "55", "/services/hair-care", "hair"),
+    ("Nail Care", "Luxurious manicures &amp; pedicures with gel polish options for beautiful hands &amp; feet.", "40", "/services/nails", "nails"),
+    ("Brows &amp; Lashes", "Lash extensions, lifts, brow shaping &amp; tinting for that perfect frame.", "23", "https://go.booker.com/#/location/fallingwaters", "brows"),
+    ("Waxing", "Professional waxing services for smooth, long-lasting results.", "20", "/services/waxing", "waxing"),
+]
+PACKAGES = [
+    ("The Ultimate Spa Day", "207", "The full-body reset: 50-minute Swedish massage, 60-minute custom facial, and a luxury spa pedicure. Relax, refresh, renew.", "team1"),
+    ("The Bloom &amp; Bliss Couples Experience", "349", "80 minutes of side-by-side Swedish massage &mdash; plus a flower bouquet to take home. Relax. Reconnect. Leave with flowers.", "roses"),
+    ("The Birthday Glow Experience", "210", "Your day, your way: 60 min custom facial, 50 min Swedish massage, and a floral arrangement to take home. You deserve it.", "team2"),
+]
+REVIEWS = [
+    ("Dolce Dachs", "Hair, massage &amp; facials", "I can't say enough amazing things about Alicia Aragon! She is seriously my go-to girl. She is a creative artist with topnotch skills to match! She is personable and fun with a warm and sweet personality that makes every appointment feel like catching up with a good friend."),
+    ("Joyce Warner", "Hair", "Holland is wonderful and a total professional about hair while still being an absolute delight to talk to. The entire staff there is incredible which always makes me want to come back!"),
+    ("Chelsea Benson", "Lashes", "Jaiden does a great job on my lashes. I love her!"),
+    ("Google Review", "Bridal party", "The staff was AMAZING! We had a bridal party of 5 plus flower girl, and they were very accommodating. They made us feel at home, and we had a blast!"),
+    ("Google Review", "The spa", "The renovations have made Falling Waters the finest spa from the Wasatch Range all the way to Park City. Well done. Well done, indeed."),
+    ("Google Review", "The salon", "Very professional salon and spa! I love the atmosphere there! The workers are always friendly and nice. I always get the results I am looking for!"),
+    ("Google Review", "The spa", "Beautiful Spa. Very welcoming and friendly. Every visit is a chance to be pampered."),
+]
+FAQS = [
+    ("Do I need to book in advance?", "We recommend booking 24-48 hours ahead, especially for weekends. Walk-ins welcome based on availability."),
+    ("What should I wear?", "Comfortable clothing is best. We provide robes and slippers for spa services. Wear easy-to-remove clothing for waxing."),
+    ("How early should I arrive?", "Please arrive 10-15 minutes early to check in and relax before your treatment begins."),
+    ("What's your cancellation policy?", "We require 24-hour notice for cancellations. Late cancellations may incur a fee."),
+    ("Do you offer couples treatments?", "Yes! Our couples suite allows you to enjoy massages side-by-side. Perfect for date nights or special occasions."),
+    ("Is parking available?", "Free parking is available at Treehouse Athletic Club. We're located inside the club."),
+]
+BOOK = "https://go.booker.com/#/location/fallingwaters"
+TEL = "tel:+18015019000"
+
+def svc(i, s):
+    name, desc, price, href, img = s
+    pl = "Women from" if img == "hair" else "From"
+    return f'''
+      <a class="svc rv" href="{href}" style="transition-delay:{i*55}ms">
+        <span class="svc-idx">{i+1:02d}</span>
+        <figure class="ph"><span class="svc-go" aria-hidden="true">View &amp; book</span><img src="{IMG[img]}" alt="" loading="lazy" decoding="async" width="800" height="600"></figure>
+        <div class="svc-b">
+          <h3>{name}</h3>
+          <p>{desc}</p>
+          <span class="price"><em>{pl}</em> $<b>{price}</b></span>
+        </div>
+      </a>'''
+
+def pkg(i, p):
+    name, price, desc, img = p
+    art = (f'<figure class="ph pkg-ph"><img src="{IMG[img]}" alt="" loading="lazy" decoding="async" width="1000" height="700"></figure>'
+           if img else
+           f'<div class="pkg-ph pkg-plate">{RIPPLE}<span class="plate-mark">Falling Waters</span></div>')
+    return f'''
+      <article class="pkg rv" style="transition-delay:{i*70}ms">
+        {art}
+        <div class="pkg-b">
+          <span class="idx">{i+1:02d}</span>
+          <h3>{name}</h3>
+          <p>{desc}</p>
+          <div class="rule"></div>
+          <div class="pkg-f">
+            <span class="pkg-price"><em>Starting at</em> $<b>{price}</b></span>
+            <a class="btn btn-brass" href="{TEL}">Call to reserve</a>
+          </div>
+          <p class="fine">Packages combine multiple providers, so they are booked by phone &mdash; (801) 501-9000.</p>
+        </div>
+      </article>'''
+
+def rev(i, r):
+    who, topic, quote = r
+    return f'''
+      <figure class="rev" role="group" aria-roledescription="slide" aria-label="Review {i+1} of 7">
+        <span class="stars" aria-label="Rated 5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <blockquote>{quote}</blockquote>
+        <figcaption><b>{who}</b><em>{topic} &middot; Verified Google review</em></figcaption>
+      </figure>'''
+
+def faq(q, a):
+    return f'''
+      <details class="faq"><summary><span>{q}</span><i aria-hidden="true"></i></summary>
+      <div class="faq-a"><p>{a}</p></div></details>'''
+
+RIPPLE = ('<svg class="ripple" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">'
+          + "".join(f'<path d="M {i*30-15} 34 a 15 15 0 0 1 30 0" fill="none" stroke="currentColor" stroke-width="1.1"/>' for i in range(22))
+          + "".join(f'<path d="M {i*30} 20 a 15 15 0 0 1 30 0" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".55"/>' for i in range(22))
+          + '</svg>')
+
+HTML = f'''<meta name="robots" content="noindex,nofollow">
+<title>Falling Waters v8</title>
+<style>
+{fonts}
+:root {{
+  /* warm ground, drawn from their own photography (7 of 9 sit 9-34deg) */
+  --linen:    #f6f5f2;
+  --linen-2:  #eceae5;
+  --paper:    #fdfdfc;
+  --ink:      #101a16;
+  --ink-2:    #17241f;
+  --ink-3:    #1e2f28;
+  --jade:     #2c6154;
+  --brass:    #b3874f;
+  --brass-dk: #7d5a24;
+  --brass-2:  #d9b483;
+  --water:    #4f9a92;
+  --text:     #40453f;
+  --text-2:   #6b6f66;
+  --on-dark:  #ece4d6;
+  --on-dark-2:#a8a89b;
+  --line:     #dedcd5;
+  --line-dk:  rgba(236,228,214,.16);
+  --fd: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --fb: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --pad: clamp(1.25rem, 4vw, 2.25rem);
+  --max: 1200px;
+}}
+* {{ box-sizing: border-box; }}
+body {{ margin:0; background:var(--linen); color:var(--text); font-family:var(--fb);
+  font-size:16.5px; line-height:1.68; -webkit-font-smoothing:antialiased; overflow-x:hidden; }}
+img {{ max-width:100%; display:block; }}
+a {{ color:inherit; }}
+::selection {{ background: var(--brass); color: #1a1208; }}
+:focus-visible {{ outline:2px solid var(--brass); outline-offset:3px; }}
+
+/* grain over the whole page — the single cheapest "not a template" tell */
+body::after {{ content:""; position:fixed; inset:0; z-index:200; pointer-events:none;
+  background-image:url("{GRAIN}"); opacity:.055; mix-blend-mode:multiply; }}
+
+.wrap {{ margin:0 auto; width:100%; max-width:var(--max); padding-inline:var(--pad); }}
+section {{ padding: clamp(4rem, 8.5vw, 7rem) 0; position:relative; }}
+
+/* ---------- dark sections carry the rhythm; v1 died into grey ---------- */
+.dark {{ background:var(--ink); color:var(--on-dark); }}
+.dark h2, .dark h3, .dark .display {{ color:#fff; }}
+.dark p {{ color:rgba(236,228,214,.78); }}
+/* light surfaces nested in a dark section keep dark-on-light */
+.dark .card h2, .dark .card h3, .dark .card .display {{ color:var(--ink); }}
+.dark .card p, .dark .card label {{ color:var(--text-2); }}
+.jade {{ background:var(--jade); color:var(--on-dark); }}
+
+/* ---------- type ---------- */
+.display {{ font-family:var(--fd); font-weight:700; text-transform:uppercase;
+  letter-spacing:-.032em; line-height:.93; margin:0; color:var(--ink); }}
+h2.display {{ font-size:clamp(2rem,5.4vw,3.6rem); max-width:17ch; }}
+h3 {{ font-family:var(--fd); font-weight:700; letter-spacing:-.018em; margin:0; color:var(--ink); }}
+p {{ margin:0; }}
+.eyebrow {{ font-family:var(--fd); font-size:.68rem; font-weight:600; text-transform:uppercase;
+  letter-spacing:.26em; color:var(--brass-dk); margin:0 0 1rem; display:block; }}
+.dark .eyebrow, .jade .eyebrow {{ color:var(--brass-2); }}
+.lede {{ margin-top:1.5rem; max-width:50ch; font-size:1.07rem; color:var(--text-2); }}
+.dark .lede {{ color:rgba(236,228,214,.72); }}
+.rule {{ height:1px; background:var(--line); margin:.4rem 0; }}
+.cta-row {{ display:flex; flex-wrap:wrap; align-items:center; gap:.85rem 1.25rem;
+  margin-top:clamp(2rem,4vw,2.75rem); }}
+.dark .rule {{ background:var(--line-dk); }}
+
+/* prices: tabular, brass, the numeral doing the work */
+.price, .pkg-price {{ font-family:var(--fd); color:var(--brass-dk); font-variant-numeric:tabular-nums;
+  display:inline-flex; align-items:baseline; gap:.32rem; letter-spacing:-.01em; }}
+.price em, .pkg-price em {{ font-family:var(--fb); font-style:normal; font-size:.74rem;
+  font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--text-2); }}
+.price b {{ font-size:1.5rem; font-weight:700; }}
+.pkg-price b {{ font-size:2.1rem; font-weight:700; }}
+.dark .pkg-price em {{ color:var(--on-dark-2); }}
+.dark .pkg-price, .dark .price {{ color:var(--brass-2); }}
+
+/* ---------- buttons ---------- */
+.btn {{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:50px;
+  padding:.9rem 1.75rem; border-radius:2px; font-family:var(--fd); font-size:.73rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; text-decoration:none; border:1px solid transparent;
+  transition:background .22s,color .22s,border-color .22s; }}
+.btn-brass {{ background:var(--brass); color:#1a1208; }}
+.btn-brass:hover {{ background:var(--brass-2); }}
+.btn-ink {{ background:var(--ink); color:var(--on-dark); }}
+.btn-ink:hover {{ background:var(--jade); }}
+.btn-out {{ border-color:var(--line); color:var(--ink); }}
+.btn-out:hover {{ background:var(--ink); color:var(--on-dark); border-color:var(--ink); }}
+.btn-light {{ border-color:rgba(255,255,255,.45); color:#fff; }}
+.btn-light:hover {{ background:#fff; color:var(--ink); }}
+
+/* ---------- ONE image treatment: unifies nine mismatched stock photos ---------- */
+.ph {{ margin:0; position:relative; overflow:hidden; background:var(--ink); }}
+.ph img {{ width:100%; height:100%; object-fit:cover;
+  filter:contrast(1.04) brightness(.99) saturate(.94); transition:transform .7s cubic-bezier(.22,.61,.36,1); }}
+.ph::after {{ content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg, transparent 55%, rgba(16,26,22,.34));
+  }}
+a:hover .ph img, .pkg:hover .ph img {{ transform:scale(1.045); }}
+
+/* ---------- announce + nav ---------- */
+.announce {{ background:var(--ink-2); color:var(--on-dark); font-size:.8rem; display:flex;
+  gap:.4rem 1rem; flex-wrap:wrap; align-items:baseline; justify-content:center; padding:.65rem var(--pad); }}
+.announce .eyebrow {{ margin:0; font-size:.6rem; color:var(--brass-2); }}
+.announce a {{ color:#fff; font-weight:600; text-decoration:none; border-bottom:1px solid var(--brass);
+  padding-bottom:1px; white-space:nowrap; }}
+.nav {{ position:sticky; top:0; z-index:90; background:rgba(246,245,242,.9);
+  backdrop-filter:blur(14px) saturate(1.2); border-bottom:1px solid var(--line); }}
+.nav-in {{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.75rem; }}
+.nav-logo {{ display:flex; align-items:center; gap:.6rem; text-decoration:none; }}
+.nav-logo img:first-child {{ height:40px; width:auto; }}
+.nav-logo img:last-child {{ height:19px; width:auto; }}
+.nav-links {{ display:flex; align-items:center; gap:1.7rem; list-style:none; margin:0; padding:0; }}
+.nav-links a {{ text-decoration:none; font-size:.87rem; color:var(--ink); position:relative; padding-bottom:3px; }}
+.nav-links a::after {{ content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
+  background:var(--brass); transition:right .3s cubic-bezier(.22,.61,.36,1); }}
+.nav-links a:hover::after {{ right:0; }}
+@media (max-width:920px) {{ .nav-links {{ display:none; }} }}
+
+/* ---------- hero ---------- */
+.hero {{ position:relative; min-height:88svh; display:flex; align-items:flex-end;
+  overflow:hidden; padding:0; background:var(--ink); }}
+.hero > img {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  filter:contrast(1.05) brightness(.86) saturate(.92); }}
+.hero-scrim {{ position:absolute; inset:0; background:
+  linear-gradient(to top, rgba(12,20,17,.96) 2%, rgba(12,20,17,.78) 32%, rgba(12,20,17,.34) 68%, rgba(12,20,17,.22) 100%); }}
+.hero-in {{ position:relative; width:100%; padding-top:9rem; padding-bottom:clamp(3rem,6vw,4.5rem); }}
+.hero .eyebrow {{ color:var(--brass-2); }}
+.hero h1 {{ font-family:var(--fd); font-weight:800; text-transform:uppercase; letter-spacing:-.038em;
+  line-height:.9; color:#fff; margin:0; font-size:clamp(2.7rem,9.4vw,6.4rem); max-width:13ch; }}
+.hero h1 em {{ font-style:normal; color:var(--brass-2); }}
+.hero h1 .sub {{ display:block; margin-top:1.35rem; font-family:var(--fb); font-weight:400;
+  text-transform:none; letter-spacing:0; line-height:1.55; font-size:clamp(.96rem,1.5vw,1.09rem);
+  color:rgba(236,228,214,.84); max-width:47ch; }}
+.hero-cta {{ display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.25rem; }}
+.ripple {{ display:block; width:100%; height:34px; color:var(--brass); opacity:.42; }}
+
+/* ---------- stat band ---------- */
+.band {{ padding:clamp(2.5rem,4.5vw,3.5rem) 0; background:var(--linen-2);
+  border-block:1px solid var(--line); }}
+.band-g {{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; }}
+@media (max-width:760px) {{ .band-g {{ grid-template-columns:repeat(2,1fr); row-gap:2rem; }} }}
+.band-g > div {{ padding-inline:clamp(.75rem,2vw,1.5rem); border-left:1px solid var(--line); }}
+.band-g > div:first-child {{ border-left:0; padding-left:0; }}
+@media (max-width:760px) {{ .band-g > div:nth-child(odd) {{ border-left:0; padding-left:0; }} }}
+.band .n {{ font-family:var(--fd); font-weight:700; letter-spacing:-.035em; font-size:clamp(1.9rem,4vw,2.8rem);
+  line-height:1; color:var(--ink); font-variant-numeric:tabular-nums; }}
+.band .l {{ margin-top:.5rem; font-size:.85rem; color:var(--text-2); max-width:20ch; }}
+
+/* ---------- section head ---------- */
+.head {{ display:grid; gap:1rem; margin-bottom:clamp(2.25rem,4vw,3.25rem); }}
+@media (min-width:900px) {{
+  .head {{ grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); align-items:end; gap:2.75rem; }}
+  .head .lede {{ margin-top:0; padding-bottom:.4rem; }}
+}}
+
+/* ---------- services ---------- */
+.svc-g {{ display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); }}
+.svc {{ text-decoration:none; background:var(--paper); border:1px solid var(--line);
+  display:flex; flex-direction:column; position:relative; transition:border-color .28s,transform .28s,box-shadow .28s; }}
+.svc:hover {{ border-color:var(--brass); transform:translateY(-4px); box-shadow:0 18px 40px -24px rgba(16,26,22,.5); }}
+.svc-idx {{ position:absolute; top:.85rem; left:.95rem; z-index:2; font-family:var(--fd); font-size:.62rem;
+  font-weight:700; letter-spacing:.22em; color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.75); }}
+.svc .ph {{ aspect-ratio:4/3; }}
+.svc-b {{ padding:1.5rem 1.5rem 1.7rem; display:grid; gap:.6rem; }}
+.svc-b h3 {{ font-size:1.16rem; text-transform:uppercase; letter-spacing:-.01em; }}
+.svc-b p {{ font-size:.92rem; color:var(--text-2); }}
+
+/* ---------- packages (dark) ---------- */
+.pkg {{ display:grid; gap:0; border:1px solid var(--line-dk); margin-bottom:1.75rem; background:var(--ink-2); }}
+@media (min-width:880px) {{
+  .pkg {{ grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); }}
+  .pkg:nth-child(even) .pkg-ph {{ order:2; }}
+}}
+.pkg-ph {{ min-height:300px; }}
+.pkg-b {{ padding:clamp(1.75rem,3.6vw,3rem); display:grid; gap:.95rem; align-content:center; }}
+.idx {{ font-family:var(--fd); font-size:2.6rem; font-weight:700; line-height:1; letter-spacing:-.04em;
+  color:transparent; -webkit-text-stroke:1px var(--brass); opacity:.75; }}
+.pkg-b h3 {{ font-size:clamp(1.4rem,2.7vw,2rem); text-transform:uppercase; letter-spacing:-.025em; line-height:1.04; }}
+.pkg-f {{ display:flex; flex-wrap:wrap; align-items:center; gap:1.25rem; }}
+.fine {{ font-size:.8rem; color:var(--text-2); }}
+.dark .fine {{ color:var(--on-dark-2); }}
+
+/* ---------- comparison ---------- */
+.cmp-w {{ overflow-x:auto; border:1px solid var(--line); background:var(--paper); }}
+.cmp {{ width:100%; border-collapse:collapse; font-size:.94rem; min-width:600px; }}
+.cmp th,.cmp td {{ padding:1rem 1.15rem; text-align:left; border-bottom:1px solid var(--line); }}
+.cmp thead th {{ font-family:var(--fd); font-size:.66rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-2); background:var(--linen-2); }}
+.cmp tbody th {{ font-weight:500; color:var(--ink); }}
+.cmp .us {{ background:rgba(179,135,79,.09); font-weight:600; color:var(--ink); }}
+.cmp thead th.us {{ color:var(--brass); background:rgba(179,135,79,.16); }}
+.cmp tr:last-child td,.cmp tr:last-child th {{ border-bottom:none; }}
+.yes::before {{ content:"\\25CF"; color:var(--brass); margin-right:.55rem; }}
+.no::before {{ content:"\\25CB"; color:#b9b2a2; margin-right:.55rem; }}
+
+/* ---------- reviews (dark) ---------- */
+.rev-g {{ display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }}
+.rev {{ margin:0; padding:2rem 1.85rem; background:var(--paper); border:1px solid var(--line);
+  display:grid; gap:1rem; grid-template-rows:auto 1fr auto; position:relative; }}
+.dark .rev {{ background:var(--ink-2); border-color:var(--line-dk); }}
+.quote-mark {{ font-family:var(--fd); font-size:4rem; line-height:.6; color:var(--brass-dk); opacity:.42; }}
+.dark .quote-mark {{ color:var(--brass); opacity:.5; }}
+.rev blockquote {{ margin:0; font-size:.98rem; color:var(--text); }}
+.dark .rev blockquote {{ color:rgba(236,228,214,.86); }}
+.rev figcaption {{ font-family:var(--fd); font-weight:700; font-size:.8rem; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink); display:grid; gap:.3rem; }}
+.dark .rev figcaption {{ color:#fff; }}
+.stars {{ color:var(--brass-dk); letter-spacing:.2em; font-size:.78rem; }}
+.dark .stars {{ color:var(--brass-2); }}
+.rev figcaption em {{ font-family:var(--fb); font-style:normal; font-weight:400; letter-spacing:0;
+  text-transform:none; font-size:.79rem; color:var(--text-2); }}
+.dark .rev figcaption em {{ color:var(--on-dark-2); }}
+
+/* ---------- team ---------- */
+.team-g {{ display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(235px,1fr)); }}
+.tm .ph {{ aspect-ratio:3/4; }}
+.tm h3 {{ font-size:1.02rem; margin-top:1.1rem; text-transform:uppercase; letter-spacing:-.005em; }}
+.tm p {{ font-size:.89rem; color:var(--text-2); margin-top:.35rem; }}
+.dark .tm p {{ color:rgba(236,228,214,.72); }}
+
+/* ---------- memberships (dark) ---------- */
+.tiers {{ display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); }}
+.tier {{ padding:2rem 1.9rem; background:var(--ink-2); border:1px solid var(--line-dk);
+  display:flex; flex-direction:column; gap:1rem; }}
+.tier.hi {{ border-color:var(--brass); background:var(--ink-3); }}
+.tier h3 {{ font-size:1.32rem; text-transform:uppercase; }}
+.tier .amt {{ font-family:var(--fd); font-weight:700; font-size:2.5rem; letter-spacing:-.035em;
+  line-height:1; color:var(--brass-2); font-variant-numeric:tabular-nums; }}
+.tier .amt span {{ font-family:var(--fb); font-size:.82rem; font-weight:400; color:var(--on-dark-2); letter-spacing:0; }}
+.tier ul {{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem; }}
+.tier li {{ font-size:.92rem; color:rgba(236,228,214,.78); padding-left:1.4rem; position:relative; }}
+.tier li::before {{ content:"\\2014"; position:absolute; left:0; color:var(--brass); }}
+.tier .btn {{ margin-top:auto; }}
+
+/* ---------- FAQ ---------- */
+.faq {{ border-bottom:1px solid var(--line); }}
+.faq summary {{ list-style:none; cursor:pointer; padding:1.25rem 0; display:flex; align-items:center;
+  justify-content:space-between; gap:1rem; font-family:var(--fd); font-weight:700; font-size:1.03rem;
+  text-transform:uppercase; letter-spacing:-.01em; color:var(--ink); }}
+.faq summary::-webkit-details-marker {{ display:none; }}
+.faq summary:hover {{ color:var(--brass-dk); }}
+.faq summary i {{ width:14px; height:14px; position:relative; flex:none; }}
+.faq summary i::before,.faq summary i::after {{ content:""; position:absolute; background:var(--brass); transition:transform .28s; }}
+.faq summary i::before {{ inset:6px 0; height:2px; }}
+.faq summary i::after {{ inset:0 6px; width:2px; }}
+.faq[open] summary i::after {{ transform:scaleY(0); }}
+.faq-a {{ padding:0 0 1.35rem; max-width:62ch; color:var(--text-2); font-size:.96rem; }}
+
+/* ---------- visit ---------- */
+.visit {{ position:relative; overflow:hidden; background:var(--ink); }}
+.visit > img {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:.2; filter:saturate(.6) blur(2px); }}
+.visit .wrap {{ position:relative; }}
+.c-grid {{ display:grid; gap:2.25rem; }}
+@media (min-width:900px) {{ .c-grid {{ grid-template-columns:1fr 1fr; gap:3.25rem; }} }}
+.card {{ background:var(--paper); color:var(--text); padding:clamp(1.75rem,3vw,2.4rem); display:grid; gap:.95rem; }}
+.card h3 {{ font-size:1.18rem; text-transform:uppercase; }}
+.field {{ display:grid; gap:.35rem; }}
+.field label {{ font-family:var(--fd); font-size:.64rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-2); }}
+.field input,.field textarea {{ font-family:var(--fb); font-size:.95rem; padding:.8rem .95rem;
+  border:1px solid var(--line); background:var(--linen); color:var(--text); width:100%; border-radius:2px; }}
+.info dl {{ margin:0; display:grid; gap:1.5rem; }}
+.info dt {{ font-family:var(--fd); font-size:.64rem; font-weight:700; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--brass-2); }}
+.info dd {{ margin:.4rem 0 0; color:rgba(236,228,214,.88); font-size:.97rem; }}
+.info a {{ color:#fff; border-bottom:1px solid var(--brass); text-decoration:none; }}
+
+footer {{ background:var(--ink-2); color:var(--on-dark-2); padding:3.25rem 0 6rem; font-size:.87rem;
+  border-top:1px solid var(--line-dk); }}
+footer a {{ color:var(--on-dark-2); text-decoration:none; }}
+footer a:hover {{ color:#fff; }}
+.f-grid {{ display:flex; flex-wrap:wrap; gap:1rem 2rem; justify-content:space-between; align-items:center; }}
+
+/* ---------- mobile-only dock ---------- */
+.dock {{ display:none; }}
+@media (max-width:768px) {{
+  .dock {{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; position:fixed; left:0; right:0; bottom:0;
+    z-index:120; padding:.55rem .75rem calc(.55rem + env(safe-area-inset-bottom));
+    background:rgba(253,253,252,.97); border-top:1px solid var(--line); }}
+  .dock .btn {{ min-height:46px; }}
+  footer {{ padding-bottom:6.5rem; }}
+}}
+
+
+
+/* ---------- rating anchor + review carousel ---------------------------------
+   The trust move is the aggregate and the fact that it is checkable, so the
+   score and a link to the real Google profile come BEFORE any quote. */
+.rating {{ display:grid; gap:1rem; margin-bottom:clamp(2rem,4vw,3rem); }}
+@media (min-width:880px) {{ .rating {{ grid-template-columns:auto 1fr; align-items:center; gap:3rem; }} }}
+.rating-score {{ display:grid; gap:.5rem; }}
+.rating-n {{ font-family:var(--fd); font-weight:700; font-size:clamp(3.2rem,7vw,5rem); line-height:.85;
+  letter-spacing:-.04em; color:#fff; font-variant-numeric:tabular-nums; }}
+.rating-meta {{ font-size:.9rem; color:var(--on-dark-2); }}
+.rating-meta a {{ color:var(--brass-2); border-bottom:1px solid var(--brass); text-decoration:none; white-space:nowrap; }}
+.rating-meta a:hover {{ color:#fff; }}
+.rating-lede {{ font-size:1.05rem; color:rgba(236,228,214,.75); max-width:44ch; }}
+.stars {{ color:var(--brass-2); letter-spacing:.18em; font-size:1rem; }}
+.stars-lg {{ font-size:1.6rem; letter-spacing:.14em; }}
+
+.carousel {{ position:relative; }}
+.track {{ display:grid; grid-auto-flow:column; grid-auto-columns:88%; gap:1.5rem;
+  overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+  scrollbar-width:none; padding-bottom:.25rem; }}
+.track::-webkit-scrollbar {{ display:none; }}
+@media (min-width:760px) {{ .track {{ grid-auto-columns:calc(50% - .75rem); }} }}
+@media (min-width:1080px) {{ .track {{ grid-auto-columns:calc(33.333% - 1rem); }} }}
+.track:focus-visible {{ outline:2px solid var(--brass); outline-offset:6px; }}
+
+.rev {{ margin:0; scroll-snap-align:start; padding:2rem 1.85rem; background:var(--ink-2);
+  border:1px solid var(--line-dk); border-top:2px solid var(--brass);
+  display:grid; grid-template-rows:auto 1fr auto; gap:1.1rem;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1), border-color .3s; }}
+.rev:hover {{ transform:translateY(-4px); border-color:rgba(236,228,214,.28); border-top-color:var(--brass-2); }}
+.rev blockquote {{ margin:0; font-size:1.02rem; line-height:1.6; color:rgba(236,228,214,.9); }}
+.rev figcaption {{ display:grid; gap:.2rem; }}
+.rev figcaption b {{ font-family:var(--fd); font-weight:700; font-size:.85rem; letter-spacing:.06em;
+  text-transform:uppercase; color:#fff; }}
+.rev figcaption em {{ font-style:normal; font-size:.79rem; color:var(--on-dark-2); }}
+
+.car-ctl {{ display:flex; align-items:center; gap:1rem; margin-top:1.75rem; }}
+.car-btn {{ width:46px; height:46px; flex:none; border:1px solid rgba(236,228,214,.3); background:transparent;
+  color:var(--on-dark); font-size:1rem; cursor:pointer; transition:background .2s,color .2s,border-color .2s; }}
+.car-btn:hover:not(:disabled) {{ background:var(--brass); color:#1a1208; border-color:var(--brass); }}
+.car-btn:disabled {{ opacity:.3; cursor:default; }}
+.dots {{ display:flex; gap:.5rem; }}
+.dot {{ width:7px; height:7px; padding:0; border:0; border-radius:50%; background:rgba(236,228,214,.28);
+  cursor:pointer; transition:background .25s, transform .25s; }}
+.dot[aria-current="true"] {{ background:var(--brass); transform:scale(1.5); }}
+
+@media (prefers-reduced-motion:reduce) {{
+  .track {{ scroll-behavior:auto; }}
+  .rev:hover {{ transform:none; }}
+}}
+
+/* designed plate for the package with no photo of its own */
+.pkg-plate {{ position:relative; display:grid; place-items:center; gap:1rem; background:var(--ink-3);
+  border-right:1px solid var(--line-dk); min-height:300px; overflow:hidden; }}
+.pkg-plate .ripple {{ position:absolute; inset:auto 0 12%; height:52px; color:var(--brass); opacity:.3; }}
+.plate-mark {{ font-family:var(--fd); font-size:.72rem; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--brass-2); }}
+
+/* ================= interaction layer =====================================
+   Everything below is motion in service of a click. Rules I held to:
+   - nothing moves that isn't clickable, or isn't telling you where you are
+   - every hover states the OUTCOME ("Book", "View") rather than just glowing
+   - all of it collapses under prefers-reduced-motion
+   ======================================================================== */
+
+/* scroll progress — the only always-on motion. Tells you how much is left,
+   which is why people keep going instead of bailing at the fold. */
+.progress {{ position:fixed; top:0; left:0; height:2px; width:100%; z-index:300;
+  background:transparent; pointer-events:none; }}
+.progress span {{ display:block; height:100%; width:0%; background:var(--brass);
+  transform-origin:left; transition:width .1s linear; }}
+
+/* hero art holds still while the copy settles — depth without a parallax jolt */
+.hero > img {{ will-change:transform; transform:scale(1.06); transition:transform 1.6s cubic-bezier(.16,.84,.44,1); }}
+html.ready .hero > img {{ transform:scale(1); }}
+
+/* nav CTA hardens once you leave the hero: the button gets more insistent
+   exactly when the reader has seen enough to act */
+.nav {{ transition:box-shadow .3s, background .3s; }}
+.nav.stuck {{ box-shadow:0 10px 30px -22px rgba(16,26,22,.55); }}
+.nav.stuck .btn-ink {{ background:var(--brass); color:#1a1208; }}
+
+/* buttons: the arrow is the affordance, and it moves toward the click */
+.btn .arw {{ display:inline-block; transition:transform .25s cubic-bezier(.22,.61,.36,1); }}
+.btn:hover .arw {{ transform:translateX(4px); }}
+
+/* service cards — the whole card is the target, so the whole card responds.
+   On hover the price steps aside and an explicit "Book" states the outcome. */
+.svc {{ position:relative; }}
+.svc .ph {{ position:relative; overflow:hidden; }}
+.svc .ph::before {{ content:""; position:absolute; inset:0; z-index:1; opacity:0;
+  background:linear-gradient(0deg, rgba(16,26,22,.55), rgba(16,26,22,.12));
+  transition:opacity .35s; }}
+.svc:hover .ph::before {{ opacity:1; }}
+.svc .ph .svc-go {{ position:absolute; left:50%; top:50%; z-index:2; transform:translate(-50%,-40%);
+  opacity:0; transition:opacity .3s, transform .35s cubic-bezier(.22,.61,.36,1);
+  font-family:var(--fd); font-size:.7rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.85);
+  padding:.7rem 1.35rem; white-space:nowrap; }}
+.svc:hover .ph .svc-go, .svc:focus-visible .ph .svc-go {{ opacity:1; transform:translate(-50%,-50%); }}
+/* a brass rule draws across the foot of the card — cheap, and it reads as
+   "this one is selected" rather than "this one is glowing" */
+.svc-b {{ position:relative; }}
+.svc-b::after {{ content:""; position:absolute; left:1.5rem; right:1.5rem; bottom:0; height:2px;
+  background:var(--brass-dk); transform:scaleX(0); transform-origin:left;
+  transition:transform .45s cubic-bezier(.22,.61,.36,1); }}
+.svc:hover .svc-b::after {{ transform:scaleX(1); }}
+
+/* package rows: the image drifts a little as it passes, which is what makes a
+   long section feel alive instead of like a list of three */
+.pkg-ph img {{ will-change:transform; }}
+.pkg:hover .pkg-ph img {{ transform:scale(1.05); }}
+
+/* review + team cards lift; they are not links, so the lift is smaller —
+   motion here signals "readable", not "clickable" */
+.rev, .tm {{ transition:transform .35s cubic-bezier(.22,.61,.36,1); }}
+.rev:hover, .tm:hover {{ transform:translateY(-3px); }}
+
+/* stat figures count up once, on entry. It buys a beat of attention on the
+   two numbers that do the most persuading: 27 years and 4.4 stars. */
+.band .n {{ font-variant-numeric:tabular-nums; }}
+
+/* reveals gain direction: art scales in, copy rises. Same fail-safes. */
+html.anim .rv.rv-img {{ opacity:0; transform:scale(1.04); }}
+html.anim .rv.rv-img.shown {{ opacity:1; transform:none; }}
+
+@media (prefers-reduced-motion:reduce) {{
+  .progress, .svc-go {{ transition:none; }}
+  .hero > img, html.ready .hero > img {{ transform:none; transition:none; }}
+  .svc:hover .ph img, .pkg:hover .pkg-ph img {{ transform:none; }}
+  .rev:hover, .tm:hover {{ transform:none; }}
+  .svc-b::after {{ transition:none; }}
+}}
+
+/* ---------- reveal, with fail-safes ---------- */
+html.anim .rv {{ opacity:0; transform:translateY(18px); }}
+html.anim .rv.shown {{ opacity:1; transform:none;
+  transition:opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }}
+@media (prefers-reduced-motion:reduce) {{
+  html.anim .rv, html.anim .rv.shown {{ opacity:1; transform:none; transition:none; }}
+  .ph img {{ transition:none; }}
+}}
+</style>
+
+<div style="background:#7a1f14;color:#fff;font:700 11px/1.5 ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:7px 14px">
+  Draft redesign v8 &middot; not live &middot; fallingwatersdayspa.com is unchanged
+</div>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<div class="announce">
+  <span class="eyebrow">Treehouse members save 10%</span>
+  <span>Same-day appointments welcome &mdash; call <a href="{TEL}">(801) 501-9000</a> or walk in.</span>
+</div>
+
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-logo" href="/"><img src="{IMG['logo']}" alt="Falling Waters" width="1280" height="1280"><img src="{IMG['logotext']}" alt="Falling Waters Day Spa &amp; Salon" width="1280" height="233"></a>
+  <ul class="nav-links">
+    <li><a href="/services/massage">Massage</a></li><li><a href="/services/facials">Facials</a></li>
+    <li><a href="/services/hair-care">Hair</a></li><li><a href="/services/nails">Nails</a></li>
+    <li><a href="#packages">Packages</a></li><li><a href="#visit">Visit</a></li>
+  </ul>
+  <a class="btn btn-ink" href="{BOOK}">Book now <span class="arw" aria-hidden="true">&rarr;</span></a>
+</div></nav>
+
+<section class="hero">
+  <img src="{IMG['hero']}" alt="Massage oil being warmed before a treatment at Falling Waters Day Spa in Draper, Utah" width="1400" height="900">
+  <div class="hero-scrim"></div>
+  <div class="wrap hero-in">
+    <span class="eyebrow">Draper, Utah &middot; Est. 1998</span>
+    <h1>Where Draper <em>unwinds.</em>
+      <span class="sub">Falling Waters is a full-service day spa &amp; salon in Draper, Utah &mdash; massage, HydraFacial, hair, nails, brows &amp; lashes, all under one roof inside Treehouse Athletic Club. Open to the public.</span></h1>
+    <div class="hero-cta">
+      <a class="btn btn-brass" href="{BOOK}">Book your escape <span class="arw" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn-light" href="#packages">See packages</a>
+    </div>
+  </div>
+</section>
+
+<div class="band"><div class="wrap">
+  <div class="band-g">
+    <div><div class="n">27+</div><div class="l">Years serving Draper, since 1998</div></div>
+    <div><div class="n">4.4&#9733;</div><div class="l">Across 136+ Google reviews</div></div>
+    <div><div class="n">50+</div><div class="l">Spa &amp; salon services under one roof</div></div>
+    <div><div class="n">59+</div><div class="l">Combined years of licensed experience</div></div>
+  </div>
+</div></div>
+
+<section class="dark" id="reviews"><div class="wrap">
+  <div class="head rv" style="margin-bottom:clamp(1.5rem,3vw,2.25rem)">
+    <div><span class="eyebrow">Reviews</span><h2 class="display">Reviews you can check.</h2></div>
+  </div>
+  <div class="rating rv">
+    <div class="rating-score">
+      <span class="rating-n">4.4</span>
+      <span class="stars stars-lg" aria-label="Rated 4.4 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="rating-meta">136+ Google reviews &middot; <a href="https://www.google.com/maps/search/?api=1&amp;query=Falling+Waters+Day+Spa+%26+Salon+1101+E+Draper+Pkwy+Draper+UT" target="_blank" rel="noopener">Read them all on Google &rarr;</a></span>
+    </div>
+    <p class="rating-lede">Every quote here is a real, published Google review &mdash; nothing paraphrased, nothing written by us.</p>
+  </div>
+
+  <div class="carousel rv" data-carousel>
+    <div class="track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Guest reviews">
+      {''.join(rev(i,r) for i,r in enumerate(REVIEWS))}
+    </div>
+    <div class="car-ctl">
+      <button class="car-btn" data-prev aria-label="Previous review">&larr;</button>
+      <div class="dots" data-dots></div>
+      <button class="car-btn" data-next aria-label="Next review">&rarr;</button>
+    </div>
+  </div>
+</div></section>
+
+<section id="services"><div class="wrap">
+  <div class="head rv">
+    <div><span class="eyebrow">The menu</span><h2 class="display">Everything under one roof.</h2></div>
+    <p class="lede">Massage, facials, hair, nails, lashes and waxing &mdash; certified professionals, one address, one booking.</p>
+  </div>
+  <div class="svc-g">{''.join(svc(i,s) for i,s in enumerate(SERVICES))}</div>
+  <div class="cta-row rv">
+    <a class="btn btn-ink" href="{BOOK}">Book any service <span class="arw" aria-hidden="true">&rarr;</span></a>
+    <a class="btn btn-out" href="{TEL}">Or call (801) 501-9000</a>
+  </div>
+  <p class="lede rv" style="margin-top:2rem">Also serving guests from
+    <a href="/areas/sandy">Sandy</a>, <a href="/areas/south-jordan">South Jordan</a>,
+    <a href="/areas/riverton">Riverton</a>, <a href="/areas/cottonwood-heights">Cottonwood Heights</a>
+    &amp; <a href="/areas/holladay">Holladay</a>.</p>
+</div></section>
+
+<section class="dark" id="packages"><div class="wrap">
+  <div class="head rv">
+    <div><span class="eyebrow">Packages</span><h2 class="display">Make a day of it.</h2></div>
+    <p class="lede">The ones people book for anniversaries, birthdays, and the week they finally stop.</p>
+  </div>
+  {''.join(pkg(i,p) for i,p in enumerate(PACKAGES))}
+</div></section>
+
+<section id="team"><div class="wrap">
+  <div class="head rv">
+    <div><span class="eyebrow">The people</span><h2 class="display">Book the right person for you.</h2></div>
+    <p class="lede">Twenty-seven years in one building, and a combined 59+ years of licensed experience on the floor. Read the reviews and you will notice guests almost never name the spa &mdash; they name Alicia, Holland, Jaiden.</p>
+  </div>
+
+  <div class="team-g">
+    <div class="tm rv"><figure class="ph"><img src="{IMG['massage']}" alt="Hot stone massage at Falling Waters" loading="lazy" decoding="async" width="600" height="800"></figure><h3>Licensed Massage Therapists</h3><p>Swedish, deep tissue &amp; more &mdash; decades of hands-on care.</p></div>
+    <div class="tm rv" style="transition-delay:75ms"><figure class="ph"><img src="{IMG['brows']}" alt="An aesthetician performing a lash and brow treatment at Falling Waters" loading="lazy" decoding="async" width="600" height="800"></figure><h3>Licensed Aestheticians</h3><p>HydraFacial, peels &amp; custom facials.</p></div>
+    <div class="tm rv" style="transition-delay:150ms"><figure class="ph"><img src="{IMG['team3']}" alt="Hair stylist at Falling Waters" loading="lazy" decoding="async" width="600" height="800"></figure><h3>Hair Stylists</h3><p>Cuts, color &amp; styling &mdash; including favorites like Alicia &amp; Holland.</p></div>
+  </div>
+
+  <div class="cta-row rv">
+    <a class="btn btn-ink" href="{BOOK}">Book with our team <span class="arw" aria-hidden="true">&rarr;</span></a>
+  </div>
+</div></section>
+
+<section class="dark" id="memberships"><div class="wrap">
+  <div class="head rv">
+    <div><span class="eyebrow">Memberships</span><h2 class="display">Make it a habit, not a treat.</h2></div>
+    <p class="lede">Regular guests get better results and better rates. Two ways to keep coming back.</p>
+  </div>
+  <div class="tiers">
+    <div class="tier hi rv">
+      <span class="eyebrow" style="margin:0">Most popular</span><h3>Massage Club</h3>
+      <div class="amt">$89<span> / month</span></div>
+      <ul><li>One 50-minute Swedish or deep-tissue massage every month</li><li>10% off every additional service</li><li>Unused sessions roll over for 90 days</li><li>Priority booking on weekends</li></ul>
+      <a class="btn btn-brass" href="{TEL}">Call to join</a>
+    </div>
+    <div class="tier rv" style="transition-delay:75ms">
+      <span class="eyebrow" style="margin:0">Already a member</span><h3>Treehouse Athletic Club</h3>
+      <div class="amt">10%<span> off, always</span></div>
+      <ul><li>10% off all spa &amp; salon services</li><li>No enrollment &mdash; just mention your membership</li><li>Stacks with seasonal offers</li><li>Free parking at the club</li></ul>
+      <a class="btn btn-light" href="{BOOK}">Book your visit <span class="arw" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+  <p class="fine rv" style="margin-top:1.6rem">Gift cards $50&ndash;$500, any amount, never expire &mdash; in person or by phone at (801) 501-9000.</p>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <div class="head rv">
+    <div><span class="eyebrow">Good to know</span><h2 class="display">Before your visit.</h2></div>
+    <p class="lede">Everything worth knowing before you arrive.</p>
+  </div>
+  <div class="rv">{''.join(faq(q,a) for q,a in FAQS)}</div>
+</div></section>
+
+<section class="dark visit" id="visit">
+  <img src="{IMG['waxing']}" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">Visit</span><h2 class="display">Inside Treehouse Athletic Club.</h2></div>
+      <p class="lede">Open to the public &mdash; you do not need to be a club member to book.</p>
+    </div>
+    <div class="c-grid">
+      <div class="info rv"><dl>
+        <div><dt>Location</dt><dd>1101 E Draper Parkway<br>Draper, UT 84020<br>Inside Treehouse Athletic Club</dd></div>
+        <div><dt>Phone</dt><dd><a href="{TEL}">(801) 501-9000</a></dd></div>
+        <div><dt>Hours</dt><dd>Mon&ndash;Fri 9am &ndash; 6pm<br>Sat 9am &ndash; 4pm<br>Closed Sunday</dd></div>
+        <div><dt>Follow</dt><dd><a href="https://www.instagram.com/fallingwaters_dayspa/">@fallingwaters_dayspa</a></dd></div>
+      </dl></div>
+      <form class="card rv" style="transition-delay:75ms" onsubmit="return false">
+        <h3>Ask us anything</h3>
+        <p style="font-size:.92rem;color:var(--text-2)">Not sure which treatment? Tell us what you are after and we will point you the right way.</p>
+        <div class="field"><label for="n">Name</label><input id="n" name="name" autocomplete="name"></div>
+        <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="m">What are you looking for?</label><textarea id="m" name="message" rows="3"></textarea></div>
+        <button class="btn btn-ink" type="submit">Send</button>
+        <p style="font-size:.77rem;color:var(--text-2)">Draft only &mdash; this form is not wired up yet.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap f-grid">
+  <div>&copy; 2026 Falling Waters Day Spa &amp; Salon &middot; 1101 E Draper Parkway, Draper, UT 84020</div>
+  <div style="display:flex;gap:1.35rem"><a href="/blog/">Blog</a><a href="/services/gift-cards">Gift cards</a><a href="#visit">Contact</a></div>
+</div></footer>
+
+<div class="dock">
+  <a class="btn btn-ink" href="{BOOK}">Book now <span class="arw" aria-hidden="true">&rarr;</span></a>
+  <a class="btn btn-out" href="{TEL}">Call</a>
+</div>
+
+{''.join(schema)}
+
+<script>
+(function () {{
+  var d = document.documentElement;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(function () {{ d.classList.add('ready'); }});   // hero settle
+
+  // ---- scroll progress + nav state -------------------------------------
+  var bar = document.querySelector('.progress span');
+  var nav = document.querySelector('.nav');
+  var hero = document.querySelector('.hero');
+  var ticking = false;
+  function onScroll() {{
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () {{
+      var max = document.body.scrollHeight - innerHeight;
+      if (bar) bar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+      if (nav && hero) nav.classList.toggle('stuck', scrollY > hero.offsetTop + hero.offsetHeight - 120);
+      ticking = false;
+    }});
+  }}
+  addEventListener('scroll', onScroll, {{ passive: true }});
+  onScroll();
+
+
+  // ---- review carousel. Scroll-snap does the work; JS only drives the
+  //      controls, so with JS dead the track is still swipeable. ----------
+  document.querySelectorAll('[data-carousel]').forEach(function (car) {{
+    var track = car.querySelector('.track');
+    var slides = [].slice.call(track.children);
+    var dots = car.querySelector('[data-dots]');
+    var prev = car.querySelector('[data-prev]');
+    var next = car.querySelector('[data-next]');
+    if (!track || !slides.length) return;
+    slides.forEach(function (_, i) {{
+      var b = document.createElement('button');
+      b.className = 'dot'; b.type = 'button';
+      b.setAttribute('aria-label', 'Go to review ' + (i + 1));
+      b.addEventListener('click', function () {{ slides[i].scrollIntoView({{ inline: 'start', block: 'nearest' }}); }});
+      dots.appendChild(b);
+    }});
+    var dotEls = [].slice.call(dots.children);
+    function perView() {{ return Math.max(1, Math.round(track.clientWidth / slides[0].offsetWidth)); }}
+    function sync() {{
+      var i = Math.round(track.scrollLeft / (slides[0].offsetWidth + 24));
+      dotEls.forEach(function (d, n) {{ d.setAttribute('aria-current', n === i ? 'true' : 'false'); }});
+      prev.disabled = track.scrollLeft < 8;
+      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8;
+    }}
+    function step(dir) {{ track.scrollBy({{ left: dir * (slides[0].offsetWidth + 24) * perView() }}); }}
+    prev.addEventListener('click', function () {{ step(-1); }});
+    next.addEventListener('click', function () {{ step(1); }});
+    track.addEventListener('scroll', function () {{ requestAnimationFrame(sync); }}, {{ passive: true }});
+    track.addEventListener('keydown', function (e) {{
+      if (e.key === 'ArrowRight') {{ e.preventDefault(); step(1); }}
+      if (e.key === 'ArrowLeft') {{ e.preventDefault(); step(-1); }}
+    }});
+    addEventListener('resize', sync);
+    sync();
+  }});
+
+  // ---- reveals. Content is visible unless JS proves it can un-hide it. ---
+  if (!('IntersectionObserver' in window)) return;
+  d.classList.add('anim');
+  document.querySelectorAll('.ph').forEach(function (f) {{
+    var c = f.closest('.rv'); if (c) c.classList.add('rv-img');
+  }});
+  var els = [].slice.call(document.querySelectorAll('.rv'));
+  var io = new IntersectionObserver(function (rows) {{
+    rows.forEach(function (r) {{ if (r.isIntersecting) {{ r.target.classList.add('shown'); io.unobserve(r.target); }} }});
+  }}, {{ rootMargin: '0px 0px -8% 0px', threshold: 0.08 }});
+  els.forEach(function (el) {{ io.observe(el); }});
+  setTimeout(function () {{ els.forEach(function (el) {{ el.classList.add('shown'); }}); }}, 3000);
+  addEventListener('pageshow', function () {{ els.forEach(function (el) {{ el.classList.add('shown'); }}); }});
+
+  // ---- stat count-up. Runs once, and only if motion is welcome. ---------
+  if (reduce) return;
+  var stats = [].slice.call(document.querySelectorAll('.band .n'));
+  var sio = new IntersectionObserver(function (rows) {{
+    rows.forEach(function (r) {{
+      if (!r.isIntersecting) return;
+      sio.unobserve(r.target);
+      var el = r.target, full = el.textContent.trim();
+      var m = full.match(/^([\d.]+)(.*)$/); if (!m) return;
+      var target = parseFloat(m[1]), suffix = m[2], dec = (m[1].split('.')[1] || '').length;
+      var t0 = null, dur = 1500;
+      function step(ts) {{
+        if (t0 === null) t0 = ts;
+        var k = Math.min((ts - t0) / dur, 1);
+        var eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = (target * eased).toFixed(dec) + suffix;
+        if (k < 1) requestAnimationFrame(step); else el.textContent = full;   // always lands on the real value
+      }}
+      requestAnimationFrame(step);
+    }});
+  }}, {{ threshold: 0.35 }});
+  stats.forEach(function (el) {{ sio.observe(el); }});
+}})();
+</script>
+'''
+
+HTML = "".join(c if ord(c) < 128 else "&#%d;" % ord(c) for c in HTML)
+out = pathlib.Path("/tmp/fw-v8.html"); out.write_text(HTML, encoding="ascii")
+print("schema:", len(schema), "| assets:", len(_cache), "| size:", out.stat().st_size // 1024, "KB")
