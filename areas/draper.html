@@ -71,9 +71,9 @@
   
   <style>
     :root {
-      --color-primary: #4A90A4;
+      --color-primary: #367082;
       --color-secondary: #7FB5C5;
-      --color-accent: #C4A77D;
+      --color-accent: #876A42;
       --color-dark: #2C3E50;
       --color-light: #F5F9FA;
       --color-cream: #FAF8F5;
@@ -99,7 +99,7 @@
     .nav-cta { background: var(--color-primary); color: white !important; padding: 0.6rem 1.2rem; border-radius: 25px; font-size: 0.8rem !important; }
     
     .btn { display: inline-block; padding: 1rem 2.5rem; border-radius: 0; text-decoration: none; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s; cursor: pointer; border: 2px solid var(--color-accent); background: var(--color-accent); color: white; }
-    .btn:hover { background: transparent; color: var(--color-accent); }
+    .btn:hover { background: #fff; color: var(--color-accent); }
     
     .page-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; color: white; text-align: center; background: linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(74, 144, 164, 0.75) 100%), url('../assets/images/services/relaxation.jpg') center/cover no-repeat; }
     .page-hero-content { position: relative; z-index: 2; max-width: 900px; padding: 8rem 2rem 4rem; }
@@ -178,6 +178,10 @@
       .sticky-book p { display: none; }
       .hero-stats { gap: 1.5rem; }
     }
+    /* a11y (WCAG 2.1 AA): tokens above are darkened for light backgrounds
+       and white text. Dark bands keep the original bright gold. */
+    .footer, .social-proof, .testimonials, .hero-stats { --color-accent: #C4A77D; }
+    .breadcrumb a { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -333,7 +337,7 @@
           </div>
         </div>
         <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.8!2d-111.863!3d40.5247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDMxJzI5LjAiTiAxMTHCsDUxJzQ2LjgiVw!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+          <iframe title="Map to Falling Waters Day Spa &amp; Salon" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3030.8!2d-111.863!3d40.5247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDMxJzI5LjAiTiAxMTHCsDUxJzQ2LjgiVw!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
     </div>

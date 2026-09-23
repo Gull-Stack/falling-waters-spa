@@ -121,9 +121,9 @@
   
   <style>
     :root {
-      --color-primary: #4A90A4;
+      --color-primary: #367082;
       --color-secondary: #7FB5C5;
-      --color-accent: #C4A77D;
+      --color-accent: #876A42;
       --color-dark: #2C3E50;
       --color-light: #F5F9FA;
       --color-cream: #FAF8F5;
@@ -149,7 +149,7 @@
     .nav-cta { background: var(--color-primary); color: white !important; padding: 0.6rem 1.2rem; border-radius: 25px; font-size: 0.8rem !important; }
     
     .btn { display: inline-block; padding: 1rem 2.5rem; border-radius: 0; text-decoration: none; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s; cursor: pointer; border: 2px solid var(--color-accent); background: var(--color-accent); color: white; }
-    .btn:hover { background: transparent; color: var(--color-accent); }
+    .btn:hover { background: #fff; color: var(--color-accent); }
     
     .page-hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; color: white; text-align: center; background: linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(196, 167, 125, 0.75) 100%), url('../assets/images/services/couples.jpg') center/cover no-repeat; }
     .page-hero-content { position: relative; z-index: 2; max-width: 900px; padding: 8rem 2rem 4rem; }
@@ -228,6 +228,10 @@
       .sticky-book p { display: none; }
       .packages-grid { grid-template-columns: 1fr; }
     }
+    /* a11y (WCAG 2.1 AA): tokens above are darkened for light backgrounds
+       and white text. Dark bands keep the original bright gold. */
+    .footer, .social-proof, .testimonials { --color-accent: #C4A77D; }
+    .breadcrumb a { text-decoration: underline; }
   </style>
 </head>
 <body>

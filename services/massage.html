@@ -193,9 +193,9 @@
   
   <style>
     :root {
-      --color-primary: #4A90A4;
+      --color-primary: #367082;
       --color-secondary: #7FB5C5;
-      --color-accent: #C4A77D;
+      --color-accent: #876A42;
       --color-dark: #2C3E50;
       --color-light: #F5F9FA;
       --color-cream: #FAF8F5;
@@ -295,7 +295,7 @@
     }
     
     .btn:hover {
-      background: transparent;
+      background: #fff;
       color: var(--color-accent);
     }
     
@@ -704,6 +704,10 @@
       .sticky-book p { display: none; }
       .services-grid { grid-template-columns: 1fr; }
     }
+    /* a11y (WCAG 2.1 AA): tokens above are darkened for light backgrounds
+       and white text. Dark bands keep the original bright gold. */
+    .footer, .social-proof, .testimonials { --color-accent: #C4A77D; }
+    .breadcrumb a { text-decoration: underline; }
   </style>
 </head>
 <body>

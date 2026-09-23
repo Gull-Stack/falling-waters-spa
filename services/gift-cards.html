@@ -105,7 +105,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root { --color-primary: #4A90A4; --color-secondary: #7FB5C5; --color-accent: #C4A77D; --color-dark: #2C3E50; --color-light: #F5F9FA; --color-cream: #FAF8F5; --color-text: #333; --font-heading: 'Cormorant Garamond', Georgia, serif; --font-body: 'Montserrat', 'Segoe UI', sans-serif; }
+    :root { --color-primary: #367082; --color-secondary: #7FB5C5; --color-accent: #876A42; --color-dark: #2C3E50; --color-light: #F5F9FA; --color-cream: #FAF8F5; --color-text: #333; --font-heading: 'Cormorant Garamond', Georgia, serif; --font-body: 'Montserrat', 'Segoe UI', sans-serif; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--font-body); color: var(--color-text); line-height: 1.6; }
     h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; }
@@ -120,7 +120,7 @@
     .nav-links a:hover { color: var(--color-primary); }
     .nav-cta { background: var(--color-primary); color: white !important; padding: 0.6rem 1.2rem; border-radius: 25px; font-size: 0.8rem !important; }
     .btn { display: inline-block; padding: 1rem 2.5rem; border-radius: 0; text-decoration: none; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s; cursor: pointer; border: 2px solid var(--color-accent); background: var(--color-accent); color: white; }
-    .btn:hover { background: transparent; color: var(--color-accent); }
+    .btn:hover { background: #fff; color: var(--color-accent); }
     .btn-primary { background: var(--color-primary); border-color: var(--color-primary); }
     .btn-primary:hover { background: transparent; color: var(--color-primary); }
 
@@ -187,6 +187,10 @@
       .nav-links { display: none; }
       .sticky-book p { display: none; }
     }
+    /* a11y (WCAG 2.1 AA): tokens above are darkened for light backgrounds
+       and white text. Dark bands keep the original bright gold. */
+    .footer, .social-proof, .testimonials { --color-accent: #C4A77D; }
+    .breadcrumb a { text-decoration: underline; }
   </style>
 </head>
 <body>

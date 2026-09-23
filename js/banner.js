@@ -18,7 +18,7 @@
     '  z-index: 1001;' +
     '}' +
     '.site-banner a {' +
-    '  color: var(--color-accent, #C4A77D);' +
+    '  color: #C4A77D;' +
     '  text-decoration: none;' +
     '  font-weight: 600;' +
     '}' +
