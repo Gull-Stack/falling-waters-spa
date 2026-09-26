@@ -165,6 +165,10 @@ export function buildGraph(file, html, dates) {
 const LEGACY = /[ \t]*<!--\s*[^>]*Schema[^>]*-->\s*\n?[ \t]*<script type="application\/ld\+json">[\s\S]*?<\/script>\s*\n?|[ \t]*<script type="application\/ld\+json">[\s\S]*?<\/script>\s*\n?/g;
 const MARKED = /[ \t]*<!-- aeo:schema -->[\s\S]*?<!-- \/aeo:schema -->\s*\n?/g;
 export const sourceHtml = (html) => html.replace(MARKED, '').replace(LEGACY, '');
+// Vercel Web Analytics for a plain-HTML site (docs/analytics/quickstart). The script 404s until the
+// project's Web Analytics toggle is on; aeo-check --live fails on that so a dead toggle cannot hide.
+const ANALYTICS = `  <!-- aeo:analytics -->\n  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>\n  <script defer src="/_vercel/insights/script.js"></script>\n  <!-- /aeo:analytics -->\n`;
+const ANALYTICS_RE = /[ \t]*<!-- aeo:analytics -->[\s\S]*?<!-- \/aeo:analytics -->\s*\n?/g;
 
 function ensureOg(html, p) {
   const has = (prop) => new RegExp(`property="${prop}"`).test(html);
@@ -193,7 +197,7 @@ const newDates = {};
 for (const file of pages) {
   const path = join(ROOT, file);
   const original = readFileSync(path, 'utf8');
-  let html = sourceHtml(original).replace(/[ \t]*<!-- aeo:og -->[\s\S]*?<!-- \/aeo:og -->\s*\n?/g, '');
+  let html = sourceHtml(original).replace(/[ \t]*<!-- aeo:og -->[\s\S]*?<!-- \/aeo:og -->\s*\n?/g, '').replace(ANALYTICS_RE, '');
   const url = pageUrl(file);
   const hash = sha(html);
   const prev = DATES[url] || {};
@@ -203,6 +207,7 @@ for (const file of pages) {
   const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': p.graph }, null, 2).replace(/\n/g, '\n  ');
   const block = `  <!-- aeo:schema -->\n  <script type="application/ld+json">\n  ${json}\n  </script>\n  <!-- /aeo:schema -->\n`;
   html = html.replace(/<\/head>/, block + '</head>');
+  html = html.replace(/<\/body>/, ANALYTICS + '</body>');
   built.push({ file, ...p, faq: extractFaq(html), offers: extractOffers(html) });
   if (html !== original) { stale.push(file); if (!CHECK) writeFileSync(path, html); }
 }
