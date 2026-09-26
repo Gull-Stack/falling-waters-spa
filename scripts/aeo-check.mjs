@@ -80,7 +80,8 @@ for (const file of pages) {
   }
 
   // 5. visible hours phrases only use brand-facts times; closed days never carry a time
-  for (const m of text.matchAll(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\b[^.|]{0,70}?\d{1,2}(?::\d{2})?\s?[ap]m/gi)) {
+  for (const m of text.matchAll(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*\b[^.|]{0,80}/gi)) {
+    if (!/\d{1,2}(?::\d{2})?\s?[ap]m/i.test(m[0])) continue;
     const phrase = m[0];
     for (const t of phrase.matchAll(/\d{1,2}(?::\d{2})?\s?[ap]m/gi)) {
       const tt = t[0].replace(/\s/g, '').toLowerCase();
