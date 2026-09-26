@@ -14,7 +14,7 @@
   },
   "geo": {
     "latitude": 40.5247,
-    "longitude": -111.8630
+    "longitude": -111.863
   },
   "telephone": "+1-801-501-9000",
   "email": "Spa@tacfitness.com",
@@ -139,5 +139,11 @@
     "spa near Sandy Utah",
     "spa near South Jordan"
   ],
-  "last_updated": "2026-08-03"
+  "last_updated": "2026-09-26",
+  "credentials": [
+    "Licensed Utah massage therapists",
+    "Licensed Utah estheticians",
+    "Licensed nail technicians",
+    "Licensed hair stylists"
+  ]
 }
