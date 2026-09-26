@@ -14,11 +14,21 @@ book. Erika (GM) told Bryce at the gym on 18 Sep that she "really wants" it onli
 | Guest booking end to end, couples, desk alerts, spa sender, Utah timezone | MERGED — cinch-app #2345 (`5edb196`) |
 | Own instance `cinch-falling-waters` + Neon DB `cinch-falling-waters-db` | LIVE 18 Sep at cinch-falling-waters.vercel.app — build log: "live instance, 117 real services, no demo data" |
 | Email (Resend key on the instance) | LIVE 19 Sep — test sign-in email reached bryce@gullstack.com INBOX, sender "Falling Waters Day Spa & Salon" <noreply@gullstack.com>. No EMAIL_FROM on the spa's own domain yet (needs Resend DKIM in Wix). |
-| Domain `fallingwaters.usecinch.com` → new project | Needs **Josh's written go** (docs/PRODUCTION-LIVE-DB-SAFETY.md) |
-| Staff, hours, services per provider | Waiting on Erika |
-| Email to Erika (5 asks) | Gmail draft, **unsent** |
+| Domain `fallingwaters.usecinch.com` → new project | Still needs **Josh's written go** (docs/PRODUCTION-LIVE-DB-SAFETY.md). 26 Sep: the name is on the `cinch` wildcard on team gull-stack; the instance project is `cinch-falling-waters` on the same team, so the move is one `add_project_domain` call once he says so. |
+| Staff, hours, services per provider | Waiting on Erika — asked 26 Sep (below) |
+| Email to Erika (5 asks) | **SENT 26 Sep 2026** from josh@gullstack.com, cc Bryce (Gmail id `1a0df41e2b022095`): people, hours (+ Saturday 4 vs 6pm), cancellation wording, desk-alert email, guest reply-to; Booker export offered |
 | Stripe (card payments, online gift cards) | Later — needs the owner's KYC |
 | SMS | OFF at launch — no consent box on the guest form, no 10DLC |
+
+## 26 Sep 2026 — what moved
+
+- Fleet: cinch-app PR #2512 adds `cinch-falling-waters` to `scripts/instances.json`
+  (host = vercel.app origin until the domain go). `instances-status`: up to date on 1dd3c22.
+- Guest page today says "Online booking opens soon — call" because no providers/hours
+  are loaded; that is the correct state until Erika's list lands. Do NOT flip Book buttons before it.
+- Marketing site: AEO rebuilt (falling-waters-spa #8–#11), Vercel Web Analytics ON for
+  `falling-waters-spa` on team gull-stack (the project that really serves the domain),
+  script live on all 28 pages and proven by `node scripts/aeo-check.mjs --live`.
 
 ## How launch goes, in order
 
