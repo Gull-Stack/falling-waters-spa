@@ -39,6 +39,7 @@ node scripts/aeo-check.mjs --live https://www.fallingwatersdayspa.com   # same c
 - missing canonical, `og:title`, `og:description`, `og:image`, `og:url`
 - leftover template strings (plastic surgery, placeholder images), broken local links or images
 - a built page missing from the sitemap, or a sitemap URL that is not a built page
+- a page without the Vercel Web Analytics script; in `--live` mode, an insights script that does not answer 200 (the project toggle is off)
 
 ## How to change things
 

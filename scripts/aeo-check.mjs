@@ -105,6 +105,9 @@ for (const file of pages) {
   for (const p of ['og:title', 'og:description', 'og:image', 'og:url']) if (!new RegExp(`property="${p}"`).test(html)) fail(file, `missing ${p}`);
   if (/name="robots"[^>]*noindex/.test(html)) fail(file, 'noindex on an indexable page');
 
+  // 7b. Web Analytics script on every page
+  if (!html.includes('/_vercel/insights/script.js')) fail(file, 'no Web Analytics script');
+
   // 8. leftover template content must be gone
   for (const bad of ['Plastic Surgery', 'Dr. Jane', 'premierplasticsurgery', 'Beverly Hills', 'mommy-makeover', '../about.html', '../contact.html', '../gallery.html', 'placehold.co']) if (html.includes(bad)) fail(file, `leftover template string "${bad}"`);
 
@@ -112,7 +115,7 @@ for (const file of pages) {
   if (!LIVE) {
     for (const m of html.matchAll(/(?:src|href)="([^"#?]+)(?:[#?][^"]*)?"/g)) {
       const ref = m[1];
-      if (/^(https?:|mailto:|tel:|data:|\/\/)/.test(ref)) continue;
+      if (/^(https?:|mailto:|tel:|data:|\/\/|\/_vercel\/)/.test(ref)) continue;
       const target = ref.startsWith('/') ? join(ROOT, ref) : join(ROOT, dirname(file), ref);
       const ok = existsSync(target) || existsSync(target + '.html') || existsSync(join(target, 'index.html'));
       if (!ok) fail(file, `broken local ref ${ref}`);
@@ -132,6 +135,7 @@ const llms = LIVE ? await (await fetch(LIVE + '/llms.txt')).text() : readFileSyn
 for (const m of llms.matchAll(/\d{1,2}(?::\d{2})?\s?[ap]m/gi)) if (!ALLOWED_TIMES.has(m[0].replace(/\s/g, '').toLowerCase())) fail('llms.txt', `hours time ${m[0]} not in brand-facts`);
 if (!llms.includes(BF.telephone.replace('+1-', '(').replace('-', ') ')) && !llms.includes(BF.telephone)) fail('llms.txt', 'phone differs from brand-facts');
 if (LIVE) {
+  { const r = await fetch(LIVE + '/_vercel/insights/script.js'); if (r.status !== 200) fail('/_vercel/insights/script.js', `live status ${r.status}: Web Analytics is not enabled on the project that serves this host`); }
   for (const p of ['/llms-full.txt', '/brand-facts.json', '/.well-known/brand-facts.json', '/robots.txt']) { const r = await fetch(LIVE + p); if (r.status !== 200) fail(p, `live status ${r.status}`); }
   for (const p of ['/contact', '/gallery', '/services/mommy-makeover']) { const r = await fetch(LIVE + p, { redirect: 'manual' }); if (r.status === 200) fail(p, 'leftover template page still served'); }
 }
