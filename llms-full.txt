@@ -1,0 +1,354 @@
+# Falling Waters Day Spa & Salon — full reference for AI systems
+
+> Full-service day spa and salon in Draper, Utah since 1998. Open to the public inside Treehouse Athletic Club. Massage, HydraFacial and facials, hair, nails, brows & lashes, and waxing.
+
+## Facts (source of truth: https://www.fallingwatersdayspa.com/brand-facts.json)
+- Name: Falling Waters Day Spa & Salon
+- Founded: 1998
+- Address: 1101 E Draper Parkway, Draper, UT 84020 (Inside Treehouse Athletic Club)
+- Phone: +1-801-501-9000
+- Email: Spa@tacfitness.com
+- Hours: Monday: 09:00 to 18:00; Tuesday: 09:00 to 18:00; Wednesday: 09:00 to 18:00; Thursday: 09:00 to 18:00; Friday: 09:00 to 18:00; Saturday: 09:00 to 16:00; Sunday: Closed
+- Booking: https://go.booker.com/#/location/fallingwaters
+- Price range: $$
+- Service area: Draper, Sandy, South Jordan, Riverton, Cottonwood Heights, Holladay, Greater Salt Lake Valley
+- Member offer: 10% off all spa & salon services for Treehouse Athletic Club members
+- Credentials: Licensed Utah massage therapists; Licensed Utah estheticians; Licensed nail technicians; Licensed hair stylists
+- Last updated: 2026-09-26
+
+## Services
+- Massage Therapy (Swedish, deep tissue, hot stone, prenatal)
+- Facials & Skin Care (HydraFacial, chemical peels, microdermabrasion, custom facials)
+- Hair Services (cuts, color, highlights, balayage, styling)
+- Nail Care (manicures, pedicures, gel polish)
+- Brows & Lashes (extensions, lifts, shaping, tinting)
+- Waxing
+- Couples Massage
+- Spa Packages & Gift Cards
+
+## Pages
+
+### Falling Waters Day Spa & Salon | Draper, UT | Est. 1998
+- URL: https://www.fallingwatersdayspa.com/
+- Summary: Draper day spa & salon since 1998. Massage, HydraFacial, hair & nails. TAC members save 10%. Book today — (801) 501-9000.
+- Prices: The Ultimate Spa Day from $207; The Bloom & Bliss Couples Experience from $349; The Birthday Glow Experience from $210
+- Q: Do I need to book in advance?
+  A: We recommend booking 24-48 hours ahead, especially for weekends. Walk-ins welcome based on availability.
+- Q: What should I wear?
+  A: Comfortable clothing is best. We provide robes and slippers for spa services. Wear easy-to-remove clothing for waxing.
+- Q: How early should I arrive?
+  A: Please arrive 10-15 minutes early to check in and relax before your treatment begins.
+- Q: What's your cancellation policy?
+  A: We require 24-hour notice for cancellations. Late cancellations may incur a fee.
+- Q: Do you offer couples treatments?
+  A: Yes! Our couples suite allows you to enjoy massages side-by-side. Perfect for date nights or special occasions.
+- Q: Is parking available?
+  A: Free parking is available at Treehouse Athletic Club. We're located inside the club.
+
+### About Falling Waters Day Spa & Salon | Draper, UT since 1998
+- URL: https://www.fallingwatersdayspa.com/about
+- Summary: Draper, Utah's full-service day spa and salon since 1998, inside Treehouse Athletic Club and open to the public. Licensed pros, TAC members save 10%.
+- Q: Do I have to be a Treehouse Athletic Club member to book?
+  A: No. Falling Waters is open to the public. Treehouse Athletic Club members receive 10% off all services.
+- Q: How long has Falling Waters been in Draper?
+  A: Since 1998. We have operated inside Treehouse Athletic Club at 1101 E Draper Parkway for more than 27 years.
+- Q: Are your therapists and stylists licensed?
+  A: Yes. Every service is performed by a licensed Utah massage therapist, esthetician, nail technician or hair stylist.
+- Q: Is parking available?
+  A: Yes. Free parking at Treehouse Athletic Club. We are located inside the club.
+- Q: What is your cancellation policy?
+  A: We require 24-hour notice for cancellations. Late cancellations may incur a fee.
+
+### Body Wraps & Scrubs in Draper, UT | Falling Waters Spa
+- URL: https://www.fallingwatersdayspa.com/services/body-treatments
+- Summary: Luxurious body treatments in Draper, Utah. Body wraps, salt scrubs, detox treatments & more. Rejuvenate your skin from head to toe. Book today! (801) 501-9000
+- Prices: Detox Body Wrap from $125; Salt Glow Body Scrub from $95; Sugar Body Polish from $95; Hydrating Body Wrap from $120; Back Facial from $85; Spa Journey Package from $195
+
+### Brows & Lashes in Draper, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/brows-lashes
+- Summary: Lash extensions, lash lifts, brow shaping and tinting in Draper, Utah from $23. Licensed estheticians at Falling Waters Day Spa. TAC members save 10%.
+- Prices: Brow & lash services from $23; Eyebrow wax $20
+- Q: Do you do lash extensions in Draper?
+  A: Yes. Falling Waters Day Spa offers lash extensions, lash lifts, and brow shaping and tinting inside Treehouse Athletic Club at 1101 E Draper Parkway, Draper, Utah.
+- Q: How much do brow and lash services cost?
+  A: Brow and lash services start at $23. Eyebrow waxing is $20. Lash extensions and fills are quoted when you book, and Treehouse Athletic Club members save 10%.
+- Q: How long does a lash lift last?
+  A: Usually 6 to 8 weeks, the natural growth cycle of your lashes. A tint at the same visit keeps them defined without mascara.
+- Q: Can I book brows and lashes online?
+  A: Yes. Book online through our scheduling page, or call (801) 501-9000 and we will find a time that works.
+
+### Couples Massage in Draper, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/couples-massage
+- Summary: Side-by-side couples massage in a private suite in Draper, Utah. Bloom & Bliss: 80 minutes of Swedish massage from $349, bouquet included.
+- Q: Do you offer couples massage in Draper?
+  A: Yes. Falling Waters Day Spa has a couples suite for side-by-side massage in Draper, Utah. Packages like Bloom & Bliss start at $349 and typically require booking multi-service packages by phone at (801) 501-9000.
+- Q: How much is a couples massage in Draper, Utah?
+  A: Signature couples experiences start around $349 for an 80-minute side-by-side Swedish massage with a flower bouquet. Call (801) 501-9000 for current package pricing and availability.
+- Q: Can we book a couples massage online?
+  A: Single services can often be booked online. Multi-service packages and couples experiences are best reserved by calling (801) 501-9000 so we can coordinate both therapists and the suite.
+- Q: Where is Falling Waters couples massage located?
+  A: 1101 E Draper Parkway, Draper, UT 84020, inside Treehouse Athletic Club. Free parking. Open to the public; TAC members save 10%.
+- Q: Is couples massage good for a date night in Utah?
+  A: Yes. Side-by-side massage is a popular date-night and anniversary plan in the south Salt Lake Valley. Arrive 10–15 minutes early, book 24–48 hours ahead for weekends, and ask about gift cards if you're surprising a partner.
+
+### Facials & HydraFacial in Draper, UT | Falling Waters
+- URL: https://www.fallingwatersdayspa.com/services/facials
+- Summary: HydraFacial, chemical peels, microdermabrasion and custom facials in Draper, Utah from $65. Licensed estheticians. TAC members save 10%.
+- Prices: HydraFacial MD from $82.50; Signature Custom Facial from $99; Chemical Peels from $105; Microdermabrasion from $65
+- Q: How often should I get a facial?
+  A: For best results, we recommend monthly facials. This aligns with your skin's natural cell turnover cycle and maintains consistent improvement.
+- Q: What's the difference between HydraFacial and a regular facial?
+  A: HydraFacial uses patented vortex technology for deeper cleansing and hydration. It's more intensive than traditional facials with zero downtime.
+- Q: Is there downtime after a chemical peel?
+  A: Light peels have minimal downtime (slight redness). Medium to deep peels may cause peeling for 3-7 days. We'll discuss what to expect.
+- Q: Can I wear makeup after my facial?
+  A: We recommend waiting 24 hours to let products absorb and skin breathe. Your esthetician will provide specific aftercare instructions.
+- Q: Where can I get a HydraFacial or facial in Draper, Utah?
+  A: Falling Waters Day Spa & Salon at 1101 E Draper Parkway (inside Treehouse Athletic Club) offers HydraFacial, chemical peels, microdermabrasion, and custom facials with licensed estheticians. Facials from about $65. Est. 1998, open to the public. Book online or call (801) 501-9000.
+- Q: How much does HydraFacial cost in Draper?
+  A: Facial treatments at Falling Waters start from about $65; HydraFacial pricing varies by treatment level and add-ons. Treehouse Athletic Club members receive 10% off. Call (801) 501-9000 for current HydraFacial pricing and availability.
+- Q: Do you offer chemical peels in Draper?
+  A: Yes! We offer various chemical peels at our Draper location, from gentle glycolic peels to deeper TCA treatments. Our licensed estheticians assess your skin type and concerns to recommend the appropriate peel strength and ensure safe, effective results.
+- Q: Can I get a facial if I have sensitive skin?
+  A: Absolutely! Our Draper estheticians specialize in sensitive skin treatments. We offer gentle facials using hypoallergenic products, patch testing when needed, and customized protocols to address sensitivity while still achieving beautiful results.
+
+### Spa Gift Cards in Draper, Utah | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/gift-cards
+- Summary: Spa gift cards for massage, facials and packages at Falling Waters Day Spa in Draper, Utah. Popular amounts $105 to $349, any amount available.
+- Prices: The Escape gift card $105; The Glow Up gift card $150; Birthday Glow Experience gift card $210; The Ultimate Spa Day gift card $207; Bloom & Bliss Couples gift card $349
+- Q: How do I purchase a gift card?
+  A: Call us at (801) 501-9000 or visit us in person at 1101 E Draper Parkway, Draper, UT 84020. Gift cards are available in any denomination.
+- Q: What can gift cards be used for?
+  A: Our gift cards can be used for any service — massage therapy, facials, HydraFacial, hair care, nail services, waxing, lash extensions, and spa packages.
+- Q: Do gift cards expire?
+  A: No! Our gift cards never expire. Recipients can use them whenever they're ready to enjoy their spa experience.
+- Q: Can I buy a gift card for a specific service?
+  A: Yes! You can purchase a gift card for a specific service (like a 50-minute Swedish massage or a HydraFacial) or choose a dollar amount and let the recipient pick their own experience.
+- Q: What are the most popular gift card amounts?
+  A: Our most popular: $105 (50-minute massage), $150 (custom facial), $210 (Birthday Glow Experience), $207 (Ultimate Spa Day), and $349 (Bloom & Bliss Couples).
+- Q: Do Falling Waters Day Spa gift cards expire?
+  A: Our gift cards do not expire. Recipients can use them whenever they're ready to enjoy their spa experience.
+
+### Hair Salon in Draper, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/hair-care
+- Summary: Expert hair salon in Draper, Utah. Cuts, color, highlights, balayage & styling by talented stylists. 27+ years of beautiful results. Book today! (801) 501-9000
+- Prices: Women's Haircut from $55; Men's Haircut from $35; Single Process Color from $85; Highlights from $110; Balayage from $150; Blowout & Styling from $45; Special Occasion Styling from $75; Deep Conditioning Treatment from $35
+
+### Massage Therapy in Draper, Utah | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/massage
+- Summary: Massage in Draper, UT — Swedish, deep tissue, hot stone & prenatal from $105. Licensed therapists, est. 1998. TAC members save 10%. Book (801) 501-9000.
+- Prices: Swedish Massage from $105; Deep Tissue Massage from $120; Hot Stone Massage from $155; Prenatal Massage from $138
+- Q: How do I know which massage is right for me?
+  A: Our therapists will discuss your goals and concerns before your session to recommend the best treatment. Swedish is great for relaxation, while deep tissue targets specific pain points.
+- Q: What should I wear during my massage?
+  A: Undress to your comfort level. You'll be professionally draped throughout the session. We provide robes for your comfort before and after treatment.
+- Q: How often should I get a massage?
+  A: For general wellness, once a month is beneficial. For chronic pain or high stress, every 2-3 weeks is recommended. Athletes may benefit from weekly sessions.
+- Q: Is deep tissue massage painful?
+  A: You may experience some discomfort in tight areas, but it shouldn't be painful. Always communicate with your therapist about pressure preferences.
+- Q: Can I get a massage if I'm pregnant?
+  A: Yes! Our prenatal massage is specifically designed for expecting mothers (second trimester onwards). It's safe and can help relieve pregnancy-related discomforts.
+- Q: How early should I arrive?
+  A: Please arrive 10-15 minutes before your appointment to check in, change, and begin relaxing before your treatment starts.
+- Q: Where can I get a professional massage in Draper, Utah?
+  A: Falling Waters Day Spa & Salon at 1101 E Draper Parkway (inside Treehouse Athletic Club) offers Swedish, deep tissue, hot stone, and prenatal massage with licensed therapists. Est. 1998, open to the public. Sessions from about $105. Book online or call (801) 501-9000.
+- Q: How much does deep tissue massage cost in Draper?
+  A: Massage sessions at Falling Waters start from about $105 depending on type and length. Treehouse Athletic Club members receive 10% off. Call (801) 501-9000 or book online for current deep tissue pricing and availability.
+- Q: Do you offer prenatal massage in Draper?
+  A: Yes! Our prenatal massage is specifically designed for expecting mothers (second trimester onwards). It's safe and can help relieve pregnancy-related discomforts like back pain, swelling, and stress. Our licensed therapists are trained in prenatal massage techniques.
+- Q: Can I book same-day massage appointments in Draper?
+  A: While we recommend booking in advance, we often have same-day availability for massage appointments. Call us at (801) 501-9000 or check our online booking system at go.booker.com for immediate availability at our Draper location.
+
+### Nail Salon in Draper, UT | Manicures & Pedicures
+- URL: https://www.fallingwatersdayspa.com/services/nails
+- Summary: Manicures, pedicures, gel and acrylics from $35 at Falling Waters Day Spa in Draper, Utah. Licensed nail technicians. TAC members save 10%.
+- Prices: Classic Manicure from $35; Gel Manicure from $50; Spa Manicure from $60; Dip Powder Manicure from $55; Classic Pedicure from $55; Spa Pedicure from $70; Luxury Hot Stone Pedicure from $85; Gel Pedicure from $65; Acrylic Full Set from $65; Acrylic Fill from $45; Nail Repair from $15; Acrylic Removal from $30
+- Q: What nail services does Falling Waters offer in Draper?
+  A: We offer classic and spa manicures, luxury and spa pedicures, gel manicures, acrylic nail extensions (full sets and fills), dip powder nails, and natural nail strengthening treatments. All services are performed by licensed nail technicians in a clean, relaxing spa environment.
+- Q: How long do gel nails last compared to regular polish?
+  A: Gel nails typically last 2-3 weeks without chipping, compared to regular polish which usually lasts 5-7 days. We use premium gel brands cured under LED for a durable, high-shine finish.
+- Q: What's the difference between acrylics and dip powder?
+  A: Acrylics use liquid monomer and powder to create extensions with maximum length and durability. Dip powder involves dipping nails into pigmented powder — lighter than acrylics, no UV lamp, and generally gentler on natural nails. Both last 2-4 weeks.
+- Q: Are your nail products safe and non-toxic?
+  A: Absolutely. We use salon-professional products free of formaldehyde, toluene, and DBP. All metal tools are hospital-grade sterilized, and we use fresh disposable files, buffers, and liners for every client.
+- Q: Can I combine nails with other spa services?
+  A: Yes! Our mani-pedi combos are very popular, and you can add a massage, facial, or any other service. We also offer spa packages that include nails as part of a full pampering experience.
+- Q: Do Treehouse Athletic Club members get a discount?
+  A: TAC members receive 10% off all nail services (and every other service we offer). Just mention your membership when booking or checking in.
+- Q: Are the nail products at Falling Waters safe and non-toxic?
+  A: Yes. We use premium, salon-professional products that are free of harmful chemicals like formaldehyde, toluene, and DBP (dibutyl phthalate). Our spa maintains strict sanitation protocols — all metal tools are hospital-grade sterilized, and we use disposable files, buffers, and liners for every client.
+- Q: How much does a pedicure cost at Falling Waters in Draper?
+  A: Pedicure prices at Falling Waters start at $55 for a classic pedicure and go up to $85+ for our luxury spa pedicure with hot stone massage and paraffin treatment. Treehouse Athletic Club members receive a 10% discount on all nail services. Call (801) 501-9000 or book online for current pricing.
+- Q: Can I get a manicure and pedicure together at Falling Waters?
+  A: Absolutely! Our mani-pedi combo is one of our most popular bookings. You can mix and match service levels — for example, a gel manicure with a spa pedicure. We also offer nail services as part of our spa packages, which can include massage, facials, and more for a complete spa day experience.
+- Q: Where can I get the best pedicure in Draper?
+  A: Falling Waters Day Spa offers Draper's premier pedicure services, including luxury spa pedicures, gel pedicures, and therapeutic foot treatments. Our licensed nail technicians provide relaxing treatments in a sanitized environment with 27+ years of spa excellence.
+- Q: How much do manicures cost in Draper Utah?
+  A: Our Draper manicure prices vary by service type - from basic manicures to gel, dip powder, and acrylic enhancements. We offer competitive rates with special discounts for Treehouse Athletic Club members (10% off). Call (801) 501-9000 for current pricing.
+- Q: Do you offer dip powder nails in Draper?
+  A: Yes! We offer professional dip powder nail services at our Draper location. Dip powder provides long-lasting color and strength without UV light, lasting 3-4 weeks with proper care. Perfect for those seeking durability with a natural feel.
+- Q: Can I book same-day nail appointments in Draper?
+  A: While we recommend advance booking, we often have same-day availability for nail services. Call us at (801) 501-9000 or check our online booking at go.booker.com for immediate availability at our Draper nail salon.
+- Q: Do you sterilize nail equipment properly?
+  A: Absolutely. We follow strict Utah Board of Cosmetology sanitation protocols. All metal implements are autoclave sterilized, single-use items are disposed of properly, and foot baths are thoroughly disinfected between clients for your safety.
+
+### Spa Packages in Draper, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/packages
+- Summary: Signature spa packages in Draper, Utah from $207: massage, facial and pedicure in one visit, or the Bloom & Bliss couples experience from $349.
+- Prices: The Ultimate Spa Day from $207; The Bloom & Bliss Couples Experience from $349; The Birthday Glow Experience from $210
+- Q: How do I book a spa package?
+  A: Packages combine several services, so we reserve them by phone at (801) 501-9000 to line up your therapist, esthetician and nail technician. Single services can be booked online.
+- Q: How much does a spa package cost in Draper?
+  A: Signature packages at Falling Waters start at $207 for The Ultimate Spa Day, $210 for The Birthday Glow Experience and $349 for The Bloom & Bliss Couples Experience. Treehouse Athletic Club members save 10%.
+- Q: How long does a package take?
+  A: Plan about three hours for The Ultimate Spa Day or The Birthday Glow Experience, and about 90 minutes for the Bloom & Bliss couples massage including check-in.
+- Q: Can I give a package as a gift?
+  A: Yes. Gift cards are available for every package amount and can be purchased by phone or in person.
+
+### Valentine's Day Spa Packages in Draper, UT | Falling Waters
+- URL: https://www.fallingwatersdayspa.com/services/valentines-day-spa
+- Summary: Valentine's Day couples spa packages in Draper, Utah from $195. Side-by-side massage, facials and add-ons at Falling Waters Day Spa.
+- Prices: Romance & Roses $295; Sweethearts Package $245; Love Connection $195
+- Q: How far in advance should we book our Valentine's Day spa package?
+  A: Valentine's Day is our most popular romantic holiday. We recommend booking 3-4 weeks in advance for February 14th, or consider celebrating the week before or after for better availability and a more intimate experience.
+- Q: Can we customize our Valentine's package for special occasions?
+  A: Absolutely! Whether you're planning a proposal, celebrating an anniversary, or have specific romantic preferences, we can customize any package to make your celebration perfectly unique.
+- Q: What's included with the couples massage suite?
+  A: All Valentine's packages include a completely private couples massage room with side-by-side tables, romantic lighting, soft music, and comfortable seating for relaxation before and after treatments.
+- Q: Are your Valentine's packages suitable for first-time spa visitors?
+  A: Yes! Our therapists are experienced in making first-time couples feel comfortable. We'll explain everything beforehand and ensure both partners feel relaxed throughout the experience.
+- Q: Can we extend our spa day with dinner or other activities?
+  A: We're happy to help coordinate with local restaurants for post-spa dining. Many couples combine their spa experience with dinner reservations to create a full romantic day.
+- Q: Do you accommodate same-day Valentine's bookings?
+  A: While we encourage advance booking, we do our best to accommodate same-day requests based on availability. Call us at (801) 501-9000 to check current openings.
+- Q: What's included in your Valentine's Day spa packages?
+  A: Our Valentine's Day packages include couples massage in a private suite, champagne service, chocolate-covered strawberries, rose petals, romantic music, and extended relaxation time. Each package is designed to create an intimate, romantic spa experience.
+- Q: Can we customize our Valentine's Day spa experience?
+  A: Absolutely! We can customize any Valentine's package with special massage techniques, preferred aromatherapy scents, dietary accommodations for refreshments, or additional romantic touches to make your celebration uniquely yours.
+- Q: Do you offer Valentine's Day gift certificates?
+  A: Yes! Valentine's Day gift certificates are available for specific packages or any dollar amount. They're beautifully presented and never expire, making them perfect for surprising your loved one.
+- Q: What makes your Valentine's spa packages special?
+  A: Our Valentine's packages go beyond typical spa treatments with private couples suites, romantic decor, premium amenities, and personalized service. With 27+ years of experience creating romantic moments, we understand what makes Valentine's Day truly memorable.
+
+### Waxing Services in Draper, Utah | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/services/waxing
+- Summary: Face, body, bikini and Brazilian waxing in Draper, Utah from $12. Licensed estheticians, hard and soft wax, private rooms. TAC members save 10%.
+- Prices: Eyebrow Wax $20; Lip Wax $12; Chin Wax $15; Full Face (brows, lip, chin) $40; Sideburns $18; Underarms $25; Half Arms $35; Full Arms $50; Half Legs $45; Full Legs $75; Back $60; Chest $50; Bikini Line $40; Extended Bikini $55; Brazilian $70
+- Q: How long should hair be for waxing?
+  A: Hair should be about 1/4 inch (roughly 2-3 weeks of growth). Too short and the wax can't grip; too long and it may be more uncomfortable.
+- Q: How long do results last?
+  A: Typically 3-6 weeks depending on your hair growth cycle. With regular waxing, hair often grows back finer and sparser over time.
+- Q: Is waxing painful?
+  A: There's some discomfort, but our estheticians use techniques to minimize it. Most clients find it very manageable, especially after the first few visits.
+- Q: What should I do before my appointment?
+  A: Gently exfoliate 24 hours before. Avoid sun exposure, retinol products, and caffeine on the day of your appointment.
+- Q: Where can I get facial waxing in Draper?
+  A: Falling Waters Day Spa offers professional facial waxing services in Draper, including eyebrow shaping, upper lip, chin, and full face waxing. Our experienced estheticians use gentle techniques and high-quality wax for smooth, lasting results with minimal discomfort.
+- Q: How much does Brazilian wax cost in Draper Utah?
+  A: Our Brazilian wax pricing at our Draper location varies based on the specific service level. We offer competitive rates for all intimate waxing services with special discounts for Treehouse Athletic Club members (10% off). Call (801) 501-9000 for current pricing.
+- Q: Do you offer hard wax or soft wax?
+  A: We use both hard wax and soft wax depending on the treatment area and your skin sensitivity. Hard wax is gentler for sensitive areas like bikini and face, while soft wax is effective for larger areas like legs and arms. Our estheticians choose the best option for your needs.
+
+### Spa Near Cottonwood Heights, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/areas/cottonwood-heights
+- Summary: Premier spa near Cottonwood Heights, Utah. Falling Waters in Draper offers massage, facials, hair & more. Just 12 minutes away! Book today! (801) 501-9000
+
+### Day Spa in Draper, UT | Falling Waters Day Spa & Salon
+- URL: https://www.fallingwatersdayspa.com/areas/draper
+- Summary: Draper's premier day spa since 1998. Massage, facials, hair, nails & more at Treehouse Athletic Club. 4.4★ rating, 10% TAC discount. Book today! (801) 501-9000
+
+### Spa Near Holladay, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/areas/holladay
+- Summary: Premier spa near Holladay, Utah. Falling Waters in Draper offers massage, facials, hair & more. Just 15 minutes away! Book today! (801) 501-9000
+
+### Spa Near Riverton, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/areas/riverton
+- Summary: Premier spa near Riverton, Utah. Falling Waters in Draper offers massage, facials, hair & more. Just 15 minutes away! Book today! (801) 501-9000
+
+### Spa Near Sandy, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/areas/sandy
+- Summary: Sandy's nearby full-service day spa: massage, HydraFacial, hair, nails and waxing at Falling Waters in Draper, a short drive down I-15. Since 1998.
+
+### Spa Near South Jordan, UT | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/areas/south-jordan
+- Summary: Premier spa near South Jordan, Utah. Falling Waters in Draper offers massage, facials, hair & more. Just 12 minutes away! Book today! (801) 501-9000
+
+### Benefits of Regular Facials | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/blog/benefits-of-regular-facials
+- Summary: Discover why monthly facials are worth it. Anti-aging benefits, acne prevention, glowing skin & more. Expert skincare advice from Falling Waters Day Spa.
+
+### Best Massage in Draper, UT: Types, Prices & How to Choose
+- URL: https://www.fallingwatersdayspa.com/blog/best-massage-draper-utah
+- Summary: Which massage is best in Draper? Compare Swedish from $105, deep tissue from $120, hot stone from $155 and prenatal from $138 at Falling Waters.
+- Q: What makes a massage therapist the best in Draper?
+  A: The best massage therapists in Draper combine proper licensing, extensive training, years of experience, and the ability to customize treatments to individual needs. They should work in a clean, professional environment and communicate effectively about pressure and techniques.
+- Q: How often should I get massage therapy in Draper?
+  A: For general wellness and stress relief, monthly massages are ideal. Those dealing with chronic pain or high stress may benefit from bi-weekly sessions, while athletes or those with physically demanding jobs might need weekly treatments.
+- Q: What should I expect during my first massage in Draper?
+  A: Your first massage will begin with a consultation about your health history, goals, and preferences. You'll undress to your comfort level, be professionally draped, and receive a customized treatment. Communication about pressure and comfort is encouraged throughout.
+- Q: How much does a massage cost in Draper, Utah?
+  A: At Falling Waters Day Spa, massage sessions typically start from about $105 depending on type and length. Treehouse Athletic Club members receive 10% off. Call (801) 501-9000 for current pricing.
+- Q: Where is Falling Waters Day Spa located?
+  A: 1101 E Draper Parkway, Draper, UT 84020, inside Treehouse Athletic Club. Free parking. Open to the public.
+- Q: Do you offer deep tissue massage near Sandy or South Jordan?
+  A: Yes. Guests from Sandy, South Jordan, Riverton, and nearby cities routinely visit our Draper location for deep tissue and other massage types — usually a short drive down the Wasatch Front.
+
+### Best Massage for Back Pain | Falling Waters Day Spa
+- URL: https://www.fallingwatersdayspa.com/blog/best-massage-for-back-pain
+- Summary: Which massage helps back pain most? Deep tissue, Swedish and hot stone compared by a Draper, Utah spa with 27+ years of experience. What to book and how often.
+
+### Couples Massage Date Night Ideas | Falling Waters Spa
+- URL: https://www.fallingwatersdayspa.com/blog/couples-massage-date-night-ideas
+- Summary: Plan the perfect couples massage date night. Romantic spa ideas, what to expect, and tips for making it special. Falling Waters Day Spa, Draper Utah.
+
+### Couples Spa Day in Utah: How to Plan It | Falling Waters
+- URL: https://www.fallingwatersdayspa.com/blog/couples-spa-day-utah
+- Summary: How to plan a couples spa day in Utah: a private couples suite, side-by-side massage from $349 with a bouquet, timing and booking tips.
+- Q: What should we expect during a couples spa day in Utah?
+  A: A couples spa day in Utah typically includes side-by-side treatments in a private suite, relaxation time together, and complementary services like champagne or refreshments. At Falling Waters Day Spa, you'll enjoy customized couples massage, access to relaxation areas, and the option to add facials or other treatments.
+- Q: How long is a typical couples spa day in Draper?
+  A: Couples spa days can range from 2-6 hours depending on your package. A basic couples massage takes 80-110 minutes, while full spa day packages with multiple treatments can last 4-6 hours including relaxation time.
+- Q: What's the best couples spa package for anniversaries?
+  A: For anniversaries, we recommend our couples massage package with champagne, followed by individual facials or body treatments. Add-ons like hot stone massage or private relaxation time make the experience even more special.
+- Q: Do we need to book couples spa treatments in advance in Utah?
+  A: Yes, couples treatments require advance booking, especially on weekends and holidays. We recommend booking 1-2 weeks ahead for the best availability. Call (801) 501-9000 or book online for immediate confirmation.
+- Q: Why book a couples spa day at Falling Waters in Draper?
+  A: Falling Waters offers a dedicated couples suite for side-by-side massage, package experiences from about $349, gift cards for surprises, and 27+ years serving Draper inside Treehouse Athletic Club. Open to the public; TAC members save 10%.
+- Q: How much is a couples massage in Draper, Utah?
+  A: Signature couples experiences at Falling Waters start around $349 for an 80-minute side-by-side Swedish massage with a flower bouquet. Call (801) 501-9000 to reserve packages.
+- Q: Can we book a couples spa day for an anniversary?
+  A: Yes. Book 1–3 weeks ahead for weekend anniversaries and holidays. Mention special occasions when you call so we can prepare the suite and any add-ons.
+- Q: Is Falling Waters open to non-members of Treehouse Athletic Club?
+  A: Yes. The spa is open to the public. Treehouse Athletic Club members receive 10% off services.
+
+### Is HydraFacial Worth It? Benefits & Cost | Falling Waters
+- URL: https://www.fallingwatersdayspa.com/blog/hydrafacial-benefits-guide
+- Summary: Is HydraFacial worth it? Results, downtime, cost from $82.50 and how it compares to a classic facial, from Falling Waters Day Spa in Draper.
+- Q: Is HydraFacial worth the money?
+  A: HydraFacial provides immediate, visible results with no downtime, making it highly cost-effective for busy individuals. The treatment addresses multiple skin concerns simultaneously and provides lasting hydration and glow that many find worth the investment.
+- Q: What are the main benefits of HydraFacial?
+  A: HydraFacial benefits include instant hydration, improved skin texture, reduced pore appearance, enhanced skin brightness, fine line reduction, and safe treatment for all skin types with zero downtime. Results are immediate and continue improving for days after treatment.
+- Q: How long do HydraFacial results last?
+  A: HydraFacial results typically last 5-7 days for the immediate glow, with deeper benefits lasting 2-4 weeks. Regular monthly treatments provide cumulative benefits and maintain optimal skin health and appearance.
+- Q: Where can I get a HydraFacial in Draper, Utah?
+  A: Falling Waters Day Spa & Salon offers HydraFacial and other facial treatments at 1101 E Draper Parkway, Draper, UT (inside Treehouse Athletic Club). Call (801) 501-9000 or book online.
+- Q: How much do facials cost in Draper?
+  A: Custom facials at Falling Waters start from about $65. HydraFacial pricing depends on treatment level and add-ons. TAC members receive 10% off. Call (801) 501-9000 for current rates.
+- Q: Is there downtime after a HydraFacial?
+  A: Most guests have little to no downtime and can return to normal activities the same day. Your esthetician will advise based on your skin and any boosters used.
+
+### Spa & Wellness Blog | Falling Waters Day Spa, Draper
+- URL: https://www.fallingwatersdayspa.com/blog
+- Summary: Expert spa and wellness tips from Falling Waters Day Spa in Draper, Utah. Massage benefits, skincare guides, relaxation techniques & more. Read our blog!
+
+### Stress Relief Massage Techniques | Falling Waters Spa
+- URL: https://www.fallingwatersdayspa.com/blog/stress-relief-massage-techniques
+- Summary: Massage techniques that lower stress: Swedish, deep tissue, hot stone and what to ask your therapist. From Falling Waters Day Spa in Draper, Utah, est. 1998.
+
+### Your First Spa Visit: What to Expect | Falling Waters
+- URL: https://www.fallingwatersdayspa.com/blog/what-to-expect-first-spa-visit
+- Summary: First time at a day spa? Complete guide on what to expect, what to wear, and spa etiquette. Tips from Falling Waters Day Spa in Draper, Utah.
+
+## Accuracy notes
+- Every price and FAQ above is copied from the visible page it belongs to; the page is the source.
+- Rating/review figures come from Google (as published on site; verify live GBP for latest).

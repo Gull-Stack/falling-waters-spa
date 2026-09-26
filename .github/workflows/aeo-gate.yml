@@ -1,0 +1,20 @@
+name: AEO gate
+# Every page's machine layer (JSON-LD, Open Graph, sitemap, llms-full.txt) is GENERATED from
+# brand-facts.json + the visible page by scripts/aeo-build.mjs, and scripts/aeo-check.mjs refuses
+# a page whose schema, hours, prices or FAQs disagree with what a visitor sees.
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generated output is committed and current
+        run: node scripts/aeo-build.mjs --check
+      - name: Schema, facts, hours, prices and FAQs agree with the visible page
+        run: node scripts/aeo-check.mjs

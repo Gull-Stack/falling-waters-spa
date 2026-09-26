@@ -1,0 +1,10 @@
+{
+  "name": "falling-waters-spa",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "aeo:build": "node scripts/aeo-build.mjs",
+    "aeo:check": "node scripts/aeo-build.mjs --check && node scripts/aeo-check.mjs",
+    "aeo:live": "node scripts/aeo-check.mjs --live https://www.fallingwatersdayspa.com"
+  }
+}

@@ -8,7 +8,17 @@ on:
 # Passing the org + project as env vars (instead of --scope) lets the Vercel
 # CLI link to the project directly — the documented CI pattern.
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/aeo-build.mjs --check
+      - run: node scripts/aeo-check.mjs
   promote:
+    needs: gate
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}

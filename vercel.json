@@ -80,10 +80,51 @@
           "value": "text/plain; charset=utf-8"
         }
       ]
+    },
+    {
+      "source": "/llms-full.txt",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        },
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
     }
   ],
   "github": {
     "enabled": true,
     "autoAlias": false
-  }
+  },
+  "redirects": [
+    {
+      "source": "/contact",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/mommy-makeover",
+      "destination": "/services/body-treatments",
+      "permanent": true
+    },
+    {
+      "source": "/blog/index",
+      "destination": "/blog",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/.well-known/brand-facts.json",
+      "destination": "/brand-facts.json"
+    }
+  ]
 }
