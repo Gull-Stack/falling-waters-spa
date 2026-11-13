@@ -1,0 +1,31 @@
+/* The home page's header, for every other page: 1200px grid, drop + wordmark lockup, LABEL links, dark-outline Book now.
+   Linked after each page's inline <style>. index.html gets the same rules from css/home.css. */
+.nav{padding:.75rem 2rem!important}
+@media (max-width:768px){.nav{padding:.5rem 1rem!important}.nav-container{justify-content:center!important}.nav-links{display:none!important}}
+.nav-container{max-width:1136px!important}
+
+/* --ht = wordmark box height. Measured ink: logo.png (1280²) drop y 29.5–70.3%; logo-text.png (1280×233) letters y 22.3–66.5%.
+   The drop centres on the letters from ascender to baseline (not into the descenders), hence the -0.048 lift. */
+.nav-logo{--ht:56px;display:flex!important;align-items:center;min-height:44px;gap:calc(var(--ht) * 0.095)!important;color:inherit!important}
+@media (max-width:767px){.nav-logo{--ht:36px}}
+.nav-logo .logo-text{height:var(--ht)!important;width:auto;transform:translateY(calc(var(--ht) * 0.056));margin-right:calc(var(--ht) * -0.1648)}
+.nav-logo .logo-icon{height:calc(var(--ht) * 1.0833)!important;width:auto;margin-left:calc(var(--ht) * -0.4063);margin-right:calc(var(--ht) * -0.3868);transform:translateY(calc(var(--ht) * -0.048))}
+
+.nav-links{gap:2.25rem!important}
+.nav-links a:not(.nav-cta){font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important;color:var(--color-dark,#2C3E50)!important}
+.nav-links a.nav-cta{display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;height:44px!important;padding:0 1.5rem!important;
+  border:2px solid var(--color-dark,#2C3E50)!important;border-radius:0!important;background:transparent!important;color:var(--color-dark,#2C3E50)!important;
+  font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important;line-height:1!important;white-space:nowrap;text-decoration:none!important}
+.nav-links a.nav-cta:focus-visible{outline:2px solid var(--color-primary,#367082)!important;outline-offset:3px}
+@media (hover:hover) and (pointer:fine){
+  .nav-links a:not(.nav-cta):hover,.nav-links a:not(.nav-cta):focus-visible{color:var(--color-primary,#367082)!important}
+  .nav-links a.nav-cta:hover,.nav-links a.nav-cta:focus-visible{background:var(--color-dark,#2C3E50)!important;color:#fff!important}
+}
+
+/* Banner pinned above the header at every width, as on the home page (36px desktop, 30px phone). */
+.dr-banner{position:fixed;top:0;left:0;right:0;z-index:1001;box-sizing:border-box;height:36px;padding:8px 16px;line-height:20px;white-space:nowrap;text-align:center;
+  background:var(--color-dark,#2C3E50);color:#fff;font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important}
+.dr-banner a{color:#C4A77D!important;font-weight:600;text-decoration:none;font-size:inherit!important}
+.nav{top:36px!important}
+@media (max-width:767px){.dr-banner{height:30px;padding:7px 12px;line-height:16px}.nav{top:30px!important}}
+@media (hover:hover) and (pointer:fine){.dr-banner a:hover{color:#fff!important;text-decoration:underline}}
