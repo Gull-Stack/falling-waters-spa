@@ -1,8 +1,8 @@
 {
   "/": {
     "published": "2026-02-05",
-    "modified": "2026-09-26",
-    "hash": "fb09fea03f1a"
+    "modified": "2026-11-13",
+    "hash": "43b1e334f71e"
   },
   "/about": {
     "published": "2026-09-26",
@@ -31,8 +31,8 @@
   },
   "/services/gift-cards": {
     "published": "2026-03-20",
-    "modified": "2026-09-26",
-    "hash": "74824ddddd7f"
+    "modified": "2026-11-13",
+    "hash": "29dcecf845b9"
   },
   "/services/hair-care": {
     "published": "2026-02-06",
@@ -51,8 +51,8 @@
   },
   "/services/packages": {
     "published": "2026-09-26",
-    "modified": "2026-09-26",
-    "hash": "bdf46d746720"
+    "modified": "2026-11-13",
+    "hash": "f9fefcfdd139"
   },
   "/services/valentines-day-spa": {
     "published": "2026-03-20",

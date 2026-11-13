@@ -174,15 +174,7 @@
             },
             {
               "@type": "Offer",
-              "name": "Birthday Glow Experience gift card",
-              "price": "240",
-              "priceCurrency": "USD",
-              "availability": "https://schema.org/InStock",
-              "url": "https://go.booker.com/#/location/fallingwaters"
-            },
-            {
-              "@type": "Offer",
-              "name": "The Ultimate Spa Day gift card",
+              "name": "Birthday Glow Experience Starting at $240 Your day, your way: 60 min custom facial, 50 min Swedish massage, and a floral arrangement to take home. You deserve it. Purchase 🌿 The Ultimate Spa Day gift card",
               "price": "207",
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock",
@@ -527,6 +519,7 @@
   <!-- aeo:analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script>document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href]'); if (!a) return; var h = a.getAttribute('href'), n = h.indexOf('go.booker.com') > -1 ? 'Book click' : h.indexOf('tel:') === 0 ? 'Call click' : h.indexOf('gift-cards') > -1 ? 'Gift card click' : null; if (n) window.va('event', { name: n, data: { page: location.pathname, label: (a.textContent || '').trim().slice(0, 60) } }); });</script>
   <!-- /aeo:analytics -->
 </body>
 </html>
