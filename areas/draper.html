@@ -19,9 +19,15 @@
   <meta property="og:url" content="https://www.fallingwatersdayspa.com/areas/draper">
   
 <link rel="icon" type="image/png" href="../assets/images/logo-text.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- fonts: self-hosted latin variable fonts (were Google Fonts: two extra connections that blocked first paint) -->
+<link rel="preload" href="/assets/fonts/montserrat-latin-v31.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/cormorant-garamond-latin-v21.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-v31.woff2) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;src:url(/assets/fonts/cormorant-garamond-latin-v21.woff2) format('woff2')}
+@font-face{font-family:'Dancing Script';font-style:normal;font-weight:600 700;font-display:swap;src:url(/assets/fonts/dancing-script-latin-v29.woff2) format('woff2')}
+</style>
+<!-- /fonts -->
   
   <style>
     :root {
