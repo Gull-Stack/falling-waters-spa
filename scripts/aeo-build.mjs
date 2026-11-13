@@ -167,7 +167,7 @@ const MARKED = /[ \t]*<!-- aeo:schema -->[\s\S]*?<!-- \/aeo:schema -->\s*\n?/g;
 export const sourceHtml = (html) => html.replace(MARKED, '').replace(LEGACY, '');
 // Vercel Web Analytics for a plain-HTML site (docs/analytics/quickstart). The script 404s until the
 // project's Web Analytics toggle is on; aeo-check --live fails on that so a dead toggle cannot hide.
-const ANALYTICS = `  <!-- aeo:analytics -->\n  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>\n  <script defer src="/_vercel/insights/script.js"></script>\n  <!-- /aeo:analytics -->\n`;
+const ANALYTICS = `  <!-- aeo:analytics -->\n  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>\n  <script defer src="/_vercel/insights/script.js"></script>\n  <script>document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href]'); if (!a) return; var h = a.getAttribute('href'), n = h.indexOf('go.booker.com') > -1 ? 'Book click' : h.indexOf('tel:') === 0 ? 'Call click' : h.indexOf('gift-cards') > -1 ? 'Gift card click' : null; if (n) window.va('event', { name: n, data: { page: location.pathname, label: (a.textContent || '').trim().slice(0, 60) } }); });</script>\n  <!-- /aeo:analytics -->\n`;
 const ANALYTICS_RE = /[ \t]*<!-- aeo:analytics -->[\s\S]*?<!-- \/aeo:analytics -->\s*\n?/g;
 
 function ensureOg(html, p) {

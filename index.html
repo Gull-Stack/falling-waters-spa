@@ -1347,7 +1347,7 @@
             "url": "https://go.booker.com/#/location/fallingwaters",
             "priceSpecification": {
               "@type": "PriceSpecification",
-              "minPrice": "210",
+              "minPrice": "240",
               "priceCurrency": "USD"
             }
           }
@@ -1437,8 +1437,15 @@
   <!-- Hero Section -->
   <section class="hero">
     <video class="hero-video" autoplay muted loop playsinline poster="/assets/images/services/relaxation.jpg">
-      <source src="/assets/videos/hero-video.mp4" type="video/mp4">
     </video>
+    <script>
+      // The hero video loads only on wider screens, and never for reduced-motion or data-saver visitors; phones keep the poster.
+      (function () {
+        var v = document.querySelector('.hero-video'), c = navigator.connection;
+        if (!v || !matchMedia('(min-width: 768px)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches || (c && c.saveData)) return;
+        v.src = '/assets/videos/hero-video.mp4';
+      })();
+    </script>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-badge">EST. 1998 • 27 YEARS OF EXCELLENCE</div>
@@ -2023,6 +2030,7 @@
   <!-- aeo:analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script>document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('a[href]'); if (!a) return; var h = a.getAttribute('href'), n = h.indexOf('go.booker.com') > -1 ? 'Book click' : h.indexOf('tel:') === 0 ? 'Call click' : h.indexOf('gift-cards') > -1 ? 'Gift card click' : null; if (n) window.va('event', { name: n, data: { page: location.pathname, label: (a.textContent || '').trim().slice(0, 60) } }); });</script>
   <!-- /aeo:analytics -->
 </body>
 </html>
