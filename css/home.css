@@ -88,7 +88,7 @@
    logo-text.png (1280×233) letters y 22.3–66.5% (0.442), x 2.3–97.0%. --ht = wordmark box height. */
 .nav-logo{--ht:56px}
 .nav-logo .logo-text{height:var(--ht)!important;transform:translateY(calc(var(--ht) * 0.056));margin-right:calc(var(--ht) * -0.1648)}
-.nav-logo .logo-icon{height:calc(var(--ht) * 1.0833)!important;margin-left:calc(var(--ht) * -0.4063);margin-right:calc(var(--ht) * -0.3868)}
+.nav-logo .logo-icon{height:calc(var(--ht) * 1.0833)!important;margin-left:calc(var(--ht) * -0.4063);margin-right:calc(var(--ht) * -0.3868);transform:translateY(calc(var(--ht) * -0.048))}
 @media (max-width:767px){ .nav-logo{--ht:36px} }
 /* Visible gap between mark and wordmark = half the shared ink height (0.221·ht); the wordmark's own left air is 0.126·ht. */
 .nav-logo{gap:calc(var(--ht) * 0.095)!important}
@@ -103,9 +103,8 @@
 .btn{height:var(--btn-l);padding:0 2.5rem!important;font-size:.85rem!important}
 /* small: header, sticky bar, inside cards */
 .nav-links a.nav-cta,.sticky-book .btn,.service-card .btn{height:var(--btn-s)!important;padding:0 1.5rem!important;font-size:.75rem!important}
-/* header CTA = primary (bronze), no longer a teal pill */
-.nav-links a.nav-cta{background:var(--color-accent)!important;border-color:var(--color-accent)!important;color:#fff!important}
-.nav-links a.nav-cta:hover{background:#fff!important;color:var(--color-accent)!important}
+/* header CTA = dark outline, so it weighs about what the logo does (bronze stays for the hero and tiles) */
+.nav-links a.nav-cta{background:transparent!important;border-color:var(--color-dark)!important;color:var(--color-dark)!important}
 /* secondary on light: the services row had inline teal-outline styles and a stray 1rem left margin */
 .services .btn[style]{margin:0!important;background:transparent!important;border-color:var(--color-primary)!important;color:var(--color-primary)!important}
 .services .btn[style]:hover{background:var(--color-primary)!important;color:#fff!important}
@@ -319,13 +318,13 @@ a,button,.dr-tile{-webkit-tap-highlight-color:transparent}
 .btn:hover{background:var(--color-accent)!important;color:#fff!important;border-color:var(--color-accent)!important}
 .btn-outline:hover{background:transparent!important;color:#fff!important;border-color:#fff!important}
 .sticky-book .btn:hover{background:#fff!important;color:var(--color-dark)!important;border-color:#fff!important}
-.nav-links a.nav-cta:hover{background:var(--color-accent)!important;color:#fff!important}
+.nav-links a.nav-cta:hover{background:transparent!important;color:var(--color-dark)!important;border-color:var(--color-dark)!important}
 .footer-social a:hover{background:transparent!important;color:#fff!important}
 @media (hover:hover) and (pointer:fine){
   .btn:hover,.btn:focus-visible{background:#fff!important;color:var(--color-accent)!important;border-color:var(--color-accent)!important}
   .btn-outline:hover,.btn-outline:focus-visible{background:#fff!important;color:var(--color-dark)!important;border-color:#fff!important}
   .sticky-book .btn:hover,.sticky-book .btn:focus-visible{background:var(--color-dark)!important;color:#fff!important;border-color:var(--color-dark)!important}
-  .nav-links a.nav-cta:hover,.nav-links a.nav-cta:focus-visible{background:#fff!important;color:var(--color-accent)!important;border-color:var(--color-accent)!important}
+  .nav-links a.nav-cta:hover,.nav-links a.nav-cta:focus-visible{background:var(--color-dark)!important;color:#fff!important;border-color:var(--color-dark)!important}
   .nav-links a:not(.nav-cta):hover,.nav-links a:not(.nav-cta):focus-visible{color:var(--color-primary)!important}
   .dr-tile:hover img,.dr-tile:focus-visible img{transform:scale(1.04)!important}
   .dr-tile:hover .arw,.dr-tile:focus-visible .arw{transform:translateX(4px)}
