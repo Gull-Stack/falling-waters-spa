@@ -1,0 +1,362 @@
+/* Home page system: square controls + one tile + five text styles. Built from the approved 13 Nov 2026 drawing. */
+/* Uses the live page's own tokens: --color-primary #367082, --color-dark #2C3E50, --color-cream, gold #C4A77D (the page's on-dark accent), Cormorant Garamond + Montserrat */
+.dr-banner{background:var(--color-dark);color:#fff;text-align:center;padding:8px 16px;font-family:var(--font-body);font-size:.85rem;font-weight:500;position:relative;z-index:1001}
+.dr-banner a{color:#C4A77D;font-weight:600;text-decoration:none}
+.hero .dr-hero{text-align:left;max-width:1320px;width:100%;margin:0 auto;padding:0 2rem;align-self:center}
+.dr-kicker{font-family:var(--font-body)!important;font-size:.78rem!important;font-weight:600!important;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75)!important;margin:0 0 1.1rem!important;line-height:1.5!important}
+.dr-offer-row{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-bottom:.9rem}
+.dr-chip{display:inline-block;background:var(--color-primary);color:#fff;font-family:var(--font-body);font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.42rem .8rem;border-radius:4px}
+.dr-where{font-family:var(--font-body);font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.dr-title{font-family:var(--font-heading)!important;font-weight:600;font-size:clamp(3rem,7vw,5.6rem)!important;line-height:.98!important;color:#fff!important;margin:0 0 1.2rem!important;max-width:none!important}
+.dr-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem;font-family:var(--font-body);font-size:.95rem!important;letter-spacing:.04em;color:rgba(255,255,255,.9)!important;margin:0 0 1.8rem!important;max-width:none!important}
+.dr-meta b{color:#C4A77D;font-weight:700}
+.dr-meta i{width:1px;height:1em;background:rgba(255,255,255,.4)}
+.dr-buttons{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:1.4rem}
+.dr-proof{font-family:var(--font-body);font-size:.85rem!important;color:rgba(255,255,255,.8)!important;margin:0!important}
+.dr-stars{color:#C4A77D;letter-spacing:.1em}
+.hero .hero-stats{display:none}
+.dr-intents{background:var(--color-cream);padding:4.5rem 0}
+.dr-intents-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.6rem;gap:1rem}
+.dr-intents-head h2{font-family:var(--font-heading);font-size:clamp(2rem,3.4vw,2.8rem);color:var(--color-dark);margin:0}
+.dr-intents-head a{font-family:var(--font-body);font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-primary);text-decoration:none;white-space:nowrap}
+.dr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.dr-tile{position:relative;display:block;aspect-ratio:4/3;border-radius:8px;overflow:hidden;text-decoration:none;background:var(--color-dark)}
+.dr-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.dr-tile:hover img{transform:scale(1.04)}
+.dr-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(44,62,80,.85) 0%,rgba(44,62,80,.15) 55%,rgba(44,62,80,0) 100%)}
+.dr-tile-txt{position:absolute;left:1.2rem;bottom:1.1rem;z-index:1;display:flex;flex-direction:column;gap:.2rem}
+.dr-tile-name{font-family:var(--font-heading);font-size:2rem;font-weight:600;color:#fff;line-height:1}
+.dr-tile-price{font-family:var(--font-body);font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C4A77D}
+.dr-tile-go{position:absolute;right:1.2rem;bottom:1.1rem;z-index:1;color:#fff;font-size:1.3rem}
+.dr-sticky p{display:flex;align-items:center;gap:.7rem}
+.dr-sticky p a{color:#fff;font-weight:700}
+@media (max-width:767px){
+  .dr-banner{font-size:.8rem;padding:7px 12px}
+  .hero .dr-hero{padding:0 1.25rem}
+  .dr-kicker{font-size:.66rem!important;letter-spacing:.16em;margin-bottom:.8rem!important}
+  .dr-where{font-size:.66rem}
+  .dr-title{font-size:3rem!important}
+  .dr-meta{font-size:.85rem!important;margin-bottom:1.3rem!important}
+  .dr-meta i{display:none}
+  .dr-meta span{width:100%}
+  .dr-buttons .btn{width:100%;text-align:center}
+  .dr-intents{padding:3rem 0}
+  .dr-grid{grid-template-columns:1fr 1fr;gap:.6rem}
+  .dr-tile{aspect-ratio:1/1}
+  .dr-tile-name{font-size:1.45rem}
+  .dr-tile-price{font-size:.68rem}
+  .dr-tile-txt{left:.8rem;bottom:.75rem}
+  .dr-tile-go{display:none}
+  .dr-intents-head{flex-direction:column;align-items:flex-start;gap:.3rem}
+  .dr-sticky p{display:flex!important;font-size:.78rem;margin:0}
+  .dr-sticky p .dr-chip{display:none}
+}
+.dr-short{display:none}
+@media (max-width:767px){
+  .dr-banner{position:fixed;top:0;left:0;right:0;height:30px;line-height:16px;white-space:nowrap}
+  .nav{top:30px!important}
+  .hero{min-height:auto!important;align-items:flex-start!important;padding:128px 0 2.2rem}
+  .dr-where,.dr-m-hide{display:none}
+  .dr-offer-row{margin-bottom:.7rem}
+  .dr-title{font-size:2.7rem!important;margin-bottom:.9rem!important}
+  .dr-meta span{width:auto}
+  .dr-meta{margin-bottom:1.1rem!important}
+  .dr-buttons{gap:.6rem;margin-bottom:1rem}
+  .dr-proof{font-size:.78rem!important}
+  .dr-long{display:none}.dr-short{display:inline}
+  .dr-sticky p{white-space:nowrap}
+}
+/* Header: logo.png is a 1280px square whose drop ink spans only x 37.5%–64.3%; crop that air so the visible mark centres,
+   and put the header on the page's own 1200px .container grid (content edge = hero text edge = tile edge). */
+.nav-container{max-width:1136px!important}
+.nav-logo .logo-icon{margin-left:-36px;margin-right:-34px}
+.nav-logo .logo-text{transform:translateY(3px)}
+.hero .dr-hero{max-width:1200px}
+@media (max-width:767px){
+  .nav-logo .logo-icon{margin-left:-24px;margin-right:-23px}
+  .nav-logo .logo-text{transform:translateY(2px)}
+}
+.nav-logo .logo-text{margin-right:-9px}
+@media (max-width:767px){ .nav-logo .logo-text{margin-right:-6px} .hero .dr-hero{padding:0 2rem} }
+/* Banner pinned above the header at every width (live: the in-flow banner covers the fixed header's top 38px). */
+@media (min-width:768px){
+  .dr-banner{position:fixed;top:0;left:0;right:0;height:36px;box-sizing:border-box;padding:8px 16px;line-height:20px}
+  .nav{top:36px!important}
+  .hero{padding-top:156px;min-height:calc(80vh + 120px)!important}
+}
+/* Mark and wordmark share one ink height. Measured ink: logo.png (1280²) drop y 29.5–70.3% (0.408), x 37.5–64.3%;
+   logo-text.png (1280×233) letters y 22.3–66.5% (0.442), x 2.3–97.0%. --ht = wordmark box height. */
+.nav-logo{--ht:56px}
+.nav-logo .logo-text{height:var(--ht)!important;transform:translateY(calc(var(--ht) * 0.056));margin-right:calc(var(--ht) * -0.1648)}
+.nav-logo .logo-icon{height:calc(var(--ht) * 1.0833)!important;margin-left:calc(var(--ht) * -0.4063);margin-right:calc(var(--ht) * -0.3868)}
+@media (max-width:767px){ .nav-logo{--ht:36px} }
+/* Visible gap between mark and wordmark = half the shared ink height (0.221·ht); the wordmark's own left air is 0.126·ht. */
+.nav-logo{gap:calc(var(--ht) * 0.095)!important}
+/* ═══ ONE BUTTON SYSTEM (drawing) ═══
+   Controls are square. One label: Montserrat 600, uppercase, .15em tracking. Two sizes: L 56px (.85rem), S 44px (.75rem).
+   Variants: primary = bronze fill · secondary = 2px outline (teal on light, white on dark) · inverse = white fill on colour.
+   Cards are one radius: 15px. Copied from Frontify (header CTA = hero CTA, smaller) and Square (one height, one shape). */
+:root{--btn-l:56px;--btn-s:44px;--radius-card:15px}
+.btn,.nav-links a.nav-cta{display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box;border-radius:0!important;
+  font-family:var(--font-body)!important;font-weight:600!important;text-transform:uppercase!important;letter-spacing:.15em!important;line-height:1!important;
+  white-space:nowrap;border-width:2px!important;border-style:solid!important;text-decoration:none!important;vertical-align:middle}
+.btn{height:var(--btn-l);padding:0 2.5rem!important;font-size:.85rem!important}
+/* small: header, sticky bar, inside cards */
+.nav-links a.nav-cta,.sticky-book .btn,.service-card .btn{height:var(--btn-s)!important;padding:0 1.5rem!important;font-size:.75rem!important}
+/* header CTA = primary (bronze), no longer a teal pill */
+.nav-links a.nav-cta{background:var(--color-accent)!important;border-color:var(--color-accent)!important;color:#fff!important}
+.nav-links a.nav-cta:hover{background:#fff!important;color:var(--color-accent)!important}
+/* secondary on light: the services row had inline teal-outline styles and a stray 1rem left margin */
+.services .btn[style]{margin:0!important;background:transparent!important;border-color:var(--color-primary)!important;color:var(--color-primary)!important}
+.services .btn[style]:hover{background:var(--color-primary)!important;color:#fff!important}
+.services div:has(> .btn[style]){display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+/* chips are square like the controls */
+.dr-chip{border-radius:0!important}
+/* icon controls: square, small size */
+.footer-social a{width:var(--btn-s)!important;height:var(--btn-s)!important;border-radius:0!important}
+/* cards: one radius */
+.dr-tile,.experience-card,.service-card,.testimonial-card,.perk,.gift-card-preview,.faq-item,.contact-map{border-radius:var(--radius-card)!important}
+/* text links: one style, never default blue */
+.experiences p a{color:var(--color-primary)!important;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.dr-intents-head a{font-size:.75rem!important;letter-spacing:.15em!important;font-weight:600!important}
+/* one focus ring for every control */
+.btn:focus-visible,.nav-cta:focus-visible,.dr-tile:focus-visible,.footer-social a:focus-visible{outline:2px solid var(--color-primary)!important;outline-offset:3px}
+@media (max-width:767px){
+  .btn{padding:0 1rem!important;font-size:.75rem!important;letter-spacing:.12em!important}
+  .dr-buttons .btn{width:100%}
+  .sticky-book .btn{padding:0 1.25rem!important}
+  .services div:has(> .btn[style]){gap:.6rem}
+}
+/* chips use the system label; social icons are the on-dark outline variant with the small label */
+.dr-chip{font-weight:600!important;letter-spacing:.15em!important}
+.footer-social a{background:transparent!important;border:2px solid #fff!important;font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important;text-decoration:none!important;box-sizing:border-box}
+.footer-social a:hover{background:#fff!important;color:var(--color-dark)!important}
+@media (max-width:767px){ .footer-social a,.dr-chip{letter-spacing:.12em!important} }
+/* every in-text link: one style (teal, 600, underline offset 3px) — no default blue anywhere */
+section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!important;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.testimonials p a:not(.btn),.membership p a:not(.btn){color:#C4A77D!important}
+.dr-tile,.nav-logo{color:inherit!important}
+/* phone: the services action row is a clean grid — primary full width, the four outlines in two equal columns */
+@media (max-width:767px){
+  .services div:has(> .btn[style]){display:grid!important;grid-template-columns:1fr 1fr;gap:.6rem}
+  .services div:has(> .btn[style]) > .btn{width:100%}
+  .services div:has(> .btn[style]) > .btn:not([style]){grid-column:1 / -1}
+}
+/* ═══ ONE TILE SYSTEM (drawing) ═══
+   Two families. PHOTO TILE: text on the photo (intent tiles). CONTENT CARD: photo on top, text below (experiences, services).
+   Both: 4:3 photo · radius 15 · one shadow · one hover · name + price bottom-left, action bottom-right · left-aligned.
+   Text cards (FAQ, testimonials, perks) share radius, padding, gap. People (team) stay round and centred.
+   Mobbin: Airbnb / Fresha / ClassPass cards — photo 4:3 on top, left-aligned name, price line, whole card is the link. */
+:root{--tile-gap:1.5rem;--tile-pad:1.5rem;--tile-shadow:0 5px 30px rgba(0,0,0,.08);--tile-shadow-hover:0 15px 40px rgba(0,0,0,.12)}
+@media (max-width:767px){:root{--tile-gap:1rem;--tile-pad:1.25rem}}
+/* grids: one gap, three columns on desktop, one on a phone (intent tiles two) */
+.dr-grid,.experience-grid,.services-grid,.testimonial-grid,.team-grid,.faq-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:var(--tile-gap)!important}
+.instagram-grid{gap:var(--tile-gap)!important}
+@media (max-width:767px){
+  .experience-grid,.services-grid,.testimonial-grid,.team-grid,.faq-grid{grid-template-columns:1fr!important}
+  .dr-grid{grid-template-columns:1fr 1fr!important}
+  .instagram-grid{grid-template-columns:repeat(3,1fr)!important}
+}
+/* surfaces */
+.dr-tile,.experience-card,.service-card,.faq-item,.perk,.gift-card-preview{box-shadow:var(--tile-shadow)!important}
+.dr-tile,.experience-card,.service-card{position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s!important}
+.dr-tile:hover,.experience-card:hover,.service-card:hover{transform:translateY(-4px)!important;box-shadow:var(--tile-shadow-hover)!important}
+.dr-tile img,.experience-card img,.service-card img{transition:transform .5s ease-out!important;transform:none!important}
+.dr-tile:hover img,.experience-card:hover img,.service-card:hover img{transform:scale(1.04)!important}
+.instagram-grid img,.instagram-grid a{border-radius:var(--radius-card)!important}
+/* photo: 4:3 everywhere */
+.dr-tile{aspect-ratio:4/3!important}
+.experience-card{height:auto!important;background:#fff!important;display:flex;flex-direction:column;cursor:pointer}
+.experience-card img{position:static!important;width:100%!important;height:auto!important;aspect-ratio:4/3;object-fit:cover;display:block}
+.experience-overlay{display:none!important}
+.service-card{display:flex;flex-direction:column}
+.service-card-image{height:auto!important;aspect-ratio:4/3}
+/* content: left-aligned, one padding, footer pinned to the bottom */
+.experience-content,.service-card-content{position:static!important;padding:var(--tile-pad)!important;text-align:left!important;color:var(--color-text)!important;display:flex;flex-direction:column;flex:1}
+.faq-item,.testimonial-card,.perk,.gift-card-preview{padding:var(--tile-pad)!important;text-align:left!important}
+/* one name style */
+.dr-tile-name,.experience-content h3,.service-card h3,.faq-item h4,.gift-card-preview h4{font-family:var(--font-heading)!important;font-weight:600!important;font-size:1.5rem!important;line-height:1.15!important;letter-spacing:0!important;text-shadow:none!important;margin:0 0 .5rem!important}
+.experience-content h3,.service-card h3,.faq-item h4,.gift-card-preview h4{color:var(--color-dark)!important}
+@media (max-width:767px){.dr-tile-name,.experience-content h3,.service-card h3,.faq-item h4,.gift-card-preview h4{font-size:1.3rem!important}}
+/* one body style */
+.experience-content p,.service-card p,.faq-item p,.tile-note{font-family:var(--font-body)!important;font-size:.9rem!important;line-height:1.6!important;color:#5a5a5a!important;opacity:1!important;margin:0 0 1rem!important}
+.tile-note{font-size:.8rem!important;color:#8a8a8a!important}
+/* one footer: price left, action right */
+.tile-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1rem;border-top:1px solid #f0ece6}
+.tile-price,.dr-tile-price{font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:700!important;letter-spacing:.14em!important;text-transform:uppercase!important}
+.tile-price{color:var(--color-accent)!important}
+.dr-tile-price{color:#C4A77D!important}
+.tile-go{font-family:var(--font-body);font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--color-primary)!important;text-decoration:none!important;white-space:nowrap}
+.tile-go::after{content:"";position:absolute;inset:0;z-index:1}  /* whole card is the link */
+.dr-tile-go{font-size:1rem!important}
+.dr-tile-txt{left:var(--tile-pad)!important;bottom:var(--tile-pad)!important}
+.dr-tile-go{right:var(--tile-pad)!important;bottom:var(--tile-pad)!important}
+.dr-tile::after{background:linear-gradient(to top,rgba(44,62,80,.88) 0%,rgba(44,62,80,.35) 45%,rgba(44,62,80,0) 70%)!important}
+@media (max-width:767px){.dr-tile-go{display:none!important}.dr-tile-txt{left:.9rem!important;bottom:.9rem!important}}
+/* section headers: the site's own centred header everywhere */
+.dr-intents .section-header{margin-bottom:2.5rem}
+/* people stay people: round, centred, same gap and name style */
+.team-member h4{font-family:var(--font-heading)!important;font-weight:600!important;font-size:1.5rem!important}
+@media (max-width:767px){.team-member h4{font-size:1.3rem!important}}
+.tile-note-once{text-align:center;margin:2rem 0 0!important;font-size:.9rem!important;color:#5a5a5a!important}
+/* ═══ SQUARE, ON PURPOSE (supersedes the rounded-card rules above) ═══
+   Rule: every rectangle is square — buttons, chips, tiles, photos, text boxes, map. No shadows: separation is whitespace + a 1px rule.
+   ONE TILE: 4:3 square-cornered photo · caption on the page (no box) · serif name · optional line · rule · price left / action right.
+   Mobbin: KOBU (square photo, caption below, title + arrow), Studio Freight (hairline-ruled editorial rows). */
+:root{--radius-card:0px;--rule:#e8e3dc}
+*{border-radius:0!important}
+.dr-tile,.experience-card,.service-card,.team-member{background:transparent!important;box-shadow:none!important;border:0!important;overflow:visible!important;position:relative;display:flex!important;flex-direction:column;text-decoration:none!important;aspect-ratio:auto!important;height:auto!important;transform:none!important}
+.dr-tile:hover,.experience-card:hover,.service-card:hover{transform:none!important;box-shadow:none!important}
+.dr-tile::after{display:none!important}
+/* the photo: one frame for every tile */
+.tile-photo,.service-card-image{display:block;overflow:hidden;aspect-ratio:4/3;height:auto!important;background:var(--color-light)}
+.tile-photo img,.service-card-image img{width:100%;height:100%;object-fit:cover;display:block}
+.experience-card img{aspect-ratio:4/3;width:100%;height:auto!important;object-fit:cover;display:block}
+.team-member img{width:100%!important;height:auto!important;aspect-ratio:4/3;object-fit:cover;object-position:50% 25%;border:0!important;margin:0!important;display:block}
+.dr-tile:hover img,.experience-card:hover img,.service-card:hover img{transform:scale(1.04)!important}
+/* the caption: on the page, no box */
+.tile-body,.experience-content,.service-card-content{display:flex;flex-direction:column;flex:1;padding:1.25rem 0 0!important;background:transparent!important;text-align:left!important}
+.team-member{text-align:left!important}
+.team-member h4{margin:1.25rem 0 .35rem!important;color:var(--color-dark)!important}
+.dr-tile-name{position:static!important;color:var(--color-dark)!important;margin:0 0 .5rem!important}
+.dr-tile-txt,.dr-tile-go{display:none!important}
+.tile-foot{margin-top:auto;border-top:1px solid var(--rule)!important;padding-top:.9rem}
+.dr-tile .tile-foot{margin-top:.25rem}
+.tile-price,.dr-tile .tile-price{color:var(--color-accent)!important}
+.tile-go{transition:letter-spacing .25s}
+.dr-tile:hover .tile-go,.experience-card:hover .tile-go,.service-card:hover .tile-go{letter-spacing:.22em}
+/* text boxes: square, hairline, no shadow */
+.faq-item,.perk,.gift-card-preview{box-shadow:none!important;border:1px solid var(--rule)!important;background:transparent!important}
+.testimonial-card{border:1px solid rgba(255,255,255,.22)!important;backdrop-filter:none!important;background:transparent!important}
+.contact-map,.contact-map iframe,.instagram-grid img,.instagram-grid a{border-radius:0!important}
+@media (max-width:767px){ .tile-body{padding-top:.75rem!important} .dr-tile .tile-go{display:none} .dr-tile .tile-foot{justify-content:flex-start} }
+@media (max-width:767px){ .tile-body,.experience-content,.service-card-content{padding-top:.75rem!important} .team-member h4{margin-top:.75rem!important} }
+.tile-note-once{grid-column:1 / -1}
+.tile-price,.dr-tile .tile-price,.experience-content .tile-price{color:#876A42!important}   /* bronze on light: ~4.9:1; the live gold (#C4A77D) is ~2.2:1 */
+.team-member p{font-family:var(--font-body)!important;font-size:.9rem!important;line-height:1.6!important;color:#5a5a5a!important}
+/* ═══ SIMPLE TEXT (supersedes earlier type rules) ═══
+   Five text styles, nothing else:
+     DISPLAY  hero line          Cormorant 600
+     TITLE    section title      Cormorant 600 44/32px, dark (white on dark)
+     NAME     tile / quote / Q   Cormorant 600 24/21px
+     BODY     everything read    Montserrat 400 16/15px, 1.6, grey #5a5a5a (white .8 on dark)
+     LABEL    price · action · kicker · nav · meta   Montserrat 600 12px UPPERCASE .15em
+   One left edge for everything. Every section: title + at most one line. No italics, no section logos, no in-section Book buttons
+   (header + sticky bar always offer Book). Colours: dark, grey, bronze (prices), teal (actions/links), gold only on dark. */
+:root{--s-pad:5.5rem;--t-title:2.75rem;--t-name:1.5rem;--t-body:1rem}
+@media (max-width:767px){:root{--s-pad:3.5rem;--t-title:2rem;--t-name:1.3rem;--t-body:.95rem}}
+.s-sec{padding:var(--s-pad) 0;background:#fff}
+.s-sec.tone-cream,.s-services{background:var(--color-cream)}
+.s-sec.tone-dark{background:var(--color-dark)}
+.s-head{margin:0 0 2.25rem;max-width:720px;text-align:left}
+.s-title{font-family:var(--font-heading)!important;font-weight:600!important;font-size:var(--t-title)!important;line-height:1.1!important;color:var(--color-dark)!important;margin:0!important;text-align:left!important}
+.s-lede{font-family:var(--font-body)!important;font-size:var(--t-body)!important;line-height:1.6!important;color:#5a5a5a!important;margin:.75rem 0 0!important}
+.tone-dark .s-title{color:#fff!important}.tone-dark .s-lede{color:rgba(255,255,255,.8)!important}
+.s-lede a,.s-facts a,.footer-areas a{color:var(--color-primary)!important;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.s-tac .s-head,.s-gift .s-head{margin-bottom:0}
+.s-gift .btn{margin-top:1.75rem}
+.s-tac{padding:calc(var(--s-pad) * .6) 0}
+/* grids */
+.s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tile-gap)}
+@media (max-width:767px){.s-grid{grid-template-columns:1fr}.s-grid-tiles{grid-template-columns:1fr 1fr}}
+/* NAME + BODY + LABEL inside tiles */
+.dr-tile-name{font-family:var(--font-heading)!important;font-weight:600!important;font-size:var(--t-name)!important;line-height:1.15!important;color:var(--color-dark)!important;margin:0!important}
+.tile-line{display:block;font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;color:#5a5a5a;margin:.4rem 0 0}
+.dr-tile .tile-foot{margin-top:1rem}
+.tile-price,.tile-go,.s-label{font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important}
+.tile-go{color:var(--color-primary)!important}
+.s-label{display:block;color:#5a5a5a;margin-bottom:.5rem}
+/* reviews: NAME-size quotes, LABEL authors, gold only on dark */
+.s-quote{margin:0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.22)}
+.s-quote blockquote{margin:0;font-family:var(--font-heading);font-weight:600;font-size:var(--t-name);line-height:1.3;color:#fff}
+.s-quote figcaption{margin-top:1rem;font-family:var(--font-body);font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#C4A77D}
+.s-stars{color:#C4A77D;letter-spacing:.1em}
+/* FAQ: ruled list, two columns, NAME + BODY */
+.s-faq-list{display:grid;grid-template-columns:1fr 1fr;column-gap:3rem}
+.s-qa{padding:1.25rem 0;border-top:1px solid var(--rule)}
+.s-qa h3{font-family:var(--font-heading)!important;font-weight:600!important;font-size:var(--t-name)!important;line-height:1.2!important;color:var(--color-dark)!important;margin:0 0 .4rem!important;text-align:left!important}
+.s-qa p{font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;color:#5a5a5a;margin:0}
+@media (max-width:767px){.s-faq-list{grid-template-columns:1fr}}
+/* visit: LABEL heads, BODY facts, square map */
+.s-visit-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start}
+.s-facts{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem 2rem}
+.s-facts p{font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;color:#5a5a5a;margin:0}
+.s-map{aspect-ratio:4/3;background:var(--color-light)}.s-map iframe{width:100%;height:100%;border:0;display:block}
+@media (max-width:767px){.s-visit-grid{grid-template-columns:1fr;gap:2rem}}
+/* hero: fewer lines */
+.dr-meta{margin-bottom:1.6rem!important}
+/* nav + footer on the LABEL / BODY styles, left edge */
+.nav-links a:not(.nav-cta){font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important;color:var(--color-dark)!important}
+footer,footer *{text-align:left!important}
+footer .container{max-width:1200px}
+footer a:not(.footer-social a){font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important}
+.footer-social{justify-content:flex-start!important}
+.footer-areas,.footer-copy{font-family:var(--font-body)!important;font-size:.85rem!important;line-height:1.6!important;color:rgba(255,255,255,.7)!important;margin:.5rem 0 0!important}
+.footer-areas a{color:#fff!important;font-size:.85rem!important;letter-spacing:0!important;text-transform:none!important;font-weight:600!important}
+footer [class*=links],footer nav,footer ul{justify-content:flex-start!important}
+/* stragglers onto the five styles */
+.dr-kicker,.dr-chip,.dr-proof,.dr-banner,.dr-sticky p,.footer-copy{font-family:var(--font-body)!important;font-size:.75rem!important;font-weight:600!important;letter-spacing:.15em!important;text-transform:uppercase!important;line-height:1.5!important}
+.dr-kicker{color:rgba(255,255,255,.8)!important}
+.dr-proof{color:rgba(255,255,255,.8)!important}.dr-stars{letter-spacing:.15em!important;font-size:inherit!important}
+.dr-banner,.dr-banner *{color:#fff!important}.dr-banner a{color:#C4A77D!important;font-size:inherit!important}
+.dr-sticky p,.dr-sticky p *{color:#fff!important;font-size:.75rem!important;letter-spacing:.15em!important;font-weight:600!important}
+.dr-meta,.dr-meta span{font-family:var(--font-body)!important;font-size:var(--t-body)!important;font-weight:400!important;letter-spacing:0!important;color:rgba(255,255,255,.85)!important}
+.dr-meta b{font-weight:600!important;color:#C4A77D!important}
+.footer-copy{color:rgba(255,255,255,.6)!important}
+.footer-areas,.footer-areas a{font-size:var(--t-body)!important}
+.nav-links{gap:2.25rem!important}
+.s-tac .s-head{max-width:none}
+footer .footer-areas a{text-transform:none!important;letter-spacing:0!important;font-size:var(--t-body)!important}
+@media (max-width:767px){ .dr-tile .tile-foot{margin-top:.6rem!important;padding-top:.6rem!important} }
+/* ═══ INTERACTION — one hover per control type, pointer devices only; same look on keyboard focus ═══ */
+a,button,.dr-tile{-webkit-tap-highlight-color:transparent}
+.btn,.nav-links a,.dr-tile img,.arw,.s-lede a,.s-facts a,.footer-areas a,footer a,.dr-banner a,.dr-sticky a{transition:background-color .2s,color .2s,border-color .2s,transform .35s ease-out,text-decoration-color .2s!important}
+.arw{display:inline-block}
+/* remove the earlier unconditional hovers so a tap on a phone never leaves a stuck state */
+.dr-tile:hover img,.experience-card:hover img,.service-card:hover img{transform:none!important}
+.dr-tile:hover .tile-go{letter-spacing:.15em!important}
+.btn:hover{background:var(--color-accent)!important;color:#fff!important;border-color:var(--color-accent)!important}
+.btn-outline:hover{background:transparent!important;color:#fff!important;border-color:#fff!important}
+.sticky-book .btn:hover{background:#fff!important;color:var(--color-dark)!important;border-color:#fff!important}
+.nav-links a.nav-cta:hover{background:var(--color-accent)!important;color:#fff!important}
+.footer-social a:hover{background:transparent!important;color:#fff!important}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover,.btn:focus-visible{background:#fff!important;color:var(--color-accent)!important;border-color:var(--color-accent)!important}
+  .btn-outline:hover,.btn-outline:focus-visible{background:#fff!important;color:var(--color-dark)!important;border-color:#fff!important}
+  .sticky-book .btn:hover,.sticky-book .btn:focus-visible{background:var(--color-dark)!important;color:#fff!important;border-color:var(--color-dark)!important}
+  .nav-links a.nav-cta:hover,.nav-links a.nav-cta:focus-visible{background:#fff!important;color:var(--color-accent)!important;border-color:var(--color-accent)!important}
+  .nav-links a:not(.nav-cta):hover,.nav-links a:not(.nav-cta):focus-visible{color:var(--color-primary)!important}
+  .dr-tile:hover img,.dr-tile:focus-visible img{transform:scale(1.04)!important}
+  .dr-tile:hover .arw,.dr-tile:focus-visible .arw{transform:translateX(4px)}
+  .s-lede a:hover,.s-facts a:hover,.footer-areas a:hover{color:var(--color-dark)!important;text-decoration-thickness:2px}
+  .tone-dark .s-lede a:hover,footer .footer-areas a:hover{color:#C4A77D!important}
+  footer a:not(.footer-social a):hover{color:#C4A77D!important}
+  .footer-social a:hover,.footer-social a:focus-visible{background:#fff!important;color:var(--color-dark)!important}
+  .dr-banner a:hover,.dr-sticky p a:hover{color:#fff!important;text-decoration:underline}
+}
+.dr-tile:focus-visible{outline:2px solid var(--color-primary)!important;outline-offset:4px}
+/* tap feedback on touch */
+@media (hover:none){ .btn:active,.dr-tile:active{opacity:.85} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} .dr-tile:hover img,.dr-tile:hover .arw{transform:none!important} }
+/* ═══ PHONE ═══ */
+body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+.sticky-book{padding-bottom:calc(.75rem + env(safe-area-inset-bottom))!important}
+@media (max-width:767px){
+  footer a:not(.footer-social a){display:inline-flex!important;align-items:center;min-height:44px}
+  .footer-areas a,.s-lede a,.s-facts a{padding:.4rem 0}
+  .s-facts{grid-template-columns:1fr!important;gap:1.25rem}
+}
+.dr-sticky p a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+@media (hover:hover) and (pointer:fine){ .dr-sticky p a:hover{text-decoration-thickness:2px!important} }
+.nav-logo{min-height:44px;display:flex!important;align-items:center}
+@media (max-width:767px){
+  .sticky-book{padding-left:1rem!important;padding-right:1rem!important;gap:.75rem!important}
+  .dr-sticky p,.dr-sticky p *{letter-spacing:.1em!important}
+  .sticky-book .btn{padding:0 1rem!important;flex:0 0 auto}
+  .dr-sticky p{min-width:0}
+  .dr-sticky p a{display:inline-flex;align-items:center;min-height:44px}
+}
+/* FAQ keeps the class the site build reads (faq-item -> FAQPage schema); styled as a ruled list */
+.s-faq-list .faq-item{padding:1.25rem 0!important;border:0!important;border-top:1px solid var(--rule)!important;background:transparent!important;box-shadow:none!important}
+.s-faq-list .faq-item h3{font-family:var(--font-heading)!important;font-weight:600!important;font-size:var(--t-name)!important;line-height:1.2!important;color:var(--color-dark)!important;margin:0 0 .4rem!important}
+.s-faq-list .faq-item p{font-family:var(--font-body)!important;font-size:var(--t-body)!important;line-height:1.6!important;color:#5a5a5a!important;margin:0!important}

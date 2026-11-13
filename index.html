@@ -1159,6 +1159,7 @@
     .footer, .social-proof, .testimonials, .hero-stats, .results, .membership, .experience-content { --color-accent: #C4A77D; }
     .breadcrumb a { text-decoration: underline; }
   </style>
+<link rel="stylesheet" href="/css/home.css">
   <!-- aeo:schema -->
   <script type="application/ld+json">
   {
@@ -1314,6 +1315,84 @@
         "itemListElement": [
           {
             "@type": "Offer",
+            "name": "Massage",
+            "price": "105",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://go.booker.com/#/location/fallingwaters",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "105",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Facials",
+            "price": "65",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://go.booker.com/#/location/fallingwaters",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "65",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Hair",
+            "price": "35",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://go.booker.com/#/location/fallingwaters",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "35",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Nails",
+            "price": "35",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://go.booker.com/#/location/fallingwaters",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "35",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Brows & lashes",
+            "price": "23",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://go.booker.com/#/location/fallingwaters",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "23",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Waxing",
+            "price": "20",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://go.booker.com/#/location/fallingwaters",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "20",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Offer",
             "name": "The Ultimate Spa Day",
             "price": "207",
             "priceCurrency": "USD",
@@ -1412,6 +1491,7 @@
   <!-- /aeo:schema -->
 </head>
 <body>
+<div class="site-banner dr-banner">Same-day? Call <a href="tel:+18015019000">(801) 501-9000</a> or walk in.</div>
 
   <!-- Navigation -->
   <nav class="nav">
@@ -1420,17 +1500,7 @@
         <img src="/assets/images/logo.png" alt="Falling Waters" class="logo-icon">
         <img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa & Salon" class="logo-text">
       </a>
-      <ul class="nav-links">
-        <li><a href="/services/massage">Massage</a></li>
-        <li><a href="/services/facials">Facials</a></li>
-        <li><a href="/services/hair-care">Hair</a></li>
-        <li><a href="/services/nails">Nails</a></li>
-        <li><a href="/areas/draper">Location</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="https://go.booker.com/#/location/fallingwaters" class="nav-cta">Book Now</a></li>
-      </ul>
+      <ul class="nav-links"><li><a href="#s-services">Services</a></li><li><a href="#s-packages">Packages</a></li><li><a href="#s-gift">Gift cards</a></li><li><a href="#s-visit">Visit</a></li><li><a href="https://go.booker.com/#/location/fallingwaters" class="nav-cta">Book now</a></li></ul>
     </div>
   </nav>
 
@@ -1447,466 +1517,36 @@
       })();
     </script>
     <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-badge">EST. 1998 • 27 YEARS OF EXCELLENCE</div>
-      <h1>Day Spa &amp; Salon in Draper, Utah</h1>
-      <p class="hero-tagline">Where Draper Unwinds</p>
-      <p>Escape the everyday at Falling Waters — Draper's full-service day spa &amp; salon since 1998. Expert massage, HydraFacial &amp; facials, hair, nails, and more inside Treehouse Athletic Club. Open to the public.</p>
-      <div class="hero-buttons">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Your Escape</a>
-        <a href="#experiences" class="btn btn-outline">View Packages</a>
+    <div class="hero-content dr-hero">
+      <h1 class="dr-kicker">Falling Waters · Day Spa &amp; Salon in Draper, Utah</h1>
+      <div class="dr-offer-row"><span class="dr-chip">The holiday gift</span></div>
+      <p class="dr-title">Give someone<br>a day off.</p>
+      <p class="dr-meta"><span>Gift cards in <b>any amount</b></span><i></i><span>Spa days <b>from $207</b></span></p>
+      <div class="dr-buttons">
+        <a href="tel:+18015019000" class="btn">Call to buy a gift card</a>
+        <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-outline">Book a massage — from $105</a>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-number">27+</div>
-          <div class="stat-label">Years of Excellence</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">4.4★</div>
-          <div class="stat-label">136+ Reviews</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Services Offered</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">10%</div>
-          <div class="stat-label">TAC Member Discount</div>
-        </div>
-      </div>
+      <p class="dr-proof"><span class="dr-stars">★★★★★</span> 4.4 · 136+ Google reviews · Draper since 1998</p>
     </div>
   </section>
 
 
   <!-- Social Proof Bar -->
-  <section class="social-proof">
-    <div class="container">
-      <div class="social-proof-inner">
-        <div class="proof-item">
-          <span class="proof-stars">★★★★★</span>
-          <span class="proof-text"><strong>4.4</strong> Rating (136+ reviews)</span>
-        </div>
-        <div class="proof-item">
-          <span class="proof-text"><strong>Trusted in Draper</strong> since 1998</span>
-        </div>
-        <div class="proof-item">
-          <span class="proof-text"><strong>Licensed & Certified</strong> Professionals</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section id="s-services" class="s-sec s-services "><div class="container"><div class="s-head"><h2 class="s-title">What are you here for?</h2></div><div class="s-grid s-grid-tiles"><a class="dr-tile" href="/services/massage"><span class="tile-photo"><img src="/assets/images/services/massage.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Massage</span><span class="tile-foot"><span class="tile-price">From $105</span><span class="tile-go">Explore <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="/services/facials"><span class="tile-photo"><img src="/assets/images/services/facial.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Facials</span><span class="tile-foot"><span class="tile-price">From $65</span><span class="tile-go">Explore <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="/services/hair-care"><span class="tile-photo"><img src="/assets/images/services/hair.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Hair</span><span class="tile-foot"><span class="tile-price">From $35</span><span class="tile-go">Explore <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="/services/nails"><span class="tile-photo"><img src="/assets/images/services/nails.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Nails</span><span class="tile-foot"><span class="tile-price">From $35</span><span class="tile-go">Explore <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="/services/brows-lashes"><span class="tile-photo"><img src="/assets/images/services/brows.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Brows &amp; lashes</span><span class="tile-foot"><span class="tile-price">From $23</span><span class="tile-go">Explore <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="/services/waxing"><span class="tile-photo"><img src="/assets/images/services/waxing.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Waxing</span><span class="tile-foot"><span class="tile-price">From $20</span><span class="tile-go">Explore <span class="arw">→</span></span></span></span></a></div></div></section>
+<section id="s-packages" class="s-sec s-packages "><div class="container"><div class="s-head"><h2 class="s-title">Spa packages</h2><p class="s-lede">Booked by phone as multiple services — <a href="tel:+18015019000">(801) 501-9000</a>.</p></div><div class="s-grid"><a class="dr-tile" href="tel:+18015019000"><span class="tile-photo"><img src="/assets/images/services/girls-day.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">The Ultimate Spa Day</span><span class="tile-line">Swedish massage · custom facial · spa pedicure</span><span class="tile-foot"><span class="tile-price">From $207</span><span class="tile-go">Call to book <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="tel:+18015019000"><span class="tile-photo"><img src="/assets/images/services/couples.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">The Bloom &amp; Bliss Couples Experience</span><span class="tile-line">80-minute side-by-side Swedish massage · bouquet</span><span class="tile-foot"><span class="tile-price">From $349</span><span class="tile-go">Call to book <span class="arw">→</span></span></span></span></a><a class="dr-tile" href="tel:+18015019000"><span class="tile-photo"><img src="/assets/images/services/relaxation.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">The Birthday Glow Experience</span><span class="tile-line">Custom facial · Swedish massage · floral arrangement</span><span class="tile-foot"><span class="tile-price">From $240</span><span class="tile-go">Call to book <span class="arw">→</span></span></span></span></a></div></div></section>
+<section class="s-sec s-team "><div class="container"><div class="s-head"><h2 class="s-title">Meet the team</h2><p class="s-lede">A combined 59+ years of experience.</p></div><div class="s-grid"><div class="dr-tile"><span class="tile-photo"><img src="/assets/images/team/massage-therapist.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Licensed Massage Therapists</span><span class="tile-line">Swedish, deep tissue &amp; more — decades of hands-on care</span></span></div><div class="dr-tile"><span class="tile-photo"><img src="/assets/images/team/aesthetician.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Licensed Aestheticians</span><span class="tile-line">HydraFacial, peels &amp; custom facials</span></span></div><div class="dr-tile"><span class="tile-photo"><img src="/assets/images/team/hair-stylist.jpg" alt="" loading="lazy" width="600" height="450"></span><span class="tile-body"><span class="dr-tile-name">Hair Stylists</span><span class="tile-line">Cuts, color &amp; styling — including favorites like Alicia &amp; Holland</span></span></div></div></div></section>
+<section class="s-sec s-reviews tone-dark"><div class="container"><div class="s-head"><h2 class="s-title">What guests say</h2><p class="s-lede"><span class="s-stars">★★★★★</span> 4.4 from 136+ Google reviews.</p></div><div class="s-grid"><figure class="s-quote"><blockquote>“The atmosphere at the salon is super inviting and relaxing.”</blockquote><figcaption>Dolce Dachs · Google review</figcaption></figure><figure class="s-quote"><blockquote>“The entire staff there is incredible which always makes me want to come back!”</blockquote><figcaption>Joyce Warner · Google review</figcaption></figure><figure class="s-quote"><blockquote>“Jaiden does a great job on my lashes. I love her!”</blockquote><figcaption>Chelsea Benson · Google review</figcaption></figure></div></div></section>
+<section class="s-sec s-tac tone-cream"><div class="container"><div class="s-head"><h2 class="s-title">Treehouse Athletic Club members save 10%</h2><p class="s-lede">On every service, every visit. Mention your membership when you book.</p></div></div></section>
+<section id="s-gift" class="s-sec s-gift "><div class="container"><div class="s-head"><h2 class="s-title">Gift cards</h2><p class="s-lede">Any amount, never expires. Buy in person or call <a href="tel:+18015019000">(801) 501-9000</a>.</p></div><a href="tel:+18015019000" class="btn">Call to buy a gift card</a></div></section>
+<section class="s-sec s-faq "><div class="container"><div class="s-head"><h2 class="s-title">Questions</h2></div><div class="s-faq-list"><div class="faq-item"><h3>Do I need to book in advance?</h3><p>We recommend booking 24-48 hours ahead, especially for weekends. Walk-ins welcome based on availability.</p></div><div class="faq-item"><h3>What should I wear?</h3><p>Comfortable clothing is best. We provide robes and slippers for spa services. Wear easy-to-remove clothing for waxing.</p></div><div class="faq-item"><h3>How early should I arrive?</h3><p>Please arrive 10-15 minutes early to check in and relax before your treatment begins.</p></div><div class="faq-item"><h3>What&#x27;s your cancellation policy?</h3><p>We require 24-hour notice for cancellations. Late cancellations may incur a fee.</p></div><div class="faq-item"><h3>Do you offer couples treatments?</h3><p>Yes! Our couples suite allows you to enjoy massages side-by-side. Perfect for date nights or special occasions.</p></div><div class="faq-item"><h3>Is parking available?</h3><p>Free parking is available at Treehouse Athletic Club. We&#x27;re located inside the club.</p></div></div></div></section>
+<section id="s-visit" class="s-sec s-visit "><div class="container"><div class="s-head"><h2 class="s-title">Visit</h2></div><div class="s-visit-grid"><div class="s-facts">
+          <div><span class="s-label">Location</span><p>1101 E Draper Parkway<br>Draper, UT 84020<br>Inside Treehouse Athletic Club</p></div>
+          <div><span class="s-label">Phone</span><p><a href="tel:+18015019000">(801) 501-9000</a></p></div>
+          <div><span class="s-label">Hours</span><p>Mon–Fri 9am–6pm<br>Sat 9am–4pm<br>Closed Sunday</p></div>
+          <div><span class="s-label">Instagram</span><p><a href="https://instagram.com/fallingwaters_dayspa">@fallingwaters_dayspa</a></p></div>
+        </div><div class="s-map"><iframe src="https://maps.google.com/maps?q=Falling+Waters+Day+Spa+%26+Salon,+1101+E+Draper+Pkwy,+Draper,+UT+84020&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Map to Falling Waters Day Spa"></iframe></div></div></div></section>
 
-  <!-- Awards -->
-  <section class="awards">
-    <div class="container">
-      <div class="awards-grid">
-        <div class="award-item">
-          <div class="award-badge">27</div>
-          <p>Years Serving<br>Draper</p>
-        </div>
-        <div class="award-item">
-          <div class="award-badge">TAC</div>
-          <p>Inside Treehouse<br>Athletic Club</p>
-        </div>
-        <div class="award-item">
-          <div class="award-badge">4.4★</div>
-          <p>Google<br>Rating</p>
-        </div>
-        <div class="award-item">
-          <div class="award-badge">50+</div>
-          <p>Services<br>Offered</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Value Props -->
-  <section class="value-props">
-    <div class="container">
-      <div class="value-grid">
-        <div class="value-item">
-          <h3>Expert Therapists</h3>
-          <p>State-licensed massage therapists and estheticians delivering personalized care</p>
-        </div>
-        <div class="value-item">
-          <h3>Luxury Amenities</h3>
-          <p>Heated tables, robes & slippers, quiet relaxation spaces</p>
-        </div>
-        <div class="value-item">
-          <h3>Full Service</h3>
-          <p>Massage, facials, hair, nails, lashes & waxing — everything under one roof</p>
-        </div>
-        <div class="value-item">
-          <h3>Peaceful Sanctuary</h3>
-          <p>Tranquil environment designed for your complete escape from daily stress</p>
-        </div>
-      </div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Your Experience</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Packages -->
-  <section class="experiences" id="experiences">
-    <div class="container">
-      <div class="section-header">
-        <img src="/assets/images/logo-text.png" alt="Falling Waters Day Spa + Salon" class="section-logo">
-        <h2>Signature Spa Packages in Draper</h2>
-        <p>More than treatments — these are moments you'll cherish. Perfect for celebrations, self-care days, or simply because you deserve it. <a href="/services/packages">See every package and how to book</a>.</p>
-      </div>
-      <div class="experience-grid">
-        <div class="experience-card">
-          <img src="/assets/images/services/girls-day.jpg" alt="The Ultimate Spa Day package at Falling Waters Day Spa Draper">
-          <div class="experience-overlay"></div>
-          <div class="experience-content">
-            <h3>The Ultimate Spa Day</h3>
-            <p>The full-body reset: 50-minute Swedish massage, 60-minute custom facial, and a luxury spa pedicure. Relax, refresh, renew.</p>
-            <span class="experience-price">Starting at $207</span>
-            <p style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.9;">Call us at <a href="tel:+18015019000" style="color: var(--color-accent); font-weight: 600;">(801) 501-9000</a> to reserve your special day<br><span style="font-size: 0.8rem;">(must book multiple services in person)</span></p>
-          </div>
-        </div>
-        <div class="experience-card">
-          <img src="/assets/images/services/couples.jpg" alt="Couples massage experience at Falling Waters Day Spa">
-          <div class="experience-overlay"></div>
-          <div class="experience-content">
-            <h3>The Bloom &amp; Bliss Couples Experience</h3>
-            <p>80 minutes of side-by-side Swedish massage — plus a flower bouquet to take home. Relax. Reconnect. Leave with flowers.</p>
-            <span class="experience-price">Starting at $349</span>
-            <p style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.9;">Call us at <a href="tel:+18015019000" style="color: var(--color-accent); font-weight: 600;">(801) 501-9000</a> to reserve · <a href="/services/couples-massage" style="color: var(--color-accent); font-weight: 600;">Couples massage details</a><br><span style="font-size: 0.8rem;">(must book multiple services in person)</span></p>
-          </div>
-        </div>
-        <div class="experience-card">
-          <img src="/assets/images/services/relaxation.jpg" alt="The Birthday Glow spa experience in Draper Utah">
-          <div class="experience-overlay"></div>
-          <div class="experience-content">
-            <h3>The Birthday Glow Experience</h3>
-            <p>Your day, your way: 60 min custom facial, 50 min Swedish massage, and a floral arrangement to take home. You deserve it.</p>
-            <span class="experience-price">Starting at $240</span>
-            <p style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.9;">Call us at <a href="tel:+18015019000" style="color: var(--color-accent); font-weight: 600;">(801) 501-9000</a> to reserve your special day<br><span style="font-size: 0.8rem;">(must book multiple services in person)</span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-header">
-        <h2>Spa &amp; Salon Services in Draper</h2>
-        <p>Massage, facials, hair, nails, lashes &amp; waxing — certified professionals under one roof</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-card-image">
-            <img src="/assets/images/services/massage.jpg" alt="Massage therapy in Draper Utah at Falling Waters">
-          </div>
-          <div class="service-card-content">
-            <h3>Massage Therapy</h3>
-            <p>Swedish, deep tissue, hot stone & prenatal massage. Melt away tension.</p>
-            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">From $105</p>
-            <a href="/services/massage" class="btn">Explore Massage</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-card-image">
-            <img src="/assets/images/services/facial.jpg" alt="HydraFacial and facials in Draper at Falling Waters">
-          </div>
-          <div class="service-card-content">
-            <h3>Skin Care & Facials</h3>
-            <p>HydraFacial, chemical peels, microdermabrasion & custom facials for radiant skin.</p>
-            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">From $65</p>
-            <a href="/services/facials" class="btn">Explore Facials</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-card-image">
-            <img src="/assets/images/services/hair.jpg" alt="Hair salon cuts and color in Draper Utah">
-          </div>
-          <div class="service-card-content">
-            <h3>Hair Services</h3>
-            <p>Expert cuts, color, highlights, balayage & styling from talented stylists.</p>
-            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">Women from $55 | Men from $35</p>
-            <a href="/services/hair-care" class="btn">Explore Hair Services</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-card-image">
-            <img src="/assets/images/services/nails.jpg" alt="Manicure and pedicure nail care in Draper">
-          </div>
-          <div class="service-card-content">
-            <h3>Nail Care</h3>
-            <p>Luxurious manicures & pedicures with gel polish options for beautiful hands & feet.</p>
-            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">From $40</p>
-            <a href="/services/nails" class="btn">Explore Nail Care</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-card-image">
-            <img src="/assets/images/services/brows.jpg" alt="Lash extensions and brow services in Draper">
-          </div>
-          <div class="service-card-content">
-            <h3>Brows & Lashes</h3>
-            <p>Lash extensions, lifts, brow shaping & tinting for that perfect frame.</p>
-            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">From $23</p>
-            <a href="/services/brows-lashes" class="btn">Explore Brows &amp; Lashes</a>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-card-image">
-            <img src="/assets/images/services/waxing.jpg" alt="Professional waxing services in Draper Utah">
-          </div>
-          <div class="service-card-content">
-            <h3>Waxing</h3>
-            <p>Professional waxing services for smooth, long-lasting results.</p>
-            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: 1rem;">From $20</p>
-            <a href="/services/waxing" class="btn">Explore Waxing</a>
-          </div>
-        </div>
-      </div>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Any Service</a>
-        <a href="/services/massage" class="btn" style="margin-left: 1rem; background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary);">Massage</a>
-        <a href="/services/couples-massage" class="btn" style="margin-left: 1rem; background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary);">Couples</a>
-        <a href="/services/body-treatments" class="btn" style="margin-left: 1rem; background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary);">Body Treatments</a>
-        <a href="/services/gift-cards" class="btn" style="margin-left: 1rem; background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary);">Gift Cards</a>
-      </div>
-      <p style="text-align:center;margin-top:1.5rem;font-size:0.95rem;color:#666;">Also serving guests from <a href="/areas/sandy">Sandy</a>, <a href="/areas/south-jordan">South Jordan</a>, <a href="/areas/riverton">Riverton</a>, <a href="/areas/cottonwood-heights">Cottonwood Heights</a> &amp; <a href="/areas/holladay">Holladay</a>.</p>
-    </div>
-  </section>
-
-  <!-- Meet Our Team -->
-  <section class="team">
-    <div class="container">
-      <div class="section-header">
-        <h2>Meet Our Team</h2>
-        <p>Experienced professionals dedicated to your relaxation and beauty</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-member">
-          <img src="/assets/images/team/massage-therapist.jpg" alt="Licensed massage therapist at Falling Waters Day Spa Draper">
-          <h4>Licensed Massage Therapists</h4>
-          <p>Swedish, deep tissue &amp; more — decades of hands-on care</p>
-        </div>
-        <div class="team-member">
-          <img src="/assets/images/team/aesthetician.jpg" alt="Licensed aesthetician at Falling Waters Day Spa">
-          <h4>Licensed Aestheticians</h4>
-          <p>HydraFacial, peels &amp; custom facials</p>
-        </div>
-        <div class="team-member">
-          <img src="/assets/images/team/hair-stylist.jpg" alt="Hair stylist at Falling Waters Day Spa and Salon">
-          <h4>Hair Stylists</h4>
-          <p>Cuts, color &amp; styling — including favorites like Alicia &amp; Holland</p>
-        </div>
-      </div>
-      <p style="text-align:center;margin-top:1.5rem;color:#666;font-size:0.95rem;">Guests also rave about specialists like <strong>Jaiden</strong> (lashes). Our team brings a combined <strong>59+ years</strong> of professional experience — when you visit Falling Waters, you're in seasoned hands.</p>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book With Our Team</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <h2>What Our Guests Say</h2>
-        <p>Don't just take our word for it — hear from the people who make us Draper's favorite spa</p>
-      </div>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"I can't say enough amazing things about Alicia Aragon! She is seriously my go-to girl. She is a creative artist with topnotch skills to match! She is personable and fun with a warm and sweet personality that makes every appointment feel like catching up with a good friend. I love Falling Waters for my hair, massage, facial, etc., services. The atmosphere at the salon is super inviting and relaxing."</p>
-          <span class="testimonial-author">— Dolce Dachs, Google Review</span>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Holland is wonderful and a total professional about hair while still being an absolute delight to talk to. The entire staff there is incredible which always makes me want to come back!"</p>
-          <span class="testimonial-author">— Joyce Warner, Google Review</span>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Jaiden does a great job on my lashes. I love her!"</p>
-          <span class="testimonial-author">— Chelsea Benson, Google Review</span>
-        </div>
-      </div>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-outline">Join Our Happy Guests</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Results Stats -->
-  <section class="results">
-    <div class="container">
-      <div class="results-grid">
-        <div class="result-item">
-          <h3>1998</h3>
-          <p>Serving Draper for 27+ years</p>
-        </div>
-        <div class="result-item">
-          <h3>50+</h3>
-          <p>Spa &amp; salon services under one roof</p>
-        </div>
-        <div class="result-item">
-          <h3>10%</h3>
-          <p>Off every service for TAC members</p>
-        </div>
-        <div class="result-item">
-          <h3>4.4★</h3>
-          <p>Average rating across 136+ Google reviews</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TAC Members -->
-  <section class="tac-banner">
-    <div class="container">
-      <div class="tac-inner">
-        <span class="tac-badge">EXCLUSIVE BENEFIT</span>
-        <h2>Treehouse Athletic Club Members</h2>
-        <p>As a TAC member, you're part of the family. Enjoy exclusive savings on all spa & salon services.</p>
-        <div class="tac-discount">10% OFF</div>
-        <p style="font-size: 0.9rem; margin-top: 1rem;">All services, every visit. Just mention your membership at booking.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Membership -->
-  <section class="membership">
-    <div class="container">
-      <h2>Become a Regular</h2>
-      <p>Join our community of wellness enthusiasts. Frequent visitors enjoy exclusive perks and priority booking.</p>
-      <div class="membership-perks">
-        <div class="perk"><strong>Priority</strong> Booking</div>
-        <div class="perk"><strong>Exclusive</strong> Promotions</div>
-      </div>
-      <a href="https://go.booker.com/#/location/fallingwaters" class="btn btn-light">Start Your Wellness Journey</a>
-    </div>
-  </section>
-
-  <!-- Gift Cards -->
-  <section class="gift-cards" id="gift-cards">
-    <div class="container">
-      <h2>Give the Gift of Relaxation</h2>
-      <p>Treat someone special to an unforgettable spa experience. Gift cards available in any amount — perfect for birthdays, anniversaries, holidays, or just because.</p>
-      <div class="gift-card-preview">
-        <h4>Falling Waters Gift Card</h4>
-        <p>Give the gift of relaxation</p>
-        <div class="gift-card-amount">$50 - $500</div>
-        <p>Any amount • Never expires</p>
-      </div>
-      <p style="margin-top: 2rem; font-size: 1.1rem;">Visit us in person or call to buy a gift card today.<br><a href="tel:+18015019000" style="color: white; font-weight: 700; font-size: 1.3rem;">(801) 501-9000</a></p>
-      <p style="margin-top: 1rem;"><a href="/services/gift-cards" class="btn btn-outline" style="border-color: white; color: white;">Gift card details</a></p>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <div class="section-header">
-        <h2>Frequently Asked Questions</h2>
-        <p>Everything you need to know before your visit</p>
-      </div>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <h4>Do I need to book in advance?</h4>
-          <p>We recommend booking 24-48 hours ahead, especially for weekends. Walk-ins welcome based on availability.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What should I wear?</h4>
-          <p>Comfortable clothing is best. We provide robes and slippers for spa services. Wear easy-to-remove clothing for waxing.</p>
-        </div>
-        <div class="faq-item">
-          <h4>How early should I arrive?</h4>
-          <p>Please arrive 10-15 minutes early to check in and relax before your treatment begins.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What's your cancellation policy?</h4>
-          <p>We require 24-hour notice for cancellations. Late cancellations may incur a fee.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Do you offer couples treatments?</h4>
-          <p>Yes! Our couples suite allows you to enjoy massages side-by-side. Perfect for date nights or special occasions.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Is parking available?</h4>
-          <p>Free parking is available at Treehouse Athletic Club. We're located inside the club.</p>
-        </div>
-      </div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Your Visit</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Instagram -->
-  <section class="instagram">
-    <div class="container">
-      <h2>Follow Our Journey</h2>
-      <a href="https://instagram.com/fallingwaters_dayspa" target="_blank" class="instagram-handle">@fallingwaters_dayspa</a>
-      <div class="instagram-grid">
-        <img src="/assets/images/services/massage.jpg" alt="Massage room at Falling Waters Day Spa Draper">
-        <img src="/assets/images/services/facial.jpg" alt="Facial treatment at Falling Waters">
-        <img src="/assets/images/services/hair.jpg" alt="Hair salon styling at Falling Waters">
-        <img src="/assets/images/services/nails.jpg" alt="Nail care manicure at Falling Waters">
-        <img src="/assets/images/services/brows.jpg" alt="Brow and lash services at Falling Waters">
-        <img src="/assets/images/services/relaxation.jpg" alt="Relaxation space at Falling Waters Day Spa">
-      </div>
-      <div style="margin-top: 1.5rem;">
-        <a href="https://instagram.com/fallingwaters_dayspa" target="_blank" class="btn">Follow Us</a>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h2>Visit Our Sanctuary</h2>
-          <div class="contact-details">
-            <div class="contact-item">
-              <div>
-                <h4>Location</h4>
-                <p>1101 E Draper Parkway<br>Draper, UT 84020</p>
-                <p style="font-size: 0.85rem; color: var(--color-primary);">Inside Treehouse Athletic Club</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div>
-                <h4>Phone</h4>
-                <a href="tel:+18015019000">(801) 501-9000</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div>
-                <h4>Hours</h4>
-                <p>Mon-Fri: 9am - 6pm<br>Sat: 9am - 4pm<br>Closed Sunday</p>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div>
-                <h4>Follow Us</h4>
-                <a href="https://instagram.com/fallingwaters_dayspa" target="_blank">@fallingwaters_dayspa</a>
-              </div>
-            </div>
-          </div>
-          <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Your Visit</a>
-        </div>
-        <div class="contact-map">
-          <iframe title="Map to Falling Waters Day Spa &amp; Salon" src="https://maps.google.com/maps?q=Falling+Waters+Day+Spa+%26+Salon,+1101+E+Draper+Pkwy,+Draper,+UT+84020&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
+<footer class="footer">
     <div class="container">
       <div class="footer-links">
         <a href="#services">Services</a>
@@ -1924,15 +1564,15 @@
         <a href="https://www.instagram.com/fallingwaters_dayspa/" target="_blank" rel="noopener">IG</a>
         <a href="https://www.facebook.com/fallingwatersdayspasalon/" target="_blank" rel="noopener">FB</a>
       </div>
-      <p class="footer-copy">© 2026 Falling Waters Day Spa & Salon. All rights reserved. | 1101 E Draper Parkway, Draper, UT 84020</p>
+      <p class="footer-areas">Also serving <a href="/areas/sandy">Sandy</a>, <a href="/areas/south-jordan">South Jordan</a>, <a href="/areas/riverton">Riverton</a>, <a href="/areas/cottonwood-heights">Cottonwood Heights</a>, <a href="/areas/holladay">Holladay</a>.</p><p class="footer-copy">© 2026 Falling Waters Day Spa & Salon. All rights reserved. | 1101 E Draper Parkway, Draper, UT 84020</p>
       <p class="footer-copy" style="margin-top:0.5rem;opacity:0.7;font-size:0.8rem;">Built by <a href="https://gullstack.com" style="color:inherit;">GullStack</a></p>
     </div>
   </footer>
 
   <!-- Sticky Book Bar -->
-  <div class="sticky-book">
-    <p>Ready to relax? Book your appointment today!</p>
-    <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book Now</a>
+  <div class="sticky-book dr-sticky">
+    <p><span class="dr-chip">Holiday</span><span class="dr-long">Gift cards in any amount — <a href="tel:+18015019000">(801) 501-9000</a></span><span class="dr-short">Gift cards · <a href="tel:+18015019000">call us</a></span></p>
+    <a href="https://go.booker.com/#/location/fallingwaters" class="btn">Book now</a>
   </div>
 
   <!-- Scroll Animation Script -->
@@ -2026,7 +1666,7 @@
     });
   </script>
 
-<script src="/js/banner.js"></script>
+
   <!-- aeo:analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
