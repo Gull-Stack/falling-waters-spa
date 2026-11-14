@@ -110,6 +110,50 @@
   },
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "falling-waters-spa-lime.vercel.app"
+        }
+      ],
+      "destination": "https://www.fallingwatersdayspa.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "falling-waters-spa-gull-stack.vercel.app"
+        }
+      ],
+      "destination": "https://www.fallingwatersdayspa.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "falling-waters-spa-psi.vercel.app"
+        }
+      ],
+      "destination": "https://www.fallingwatersdayspa.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "falling-waters-spa-gullstackteam.vercel.app"
+        }
+      ],
+      "destination": "https://www.fallingwatersdayspa.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/contact",
       "destination": "/#contact",
       "permanent": true

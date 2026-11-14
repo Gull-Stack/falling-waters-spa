@@ -11,7 +11,7 @@ import { join, relative } from 'node:path';
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const ORIGIN = 'https://www.fallingwatersdayspa.com';
 const CHECK = process.argv.includes('--check');
-const TODAY = new Date().toISOString().slice(0, 10);
+const TODAY = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Denver' }); // the spa's calendar day, not UTC
 
 const BF = JSON.parse(readFileSync(join(ROOT, 'brand-facts.json'), 'utf8'));
 const DATES_PATH = join(ROOT, 'data/page-dates.json');
@@ -26,6 +26,8 @@ export const unescape = (s) => s.replace(/&(#\d+|#x[0-9a-f]+|[a-z]+);/gi, (m, c)
 });
 export const strip = (html) => unescape(html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
 export const visibleText = (html) => strip(html.replace(/^[\s\S]*?<body[^>]*>/i, ''));
+// a page's own words: nav, footer and the sticky book bar are site chrome, so changing them does not re-date every page
+export const contentText = (html) => visibleText(html.replace(/<nav\b[\s\S]*?<\/nav>|<footer\b[\s\S]*?<\/footer>|<div class="sticky-book"[\s\S]*?<\/div>/gi, ' '));
 const attr = (html, re) => { const m = html.match(re); return m ? unescape(m[1]) : ''; };
 const abs = (u) => (u.startsWith('http') ? u : ORIGIN + '/' + u.replace(/^(\.\.\/|\/)+/, ''));
 const sha = (s) => createHash('sha1').update(s).digest('hex').slice(0, 12);
@@ -202,15 +204,16 @@ for (const file of pages) {
   const original = readFileSync(path, 'utf8');
   let html = sourceHtml(original).replace(/[ \t]*<!-- aeo:og -->[\s\S]*?<!-- \/aeo:og -->\s*\n?/g, '').replace(ANALYTICS_RE, '');
   const url = pageUrl(file);
-  const hash = sha(html);
+  const hash = sha(contentText(html));
   const prev = DATES[url] || {};
   newDates[url] = { published: prev.published || TODAY, modified: prev.hash === hash ? prev.modified || TODAY : TODAY, hash };
   const p = buildGraph(file, html, newDates);
   html = ensureOg(html, p);
   const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': p.graph }, null, 2).replace(/\n/g, '\n  ');
   const block = `  <!-- aeo:schema -->\n  <script type="application/ld+json">\n  ${json}\n  </script>\n  <!-- /aeo:schema -->\n`;
-  html = html.replace(/<\/head>/, block + '</head>');
-  html = html.replace(/<\/body>/, ANALYTICS + '</body>');
+  // function replacers: a string replacement turns "$$" in the JSON (priceRange) into "$"
+  html = html.replace(/<\/head>/, () => block + '</head>');
+  html = html.replace(/<\/body>/, () => ANALYTICS + '</body>');
   built.push({ file, ...p, faq: extractFaq(html), offers: extractOffers(html) });
   if (html !== original) { stale.push(file); if (!CHECK) writeFileSync(path, html); }
 }

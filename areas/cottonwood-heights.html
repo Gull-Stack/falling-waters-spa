@@ -92,6 +92,11 @@
        and white text. Dark bands keep the original bright gold. */
     .footer, .social-proof, .testimonials { --color-accent: #C4A77D; }
     .breadcrumb a { text-decoration: underline; }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1.5rem; }
+    .faq-item { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .faq-item h3 { font-size: 1.1rem; color: var(--color-dark); margin-bottom: 0.5rem; }
+    .faq-item p { font-size: 0.9rem; color: #666; }
+    @media (max-width: 768px) { .faq-grid { grid-template-columns: 1fr; } }
   </style>
 <link rel="stylesheet" href="/css/header.css">
   <!-- aeo:schema -->
@@ -130,7 +135,7 @@
         "description": "Full-service day spa and salon in Draper, Utah since 1998. Open to the public inside Treehouse Athletic Club. Massage, HydraFacial and facials, hair, nails, brows & lashes, and waxing.",
         "email": "Spa@tacfitness.com",
         "foundingDate": "1998",
-        "priceRange": "$",
+        "priceRange": "$$",
         "image": [
           "https://www.fallingwatersdayspa.com/assets/images/logo.png",
           "https://www.fallingwatersdayspa.com/assets/images/services/girls-day.jpg"
@@ -241,6 +246,43 @@
             "item": "https://www.fallingwatersdayspa.com/areas/cottonwood-heights"
           }
         ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How far is Falling Waters Day Spa from Cottonwood Heights?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "About 6 miles, roughly 12 minutes by car. The spa is at 1101 E Draper Parkway, Draper, UT 84020, inside Treehouse Athletic Club, with free parking."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a Treehouse Athletic Club membership?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Falling Waters is open to the public. Treehouse Athletic Club members get 10% off all spa and salon services; mention your membership when you book."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How far ahead should I book?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We recommend booking 24 to 48 hours ahead, especially for weekends. Walk-ins are welcome based on availability, so call (801) 501-9000 to check for same-day openings."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can we book a couples massage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Our couples suite allows side-by-side massage. The Bloom & Bliss Couples Experience is 80 minutes of side-by-side Swedish massage plus a flower bouquet. Multi-service packages are booked by phone at (801) 501-9000 ."
+            }
+          }
+        ]
       }
     ]
   }
@@ -257,6 +299,7 @@
       <ul class="nav-links"><li><a href="/#s-services">Services</a></li><li><a href="/#s-packages">Packages</a></li><li><a href="/#s-gift">Gift cards</a></li><li><a href="/#s-visit">Visit</a></li><li><a href="https://go.booker.com/#/location/fallingwaters" class="nav-cta">Book now</a></li></ul>
     </div>
   </nav>
+  <main>
 
   <section class="page-hero">
     <div class="page-hero-content">
@@ -300,25 +343,25 @@
           <div class="service-icon">💆</div>
           <h3>Massage Therapy</h3>
           <p>Swedish, deep tissue, hot stone</p>
-          <span class="price">From $75</span>
+          <span class="price">From $105</span>
         </a>
         <a href="/services/facials" class="service-card">
           <div class="service-icon">✨</div>
           <h3>Facials</h3>
           <p>HydraFacial, peels & more</p>
-          <span class="price">From $85</span>
+          <span class="price">From $65</span>
         </a>
         <a href="/services/couples-massage" class="service-card">
           <div class="service-icon">💕</div>
           <h3>Couples Massage</h3>
           <p>Side-by-side romance</p>
-          <span class="price">From $299</span>
+          <span class="price">From $349</span>
         </a>
         <a href="/services/hair-care" class="service-card">
           <div class="service-icon">💇</div>
           <h3>Hair Salon</h3>
           <p>Cuts, color & styling</p>
-          <span class="price">From $45</span>
+          <span class="price">From $35</span>
         </a>
       </div>
     </div>
@@ -347,6 +390,30 @@
     </div>
   </section>
 
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-header"><h2>Visiting from Cottonwood Heights: FAQ</h2></div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>How far is Falling Waters Day Spa from Cottonwood Heights?</h3>
+          <p>About 6 miles, roughly 12 minutes by car. The spa is at 1101 E Draper Parkway, Draper, UT 84020, inside Treehouse Athletic Club, with free parking.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I need a Treehouse Athletic Club membership?</h3>
+          <p>No. Falling Waters is open to the public. Treehouse Athletic Club members get 10% off all spa and salon services; mention your membership when you book.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How far ahead should I book?</h3>
+          <p>We recommend booking 24 to 48 hours ahead, especially for weekends. Walk-ins are welcome based on availability, so call <span style="white-space:nowrap">(801) 501-9000</span> to check for same-day openings.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can we book a couples massage?</h3>
+          <p>Yes. Our couples suite allows side-by-side massage. The Bloom &amp; Bliss Couples Experience is 80 minutes of side-by-side Swedish massage plus a flower bouquet. Multi-service packages are booked by phone at <span style="white-space:nowrap">(801) 501-9000</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-cream">
     <div class="container">
       <div class="section-header"><h2>Also Serving</h2></div>
@@ -369,13 +436,13 @@
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container">
       <div class="footer-links">
         <a href="/">Home</a>
         <a href="/services/massage">Massage</a>
         <a href="/services/facials">Facials</a>
-        <a href="/services/nails">Nails</a>
         <a href="/services/nails">Nails</a>
         <a href="/about">About</a>
         <a href="/blog">Blog</a>
