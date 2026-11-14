@@ -158,6 +158,11 @@ if (!llms.includes(BF.telephone.replace('+1-', '(').replace('-', ') ')) && !llms
 if (LIVE) {
   { const r = await fetch(LIVE + '/_vercel/insights/script.js'); if (r.status !== 200) fail('/_vercel/insights/script.js', `live status ${r.status}: Web Analytics is not enabled on the project that serves this host`); }
   for (const p of ['/llms-full.txt', '/brand-facts.json', '/.well-known/brand-facts.json', '/robots.txt']) { const r = await fetch(LIVE + p); if (r.status !== 200) fail(p, `live status ${r.status}`); }
+  // stale public copies on vercel.app must send search engines to the real domain (vercel.json host redirects)
+  for (const h of ['falling-waters-spa-lime.vercel.app', 'falling-waters-spa-psi.vercel.app']) {
+    const r = await fetch(`https://${h}/about`, { redirect: 'manual' });
+    if (r.status !== 308 || !(r.headers.get('location') || '').startsWith(LIVE)) fail(h, `serves ${r.status} instead of a 308 to ${LIVE}`);
+  }
   for (const p of ['/contact', '/gallery', '/services/mommy-makeover']) { const r = await fetch(LIVE + p, { redirect: 'manual' }); if (r.status === 200) fail(p, 'leftover template page still served'); }
 }
 
