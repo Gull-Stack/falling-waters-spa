@@ -114,6 +114,17 @@
       "has": [
         {
           "type": "host",
+          "value": "falling-waters-spa.vercel.app"
+        }
+      ],
+      "destination": "https://www.fallingwatersdayspa.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
           "value": "falling-waters-spa-lime.vercel.app"
         }
       ],
