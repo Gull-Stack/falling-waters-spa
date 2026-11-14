@@ -209,8 +209,9 @@ for (const file of pages) {
   html = ensureOg(html, p);
   const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': p.graph }, null, 2).replace(/\n/g, '\n  ');
   const block = `  <!-- aeo:schema -->\n  <script type="application/ld+json">\n  ${json}\n  </script>\n  <!-- /aeo:schema -->\n`;
-  html = html.replace(/<\/head>/, block + '</head>');
-  html = html.replace(/<\/body>/, ANALYTICS + '</body>');
+  // function replacers: a string replacement turns "$$" in the JSON (priceRange) into "$"
+  html = html.replace(/<\/head>/, () => block + '</head>');
+  html = html.replace(/<\/body>/, () => ANALYTICS + '</body>');
   built.push({ file, ...p, faq: extractFaq(html), offers: extractOffers(html) });
   if (html !== original) { stale.push(file); if (!CHECK) writeFileSync(path, html); }
 }

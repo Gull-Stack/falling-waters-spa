@@ -33,6 +33,16 @@ async function load(file) {
 }
 
 const pages = listPages();
+const priceCache = {};
+// the prices a service page lists: its Offer prices, else every $ amount in its visible text
+const listedPrices = async (f) => {
+  if (f in priceCache) return priceCache[f];
+  if (!existsSync(join(ROOT, f))) return (priceCache[f] = null);
+  const h = await load(f);
+  const p = extractOffers(h).map((o) => +o.price);
+  return (priceCache[f] = p.length ? p : [...visibleText(h).matchAll(/\$(\d+(?:\.\d+)?)/g)].map((x) => +x[1]));
+};
+const cardPrices = {}; // service → { price → [pages] }
 const sitemapText = LIVE ? await (await fetch(LIVE + '/sitemap.xml')).text() : readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
 const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
@@ -69,12 +79,22 @@ for (const file of pages) {
   }
   if (extractOffers(html).length && !graph.some((n) => n.hasOfferCatalog || n['@type'] === 'OfferCatalog')) fail(file, 'visible prices but no Offer schema');
 
+  // 3b. a card linking to a service page with "From $N": N is a price that page lists (site-wide agreement checked after the loop)
+  for (const m of html.matchAll(/<a\b[^>]*href="\/services\/([a-z-]+)"[^>]*>([\s\S]*?)<\/a>/g)) {
+    const from = strip(m[2]).match(/from \$(\d+(?:\.\d+)?)/i);
+    if (!from) continue;
+    const listed = await listedPrices(`services/${m[1]}.html`);
+    if (listed && !listed.includes(+from[1])) fail(file, `card to /services/${m[1]} says From $${from[1]}, a price that page does not list`);
+    ((cardPrices[m[1]] ||= {})[+from[1]] ||= []).push(file);
+  }
+
   // 4. business facts on every page equal brand-facts
   const biz = graph.find((n) => n['@id'] === ORIGIN + '/#business');
   if (!biz) fail(file, 'no business node');
   else {
     if (biz.name !== BF.name) fail(file, `business name "${biz.name}"`);
     if (biz.telephone !== BF.telephone) fail(file, `business phone "${biz.telephone}"`);
+    for (const [k, v] of [['priceRange', BF.priceRange], ['email', BF.email], ['foundingDate', BF.founded]]) if (k in biz && biz[k] !== v) fail(file, `business ${k} "${biz[k]}" ≠ brand-facts "${v}"`);
     if (biz.address?.streetAddress !== BF.location.streetAddress || biz.address?.postalCode !== BF.location.postalCode) fail(file, 'business address differs from brand-facts');
     if (biz.openingHoursSpecification) for (const s of biz.openingHoursSpecification) if (!Object.values(BF.hours).includes(`${s.opens}-${s.closes}`)) fail(file, `schema hours ${s.opens}-${s.closes} not in brand-facts`);
   }
@@ -130,6 +150,7 @@ for (const file of pages) {
 }
 
 // site-level
+for (const [svc, byPrice] of Object.entries(cardPrices)) if (Object.keys(byPrice).length > 1) fail(`/services/${svc}`, `cards disagree on its From price: ${Object.entries(byPrice).map(([pr, fs]) => `$${pr} on ${fs.join(', ')}`).join(' vs ')}`);
 for (const u of sitemapUrls) if (!pages.map((f) => ORIGIN + (pageUrl(f) === '/' ? '/' : pageUrl(f))).includes(u)) fail('sitemap.xml', `lists ${u} which is not a built page`);
 const llms = LIVE ? await (await fetch(LIVE + '/llms.txt')).text() : readFileSync(join(ROOT, 'llms.txt'), 'utf8');
 for (const m of llms.matchAll(/\d{1,2}(?::\d{2})?\s?[ap]m/gi)) if (!ALLOWED_TIMES.has(m[0].replace(/\s/g, '').toLowerCase())) fail('llms.txt', `hours time ${m[0]} not in brand-facts`);
