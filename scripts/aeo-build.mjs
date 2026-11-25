@@ -81,6 +81,9 @@ export function extractOffers(html) {
   // home tiles (13 Nov 2026 redesign): <span class="dr-tile-name">Name</span> … <span class="tile-price">From $105</span>
   const tile = /<(?:a|div) class="dr-tile(?: [^"]*)?"[^>]*>[\s\S]*?<span class="dr-tile-name">([\s\S]*?)<\/span>[\s\S]*?<span class="tile-price">([^<]*)<\/span>/g;
   while ((m = tile.exec(html))) { const price = (m[2].match(/\$(\d+(?:\.\d+)?)/) || [])[1]; if (price) offers.push({ name: strip(m[1]), price, from: /from/i.test(m[2]) }); }
+  // holiday packages (December 2026): <a class="hol-card"> … <span class="dr-tile-name">Name</span> … <span class="hol-price">$232</span>
+  const hol = /<a class="hol-card"[^>]*>[\s\S]*?<span class="dr-tile-name">([\s\S]*?)<\/span>[\s\S]*?<span class="hol-price">\$(\d+)<\/span>/g;
+  while ((m = hol.exec(html))) offers.push({ name: strip(m[1]), price: m[2], from: false });
   // dedupe by name+price
   const seen = new Set();
   return offers.filter((o) => { const k = o.name + '|' + o.price; if (seen.has(k)) return false; seen.add(k); return true; });
