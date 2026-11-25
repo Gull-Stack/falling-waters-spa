@@ -82,7 +82,7 @@
 @media (min-width:768px){
   .dr-banner{position:fixed;top:0;left:0;right:0;height:36px;box-sizing:border-box;padding:8px 16px;line-height:20px}
   .nav{top:36px!important}
-  .hero{padding-top:156px;min-height:calc(80vh + 120px)!important}
+  .hero{padding-top:156px;min-height:calc(70vh + 60px)!important}
 }
 /* Mark and wordmark share one ink height. Measured ink: logo.png (1280²) drop y 29.5–70.3% (0.408), x 37.5–64.3%;
    logo-text.png (1280×233) letters y 22.3–66.5% (0.442), x 2.3–97.0%. --ht = wordmark box height. */
@@ -146,8 +146,8 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
    Both: 4:3 photo · radius 15 · one shadow · one hover · name + price bottom-left, action bottom-right · left-aligned.
    Text cards (FAQ, testimonials, perks) share radius, padding, gap. People (team) stay round and centred.
    Mobbin: Airbnb / Fresha / ClassPass cards — photo 4:3 on top, left-aligned name, price line, whole card is the link. */
-:root{--tile-gap:1.5rem;--tile-pad:1.5rem;--tile-shadow:0 5px 30px rgba(0,0,0,.08);--tile-shadow-hover:0 15px 40px rgba(0,0,0,.12)}
-@media (max-width:767px){:root{--tile-gap:1rem;--tile-pad:1.25rem}}
+:root{--tile-gap:1.25rem;--tile-pad:1.5rem;--tile-shadow:0 5px 30px rgba(0,0,0,.08);--tile-shadow-hover:0 15px 40px rgba(0,0,0,.12)}
+@media (max-width:767px){:root{--tile-gap:.75rem;--tile-pad:1.25rem}}
 /* grids: one gap, three columns on desktop, one on a phone (intent tiles two) */
 .dr-grid,.experience-grid,.services-grid,.testimonial-grid,.team-grid,.faq-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:var(--tile-gap)!important}
 .instagram-grid{gap:var(--tile-gap)!important}
@@ -245,14 +245,16 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
    Grounds (25 Nov 2026): no run of white. Sections alternate linen (gold tint), mist (teal tint), teal and navy;
    Questions is the one white section. Mobbin: Headspace stacked bands, Mailchimp featured band. */
 :root{--color-linen:#F0E9DF;--color-mist:#EBF1F2;--color-price:#7A5F3B}
-:root{--s-pad:5.5rem;--t-title:2.75rem;--t-name:1.5rem;--t-body:1rem}
-@media (max-width:767px){:root{--s-pad:3.5rem;--t-title:2rem;--t-name:1.3rem;--t-body:.95rem}}
+/* Zoomed out 25 Nov 2026 (Josh: "feels claustrophobic"): was 5.5rem/2.75rem/1.5rem desktop, 3.5rem/2rem/1.3rem phone. */
+:root{--s-pad:4rem;--t-title:2.25rem;--t-name:1.25rem;--t-body:1rem}
+@media (max-width:767px){:root{--s-pad:2.5rem;--t-title:1.75rem;--t-name:1.15rem;--t-body:.95rem}}
 .s-sec{padding:var(--s-pad) 0;background:#fff}
 .s-sec.tone-linen,.s-services{background:var(--color-linen)}
 .s-sec.tone-mist{background:var(--color-mist)}
 .s-sec.tone-teal{background:var(--color-primary)}
 .s-sec.tone-dark{background:var(--color-dark)}
-.s-head{margin:0 0 2.25rem;max-width:720px;text-align:left}
+.s-head{margin:0 0 1.75rem;max-width:720px;text-align:left}
+@media (max-width:767px){.s-head{margin-bottom:1.25rem}}
 .s-title{font-family:var(--font-heading)!important;font-weight:600!important;font-size:var(--t-title)!important;line-height:1.1!important;color:var(--color-dark)!important;margin:0!important;text-align:left!important}
 .s-lede{font-family:var(--font-body)!important;font-size:var(--t-body)!important;line-height:1.6!important;color:#5a5a5a!important;margin:.75rem 0 0!important}
 .tone-dark .s-title,.tone-teal .s-title{color:#fff!important}.tone-dark .s-lede{color:rgba(255,255,255,.8)!important}.tone-teal .s-lede{color:#fff!important}
@@ -263,6 +265,16 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
 /* grids */
 .s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tile-gap)}
 @media (max-width:767px){.s-grid{grid-template-columns:1fr}.s-grid-tiles{grid-template-columns:1fr 1fr}}
+/* Services: all six in one row on a laptop (Mobbin: Airbnb Services category row); the whole tile is the link, so "Explore" goes. */
+@media (min-width:1200px){.s-grid-tiles{grid-template-columns:repeat(6,1fr)}.s-grid-tiles .dr-tile .tile-go{display:none}.s-grid-tiles .dr-tile .tile-foot{justify-content:flex-start;margin-top:.5rem;padding-top:.6rem}.s-grid-tiles .tile-body{padding-top:.75rem!important}}
+@media (max-width:767px){.s-grid-tiles .tile-photo{aspect-ratio:3/2}}
+/* Spa packages + team: shorter photos on a laptop; on a phone a swipe row with the next card peeking (Mobbin: Fresha, Superpower). */
+@media (min-width:768px){.s-packages .tile-photo,.s-team .tile-photo{aspect-ratio:16/9}}
+@media (max-width:767px){
+  .s-packages .s-grid,.s-team .s-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.75rem;margin-inline:calc(50% - 50vw);padding:0 calc(50vw - 50%) .25rem;scrollbar-width:none}
+  .s-packages .s-grid::-webkit-scrollbar,.s-team .s-grid::-webkit-scrollbar{display:none}
+  .s-packages .dr-tile,.s-team .dr-tile{flex:0 0 74%;scroll-snap-align:center}
+}
 /* NAME + BODY + LABEL inside tiles */
 .dr-tile-name{font-family:var(--font-heading)!important;font-weight:600!important;font-size:var(--t-name)!important;line-height:1.15!important;color:var(--color-dark)!important;margin:0!important}
 .tile-line{display:block;font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;color:#5a5a5a;margin:.4rem 0 0}
@@ -272,22 +284,23 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
 .tile-go{color:var(--color-primary)!important}
 .s-label{display:block;color:#5a5a5a;margin-bottom:.5rem}
 /* spotlight: one service across the whole grid, photo left and caption on a teal panel (Mobbin: ClassPass Spotlight). Stacks on a phone. */
-.dr-spot{grid-column:1 / -1;display:grid!important;grid-template-columns:1fr 1fr;background:var(--color-primary)!important;margin-top:1rem}
-.dr-spot .tile-body{padding:clamp(1.75rem,4vw,3.5rem)!important;justify-content:center}
+.dr-spot{grid-column:1 / -1;display:grid!important;grid-template-columns:1fr 2fr;background:var(--color-primary)!important;margin-top:1rem}
+.dr-spot .tile-body{padding:2rem 2.5rem!important;justify-content:center}
+@media (min-width:768px){.dr-spot .tile-photo{aspect-ratio:auto;height:100%!important;min-height:220px}}
 .dr-spot .tile-body>:nth-last-child(2){flex-grow:0}
 .dr-spot .s-label{color:#fff}
-.dr-spot .dr-tile-name{color:#fff!important;font-size:var(--t-title)!important}
+.dr-spot .dr-tile-name{color:#fff!important;font-size:2rem!important}
 .dr-spot .tile-line{color:#fff;max-width:30rem}
-.dr-spot .tile-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem;border-top-color:rgba(255,255,255,.35)!important}
+.dr-spot .tile-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;border-top-color:rgba(255,255,255,.35)!important}
 .dr-spot .tile-price,.dr-spot .tile-go{color:#fff!important}
-@media (max-width:767px){.dr-spot{grid-template-columns:1fr;margin-top:.5rem}.dr-spot .tile-photo{aspect-ratio:3/2}}
+@media (max-width:767px){.dr-spot{grid-template-columns:1fr;margin-top:.5rem}.dr-spot .tile-photo{aspect-ratio:2/1}.dr-spot .tile-body{padding:1.25rem!important}.dr-spot .dr-tile-name{font-size:1.6rem!important}}
 /* holiday packages (December): five photo cards on navy, 3 across then 2 wide. Gold "Save $X" chip, name and price over a navy fade.
    Hover / keyboard focus: photo zooms, a gold inner frame draws in, "Call to buy" rises, the other cards step back.
    Phone: a swipe row, one card and a peek of the next, "Call to buy" always shown.
    Mobbin: Givingli gift cards (title on photo), KOBU (chip on photo), Kalstore (savings badge), Higgsfield (action revealed on hover), Fresha (swipe row). */
 .s-holiday .s-lede a{color:#fff!important}
 .hol-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--tile-gap)}
-.hol-card{position:relative;display:block;grid-column:span 2;height:clamp(380px,31vw,460px);overflow:hidden;background:var(--color-dark);text-decoration:none!important;isolation:isolate;transition:opacity .35s ease}
+.hol-card{position:relative;display:block;grid-column:span 2;height:340px;overflow:hidden;background:var(--color-dark);text-decoration:none!important;isolation:isolate;transition:opacity .35s ease}
 .hol-card:nth-child(n+4){grid-column:span 3}
 .hol-media{position:absolute;inset:0;display:flex;gap:2px;background:var(--color-dark)}
 .hol-media img{flex:1;min-width:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
@@ -313,14 +326,16 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
 .hol-card:focus-visible::before{opacity:1;transform:none}
 .hol-card:focus-visible .hol-go{max-height:2rem;opacity:1;transform:none;margin-top:1rem}
 @media (prefers-reduced-motion:reduce){.hol-card,.hol-media img,.hol-card::before,.hol-go{transition:none}.hol-card:hover .hol-media img{transform:none}}
+/* All five in one row on a laptop (Mobbin: Expedia five-tile row). */
+@media (min-width:1200px){.hol-grid{grid-template-columns:repeat(5,1fr)}.hol-card,.hol-card:nth-child(n+4){grid-column:span 1}.hol-body{padding:1.25rem}.hol-card .dr-tile-name{font-size:1.2rem!important}.hol-price{font-size:1.9rem}.hol-save{top:1rem;left:1rem}}
 @media (max-width:1023px){.hol-grid{grid-template-columns:repeat(2,1fr)}.hol-card,.hol-card:nth-child(n+4){grid-column:span 1}.hol-card:last-child{grid-column:1 / -1}}
 @media (max-width:767px){
   .hol-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.75rem;margin-inline:calc(50% - 50vw);padding:0 calc(50vw - 50%) .25rem;scrollbar-width:none}
   .hol-grid::-webkit-scrollbar{display:none}
-  .hol-card,.hol-card:nth-child(n+4),.hol-card:last-child{flex:0 0 82%;height:auto;aspect-ratio:4/5;scroll-snap-align:center}
-  .hol-body{padding:1.25rem}
+  .hol-card,.hol-card:nth-child(n+4),.hol-card:last-child{flex:0 0 66%;height:auto;aspect-ratio:4/5;scroll-snap-align:center}
+  .hol-body{padding:1rem}
   .hol-card::after{background:linear-gradient(to top,rgba(44,62,80,.97) 0%,rgba(44,62,80,.92) 50%,rgba(44,62,80,.4) 70%,rgba(44,62,80,0) 88%)}
-  .hol-price{font-size:2rem}
+  .hol-price{font-size:1.6rem}
 }
 @media (hover:none){.hol-go{max-height:none;opacity:1;transform:none;margin-top:.9rem}}
 /* reviews: NAME-size quotes, LABEL authors, gold only on dark */
@@ -396,8 +411,8 @@ a,button,.dr-tile{-webkit-tap-highlight-color:transparent}
 @media (hover:none){ .btn:active,.dr-tile:active{opacity:.85} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important} .dr-tile:hover img,.dr-tile:hover .arw{transform:none!important} }
 /* ═══ PHONE ═══ */
-body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
-.sticky-book{padding-bottom:calc(.75rem + env(safe-area-inset-bottom))!important}
+body{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
+.sticky-book{padding-top:.375rem!important;padding-bottom:calc(.375rem + env(safe-area-inset-bottom))!important}
 @media (max-width:767px){
   footer a:not(.footer-social a){display:inline-flex!important;align-items:center;min-height:44px}
   .footer-areas a,.s-lede a,.s-facts a{padding:.4rem 0}
