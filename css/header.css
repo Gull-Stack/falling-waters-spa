@@ -29,3 +29,16 @@
 .nav{top:36px!important}
 @media (max-width:767px){.dr-banner{height:30px;padding:7px 12px;line-height:16px}.nav{top:30px!important}}
 @media (hover:hover) and (pointer:fine){.dr-banner a:hover{color:#fff!important;text-decoration:underline}}
+
+/* Collapsing header (25 Nov 2026; Mobbin: Hims slim header once scrolled). js/header.js sets body.hdr-away while the visitor
+   scrolls down (banner + header slide away) and body.hdr-slim while they scroll back up (a slim header, no banner).
+   Within 120px of the top neither class is set and the full banner + header show. */
+.dr-banner,.nav{transition:transform .3s ease,padding .3s ease,top .3s ease}
+.nav-logo .logo-text,.nav-logo .logo-icon{transition:height .3s ease}
+body.hdr-away .dr-banner,body.hdr-slim .dr-banner{transform:translateY(-100%)}
+body.hdr-away .nav{transform:translateY(calc(-100% - 64px))}
+body.hdr-away .nav:focus-within{transform:none;top:0!important}
+body.hdr-slim .nav{top:0!important;padding-top:.375rem!important;padding-bottom:.375rem!important}
+body.hdr-slim .nav-logo{--ht:40px}
+@media (max-width:767px){body.hdr-slim .nav{padding-top:.25rem!important;padding-bottom:.25rem!important}body.hdr-slim .nav-logo{--ht:28px}}
+@media (prefers-reduced-motion:reduce){.dr-banner,.nav,.nav-logo .logo-text,.nav-logo .logo-icon{transition:none}}
