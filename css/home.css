@@ -281,20 +281,48 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
 .dr-spot .tile-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem;border-top-color:rgba(255,255,255,.35)!important}
 .dr-spot .tile-price,.dr-spot .tile-go{color:#fff!important}
 @media (max-width:767px){.dr-spot{grid-template-columns:1fr;margin-top:.5rem}.dr-spot .tile-photo{aspect-ratio:3/2}}
-/* holiday packages (December): navy band under the hero, five ruled text cards, no photos. Package number in gold, NAME, then a ruled
-   foot with the price at TITLE size and "Value $X" in gold. Phone: one ruled row per package, price on the right.
-   Mobbin: Graza "Tis the season" gift panel, Dollar Shave Club gift sets (price over the regular value), Intercom ruled cards. */
+/* holiday packages (December): five photo cards on navy, 3 across then 2 wide. Gold "Save $X" chip, name and price over a navy fade.
+   Hover / keyboard focus: photo zooms, a gold inner frame draws in, "Call to buy" rises, the other cards step back.
+   Phone: a swipe row, one card and a peek of the next, "Call to buy" always shown.
+   Mobbin: Givingli gift cards (title on photo), KOBU (chip on photo), Kalstore (savings badge), Higgsfield (action revealed on hover), Fresha (swipe row). */
 .s-holiday .s-lede a{color:#fff!important}
-.hol-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--tile-gap)}
-.hol-card{display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;padding:1.25rem 0 0;border-top:1px solid rgba(255,255,255,.22);text-decoration:none!important}
-.hol-card .hol-no{color:#C4A77D;margin-bottom:.75rem}
-.hol-card .dr-tile-name{color:#fff!important}
-.hol-foot{display:flex;flex-direction:column;gap:.35rem;border-top:1px solid rgba(255,255,255,.22);padding-top:.9rem}
+.hol-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--tile-gap)}
+.hol-card{position:relative;display:block;grid-column:span 2;height:clamp(380px,31vw,460px);overflow:hidden;background:var(--color-dark);text-decoration:none!important;isolation:isolate;transition:opacity .35s ease}
+.hol-card:nth-child(n+4){grid-column:span 3}
+.hol-media{position:absolute;inset:0;display:flex;gap:2px;background:var(--color-dark)}
+.hol-media img{flex:1;min-width:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.hol-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(44,62,80,.97) 0%,rgba(44,62,80,.9) 40%,rgba(44,62,80,.45) 60%,rgba(44,62,80,0) 80%)}
+.hol-card::before{content:"";position:absolute;inset:12px;z-index:3;border:1px solid #C4A77D;opacity:0;transform:scale(1.03);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.hol-save{position:absolute;top:1.25rem;left:1.25rem;z-index:2;background:#C4A77D;color:var(--color-dark);font-family:var(--font-body);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.5rem .7rem;line-height:1}
+.hol-body{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;padding:1.75rem}
+.hol-card .hol-no{color:#C4A77D;margin-bottom:.5rem}
+.hol-card .dr-tile-name{color:#fff!important;max-width:22rem}
+.hol-foot{display:flex;align-items:baseline;gap:.9rem;margin-top:1rem}
 .hol-price{font-family:var(--font-heading);font-weight:600;font-size:var(--t-title);line-height:1;color:#fff}
-.hol-card .hol-value{color:#C4A77D;margin:0}
-.hol-card:hover .dr-tile-name{text-decoration:underline;text-underline-offset:4px}
-@media (max-width:1023px){.hol-grid{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:767px){.hol-grid{grid-template-columns:1fr;gap:0}.hol-card{flex-direction:row;align-items:center;padding:1rem 0;gap:1rem}.hol-card .hol-no{margin-bottom:.35rem}.hol-foot{border-top:0;padding-top:0;align-items:flex-end;text-align:right;flex-shrink:0}.hol-price{font-size:var(--t-name)}}
+.hol-card .hol-value{color:#C4A77D;margin:0;text-decoration:line-through;text-decoration-thickness:1px}
+.hol-go{color:#fff!important;max-height:0;opacity:0;transform:translateY(10px);overflow:hidden;transition:max-height .35s ease,opacity .35s ease,transform .35s ease,margin .35s ease}
+.hol-go .arw{display:inline-block;transition:transform .3s ease}
+@media (hover:hover){
+  .hol-card:hover .hol-media img{transform:scale(1.07)}
+  .hol-card:hover::before{opacity:1;transform:none}
+  .hol-card:hover .hol-go{max-height:2rem;opacity:1;transform:none;margin-top:1rem}
+  .hol-card:hover .hol-go .arw{transform:translateX(4px)}
+  .hol-grid:hover .hol-card:not(:hover){opacity:.55}
+}
+.hol-card:focus-visible{outline:2px solid #C4A77D;outline-offset:3px}
+.hol-card:focus-visible::before{opacity:1;transform:none}
+.hol-card:focus-visible .hol-go{max-height:2rem;opacity:1;transform:none;margin-top:1rem}
+@media (prefers-reduced-motion:reduce){.hol-card,.hol-media img,.hol-card::before,.hol-go{transition:none}.hol-card:hover .hol-media img{transform:none}}
+@media (max-width:1023px){.hol-grid{grid-template-columns:repeat(2,1fr)}.hol-card,.hol-card:nth-child(n+4){grid-column:span 1}.hol-card:last-child{grid-column:1 / -1}}
+@media (max-width:767px){
+  .hol-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.75rem;margin-inline:calc(50% - 50vw);padding:0 calc(50vw - 50%) .25rem;scrollbar-width:none}
+  .hol-grid::-webkit-scrollbar{display:none}
+  .hol-card,.hol-card:nth-child(n+4),.hol-card:last-child{flex:0 0 82%;height:auto;aspect-ratio:4/5;scroll-snap-align:center}
+  .hol-body{padding:1.25rem}
+  .hol-card::after{background:linear-gradient(to top,rgba(44,62,80,.97) 0%,rgba(44,62,80,.92) 50%,rgba(44,62,80,.4) 70%,rgba(44,62,80,0) 88%)}
+  .hol-price{font-size:2rem}
+}
+@media (hover:none){.hol-go{max-height:none;opacity:1;transform:none;margin-top:.9rem}}
 /* reviews: NAME-size quotes, LABEL authors, gold only on dark */
 .s-quote{margin:0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.22)}
 .s-quote blockquote{margin:0;font-family:var(--font-heading);font-weight:600;font-size:var(--t-name);line-height:1.3;color:#fff}
