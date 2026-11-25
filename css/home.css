@@ -281,6 +281,20 @@ section p a:not(.btn),section li a:not(.btn){color:var(--color-primary)!importan
 .dr-spot .tile-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem;border-top-color:rgba(255,255,255,.35)!important}
 .dr-spot .tile-price,.dr-spot .tile-go{color:#fff!important}
 @media (max-width:767px){.dr-spot{grid-template-columns:1fr;margin-top:.5rem}.dr-spot .tile-photo{aspect-ratio:3/2}}
+/* holiday packages (December): navy band under the hero, five ruled text cards, no photos. Package number in gold, NAME, then a ruled
+   foot with the price at TITLE size and "Value $X" in gold. Phone: one ruled row per package, price on the right.
+   Mobbin: Graza "Tis the season" gift panel, Dollar Shave Club gift sets (price over the regular value), Intercom ruled cards. */
+.s-holiday .s-lede a{color:#fff!important}
+.hol-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--tile-gap)}
+.hol-card{display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;padding:1.25rem 0 0;border-top:1px solid rgba(255,255,255,.22);text-decoration:none!important}
+.hol-card .hol-no{color:#C4A77D;margin-bottom:.75rem}
+.hol-card .dr-tile-name{color:#fff!important}
+.hol-foot{display:flex;flex-direction:column;gap:.35rem;border-top:1px solid rgba(255,255,255,.22);padding-top:.9rem}
+.hol-price{font-family:var(--font-heading);font-weight:600;font-size:var(--t-title);line-height:1;color:#fff}
+.hol-card .hol-value{color:#C4A77D;margin:0}
+.hol-card:hover .dr-tile-name{text-decoration:underline;text-underline-offset:4px}
+@media (max-width:1023px){.hol-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:767px){.hol-grid{grid-template-columns:1fr;gap:0}.hol-card{flex-direction:row;align-items:center;padding:1rem 0;gap:1rem}.hol-card .hol-no{margin-bottom:.35rem}.hol-foot{border-top:0;padding-top:0;align-items:flex-end;text-align:right;flex-shrink:0}.hol-price{font-size:var(--t-name)}}
 /* reviews: NAME-size quotes, LABEL authors, gold only on dark */
 .s-quote{margin:0;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,.22)}
 .s-quote blockquote{margin:0;font-family:var(--font-heading);font-weight:600;font-size:var(--t-name);line-height:1.3;color:#fff}
